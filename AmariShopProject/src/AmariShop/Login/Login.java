@@ -1,11 +1,5 @@
-/*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
- */
-package AmariShop;
+package AmariShop.Login;
 
-import AmariShop.Login.Login;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,19 +7,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- *
- * @author fahim
- */
-public class FXMain extends Application {
-    
+public class Login extends Application {
+
     @Override
     public void start(Stage primaryStage) throws IOException {
-//        setInterface(primaryStage,"AmariShop Login","Login/LoginInterface.fxml");
-        Login login = new Login();
-        login.start(primaryStage);
+        setInterface(primaryStage, "AmariShop Login", "LoginInterface.fxml");
     }
-    
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -37,5 +25,5 @@ public class FXMain extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-    
+
 }
