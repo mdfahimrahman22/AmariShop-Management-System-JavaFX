@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="857.0" stylesheets="@loginlayout.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Label text="AmariShop Login Panel" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="36.0" />
+         </font>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets left="2.0" right="2.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+   <center>
+      <AnchorPane prefHeight="275.0" prefWidth="293.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField layoutX="75.0" layoutY="47.0" promptText="Username" AnchorPane.topAnchor="47.0">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </TextField>
+            <PasswordField layoutX="75.0" layoutY="124.0" promptText="Password" AnchorPane.topAnchor="124.0">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </PasswordField>
+            <ImageView fitHeight="306.0" fitWidth="367.0" layoutX="429.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="429.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="24.0">
+               <image>
+                  <Image url="@img/security_img.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="123.0" layoutY="194.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="169.0" text="Login" AnchorPane.topAnchor="194.0">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Button>
+            <Hyperlink layoutX="140.0" layoutY="285.0" text="Forget Password?" AnchorPane.topAnchor="285.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </AnchorPane>
+   </center>
+   <left>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </right>
+</BorderPane>

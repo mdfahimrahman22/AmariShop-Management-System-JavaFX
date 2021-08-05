@@ -5,8 +5,10 @@
  */
 package AmariShop.Login;
 
+import AmariShop.FXMain;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 
 /**
@@ -14,7 +16,7 @@ import javafx.fxml.Initializable;
  *
  * @author fuads
  */
-public class LoginInterfaceController implements Initializable {
+public class LoginLayoutController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -24,4 +26,7 @@ public class LoginInterfaceController implements Initializable {
         // TODO
     }
 
+    public void loginBtnClick(ActionEvent event) {
+        new FXMain("Dashboard", "Dashboard/DashboardLayout").changeActivity(event);
+    }
 }
