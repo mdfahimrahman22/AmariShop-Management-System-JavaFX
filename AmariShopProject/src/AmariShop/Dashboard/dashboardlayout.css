@@ -1,7 +1,15 @@
-/*
- * Empty Stylesheet file.
- */
+
+
+.header{
+    -fx-background-color:white;
+}
 
 .mainFxmlClass {
 
+}
+.whiteBg{
+    -fx-background-color:white;
+}
+.menuItem:hover{
+    -fx-background-color: #282a3c;
 }

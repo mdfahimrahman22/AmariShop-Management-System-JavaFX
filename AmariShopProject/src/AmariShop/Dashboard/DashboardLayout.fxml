@@ -1,16 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AmariShop.Dashboard.DashboardLayoutController">
    <top>
-      <Label fx:id="userLbl" alignment="CENTER" contentDisplay="CENTER" prefHeight="67.0" prefWidth="128.0" text="User" textAlignment="CENTER" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
+      <AnchorPane prefHeight="60.0" prefWidth="1200.0" styleClass="header" stylesheets="@dashboardlayout.css" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="60.0" prefWidth="280.0" style="-fx-background-color: #282a3c;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label layoutX="47.0" layoutY="4.0" prefHeight="52.0" prefWidth="171.0" text="AmariShop" textFill="WHITE">
+                     <font>
+                        <Font name="Lucida Sans Demibold Italic" size="28.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="shopIcon" fitHeight="48.0" fitWidth="57.0" layoutX="218.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/online-shopping.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Label layoutX="871.0" layoutY="18.0" prefHeight="30.0" prefWidth="207.0" text="Fahim Rahman" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="122.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font name="SansSerif Bold" size="18.0" />
+               </font>
+            </Label>
+            <Circle fx:id="circle" fill="#1f93ff" layoutX="825.0" layoutY="41.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="348.0" AnchorPane.topAnchor="0.0" />
+            <ImageView fx:id="Logout" fitHeight="34.0" fitWidth="58.0" layoutX="1097.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="16.0" AnchorPane.rightAnchor="69.0" AnchorPane.topAnchor="10.0">
+               <image>
+                  <Image url="@img/logout.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Menu" fitHeight="34.0" fitWidth="58.0" layoutX="294.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="294.0" AnchorPane.topAnchor="10.0">
+               <image>
+                  <Image url="@img/menu.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="MenuClose" fitHeight="34.0" fitWidth="58.0" layoutX="294.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="294.0" AnchorPane.topAnchor="10.0">
+               <image>
+                  <Image url="@img/menu.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
    </top>
+   <left>
+      <AnchorPane fx:id="slider" prefWidth="280.0" style="-fx-background-color: #2c2e3e;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox fx:id="dashboardMenu" alignment="CENTER" prefHeight="57.0" prefWidth="280.0" styleClass="menuItem" stylesheets="@dashboardlayout.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+               <children>
+                  <ImageView fitHeight="34.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/business-report.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label text="Dashboard" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Bold Italic" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </HBox>
+         </children></AnchorPane>
+   </left>
+   <center>
+      <AnchorPane fx:id="mainContent" style="-fx-background-color: #eeeeee;" BorderPane.alignment="CENTER">
+         <children>
+            <TabPane fx:id="tabPane" layoutX="292.0" layoutY="129.0" prefHeight="200.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <tabs>
+                <Tab text="Dashboard">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+                <Tab text="Untitled Tab 2">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+            <AnchorPane prefHeight="30.0" prefWidth="804.0" styleClass="whiteBg" stylesheets="@dashboardlayout.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Label fx:id="copyrightLabel" alignment="CENTER" prefHeight="17.0" prefWidth="605.0" text="Copyright Text" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="SansSerif Regular" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
 </BorderPane>

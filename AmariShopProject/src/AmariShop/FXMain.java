@@ -36,7 +36,7 @@ public class FXMain {
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
-            System.out.println("IOException occured.");
+            System.out.println("IOException occured. \nEx:" + ex);
 //            Logger.getLogger(FXMain.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             System.out.println("Can't load layout.");
