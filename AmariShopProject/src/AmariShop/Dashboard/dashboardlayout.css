@@ -7,9 +7,26 @@
 .mainFxmlClass {
 
 }
-.whiteBg{
-    -fx-background-color:white;
-}
+
 .menuItem:hover{
     -fx-background-color: #282a3c;
+}
+
+.cart-item{
+    -fx-background-radius:30;
+}
+.bg-white{
+    -fx-background-color:white;
+}
+.bg-green{
+    -fx-background-color:#00c689;
+}
+.bg-blue{
+    -fx-background-color:#3da5f4;    
+}
+.bg-red{
+    -fx-background-color:#f1536e;    
+}
+.bg-yellow{
+    -fx-background-color:#fda006;    
 }
