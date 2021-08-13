@@ -8,7 +8,10 @@ public class ConnectDB {
 
     public ConnectDB() {
         try {
-            connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=amarishopdb;selectMethod=cursor", "amarishopdb_user", "123456");
+            String dbuser="amarishopdb_user";
+            String dbuser_pass="123456";
+            String dbname="amarishopdb";
+            connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName="+dbname+";selectMethod=cursor", dbuser,dbuser_pass);
             System.out.println("Database Connection Successful.");
         } catch (Exception e) {
             System.out.println("Database Connection Failed.");
