@@ -5,6 +5,9 @@
  */
 package AmariShop.Dashboard;
 
+import AmariShop.Database.ConnectDB;
+import AmariShop.FXMain;
+import AmariShop.Models.User;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.ResourceBundle;
@@ -23,36 +26,106 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
+import java.sql.Connection;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 public class DashboardLayoutController implements Initializable {
+    @FXML
+    private ImageView shopIcon;
+
+    @FXML
+    private Label userName;
 
     @FXML
     private Circle circle;
+    
     @FXML
-    private AnchorPane slider;
+    private Circle circle2;
+
     @FXML
-    private AnchorPane mainContent;
+    private ImageView Logout;
+
     @FXML
     private ImageView Menu;
+
     @FXML
     private ImageView MenuClose;
+
     @FXML
-    private Label copyrightLabel;
+    private AnchorPane slider;
+
     @FXML
-    private HBox dashboardMenu;
+    private HBox dashboardMenu,profileMenu;
+
+    @FXML
+    private AnchorPane mainContent;
+
     @FXML
     private TabPane tabPane;
+
+    @FXML
+    private Label copyrightLabel;
+    
+    @FXML
+    private Button updateProfileBtn;
+    
+    @FXML
+    private TextField nameTextField;
+
+    @FXML
+    private TextField emailTextField;
+
+    @FXML
+    private TextField contactTextField;
+
+    @FXML
+    private TextArea addressTextField;
+    
+    @FXML
+    private Label acIdLabel;
+    
+    @FXML
+    private Label profileNameLabel;
+    
+    private User user;
+    private Connection connection;
+
+    public DashboardLayoutController(){
+    }
+
+    public DashboardLayoutController(User user, Connection connection) {
+        this.user = user;
+        this.connection = connection;
+    }
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         setCopyrightLabelText();
-        setOnClickListeners();
-        setProfileImage();
-
+        setOnClickListeners();      
+        setProfileSettingsEditable(false);
     }
-
+    public void setUserInfo(User user){
+        setUser(user);
+        userName.setText(user.getName());
+        acIdLabel.setText("Account ID: "+Integer.toString(user.getId()));
+        profileNameLabel.setText(user.getName());
+        nameTextField.setText(user.getName());
+        emailTextField.setText(user.getEmail());
+        contactTextField.setText(user.getContact());
+        addressTextField.setText(user.getAddress());
+        setProfileImage();  
+    }
+    private void setProfileSettingsEditable(boolean editable) {
+            nameTextField.setEditable(editable);
+            emailTextField.setEditable(editable);
+            contactTextField.setEditable(editable);
+            addressTextField.setEditable(editable);
+    }
     public void animateOnWidthChange(final AnchorPane pane, double width) {
-        Duration cycleDuration = Duration.millis(500);
+        Duration cycleDuration = Duration.millis(350);
         Timeline timeline = new Timeline(
                 new KeyFrame(cycleDuration,
                         new KeyValue(pane.maxWidthProperty(), width, Interpolator.EASE_BOTH))
@@ -65,19 +138,28 @@ public class DashboardLayoutController implements Initializable {
 
     private void setOnClickListeners() {
         Menu.setOnMouseClicked(event -> {
-            animateOnWidthChange(slider, 280);
+            animateOnWidthChange(slider, 237);
             Menu.setVisible(false);
             MenuClose.setVisible(true);
         });
 
         MenuClose.setOnMouseClicked(event -> {
-            animateOnWidthChange(slider, 85);
+            animateOnWidthChange(slider, 80);
             Menu.setVisible(true);
             MenuClose.setVisible(false);
         });
         dashboardMenu.setOnMouseClicked(event -> {
             tabPane.getSelectionModel().select(0);
         });
+        profileMenu.setOnMouseClicked(event -> {
+            tabPane.getSelectionModel().select(1);
+        });
+        updateProfileBtn.setOnMouseClicked(event->{
+        
+        FXMain.showNotification("Update Successful", "Your profile has been updated successfully", "confirm");
+        
+        });
+
     }
 
     private void setCopyrightLabelText() {
@@ -90,6 +172,15 @@ public class DashboardLayoutController implements Initializable {
     private void setProfileImage() {
         Image profilePic = new Image("AmariShop/Dashboard/img/face1.jpg");
         circle.setFill(new ImagePattern(profilePic));
+        circle2.setFill(new ImagePattern(profilePic));
+    }
+    public User getUser() {
+        return user;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    
 }

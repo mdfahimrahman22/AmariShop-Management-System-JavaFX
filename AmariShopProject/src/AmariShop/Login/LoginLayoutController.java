@@ -5,28 +5,57 @@
  */
 package AmariShop.Login;
 
+import AmariShop.Database.ConnectDB;
+import AmariShop.Database.UserAccount;
 import AmariShop.FXMain;
+import AmariShop.Models.User;
+import java.sql.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
-/**
- * FXML Controller class
- *
- * @author fuads
- */
+
 public class LoginLayoutController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    private Connection connection;
+    
+    @FXML
+    private TextField emailField;
+
+    @FXML
+    private PasswordField passField;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }
 
     public void loginBtnClick(ActionEvent event) {
-        new FXMain("Dashboard", "Dashboard/DashboardLayout").changeActivity(event);
+        FXMain fxmain=new FXMain();
+        connection=ConnectDB.getConnection();
+        UserAccount userAccount=new UserAccount(connection);
+        String email="fahimpranto002@gmail.com";
+        String pass="123456";
+//        String email=emailField.getText();
+//        String pass=passField.getText();
+        User user=userAccount.getUserProfile(email,pass);
+        if(user!=null){
+            fxmain.openDashboard(event,user,connection);
+        }
+        else{
+            FXMain.showNotification("Varification Failed", "Can't varify the user.", "warning");
+        }
+    
     }
+    
+    
 }

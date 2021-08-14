@@ -2,18 +2,44 @@
 
 .header{
     -fx-background-color:white;
+
 }
 
 .mainFxmlClass {
 
 }
-
+.text-field-style{
+    -fx-text-fill: #828282;
+}
+.box-shadow{
+   -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.7), 15, 0, 3, 5);
+}
+.box-border{
+    -fx-background-radius:15;
+    
+}
 .menuItem:hover{
     -fx-background-color: #282a3c;
 }
-
+.button-style{
+    -fx-background-color: #2c2e3e;
+    -fx-background-radius:20;
+}
+.button-style:hover{
+    -fx-background-color:  #282a3c;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.7), 15, 0, 3, 5);
+}
 .cart-item{
     -fx-background-radius:30;
+}
+.bg-gray{
+    -fx-background-color:#f7f7f7;
+}
+.bg-dark-gray{
+    -fx-background-color:#f2f2f2;
+}
+.bg-black{
+    -fx-background-color:black;
 }
 .bg-white{
     -fx-background-color:white;

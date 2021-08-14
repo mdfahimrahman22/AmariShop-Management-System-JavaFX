@@ -20,20 +20,39 @@ branch_contact VARCHAR(20) NULL,
 branch_email VARCHAR(30) NULL
 )
 
-CREATE TABLE EmployeeRole(
-EmployeeRoleID INT IDENTITY(1,1) PRIMARY KEY,
-role_title VARCHAR(30) NOT NULL,
+CREATE TABLE UserRole(
+UserRoleID INT IDENTITY(1,1) PRIMARY KEY,
+user_role_title VARCHAR(30) NOT NULL unique,
 )
+
+CREATE TABLE Users(
+UserID INT IDENTITY(1,1) PRIMARY KEY,
+BranchID INT NOT NULL FOREIGN key REFERENCES Branch(BranchID) on delete cascade on update cascade,
+UserRoleID INT NULL FOREIGN key REFERENCES UserRole(UserRoleID) on delete set null on update cascade,
+name VARCHAR(30) NOT NULL,
+email VARCHAR(30) NOT NULL,
+password VARCHAR(30) NOT NULL,
+address VARCHAR(200) NULL,
+contact VARCHAR(20) NULL,
+created_at datetime default current_timestamp
+)
+ALTER TABLE Users
+ADD UNIQUE (email);
+
+CREATE TABLE EmployeePosition(
+EmployeePositionID INT IDENTITY(1,1) PRIMARY KEY,
+position_title VARCHAR(30) NOT NULL,
+)
+
 
 CREATE TABLE Employee(
 EmployeeID INT IDENTITY(1,1) PRIMARY KEY,
 BranchID INT NOT NULL FOREIGN key REFERENCES Branch(BranchID),
-EmployeeRoleID INT NOT NULL  FOREIGN key REFERENCES EmployeeRole(EmployeeRoleID),
+EmployeePositionID INT NOT NULL  FOREIGN key REFERENCES EmployeePosition(EmployeePositionID),
 employee_name VARCHAR(30) NOT NULL,
 employee_address VARCHAR(200) NULL,
 employee_contact VARCHAR(20) NULL,
 employee_email VARCHAR(30) NULL,
-employee_pass VARCHAR(30) NULL CHECK(employee_pass>6),
 employee_salary INT NULL
 )
 

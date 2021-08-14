@@ -7,15 +7,15 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class Login extends Application {
-
+    
     @Override
     public void start(Stage primaryStage) throws IOException {
-        new FXMain(primaryStage, "AmariShop Login", "Login/LoginLayout").startActivity();
-        ConnectDB db = new ConnectDB();
+        FXMain fxmain=new FXMain(primaryStage);
+        fxmain.startLoginActivity();
     }
 
     public static void main(String[] args) {
         launch(args);
     }
-
+    
 }
