@@ -10,20 +10,38 @@ package AmariShop.Models;
  * @author fahim
  */
 public class User {
-    private String email,name,password,userRole,address,contact;
+    private String email,name,userRole,address,contact,branchName;
     private int id,branchId;
 
     public User() {
     }
 
-    public User(int id,int branchId,String name,String email,  String password, String address, String contact) {
+    public User(int id,String name,String email, String contact, String address,  String branchName) {
+        this.email = email;
+        this.name = name;
+        this.userRole = userRole;
+        this.address = address;
+        this.contact = contact;
+        this.branchName = branchName;
+        this.id = id;
+    }
+
+    public User(int id,int branchId,String name,String email, String address, String contact) {
         this.id=id;
         this.email = email;
         this.name = name;
-        this.password = password;
         this.address = address;
         this.contact = contact;
         this.branchId = branchId;
+    }
+    
+    
+    public String getBranchName() {
+        return branchName;
+    }
+
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
     }
 
     public int getId() {
@@ -48,14 +66,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getUserRole() {

@@ -17,7 +17,7 @@ public class Dashboard extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMain fxmain=new FXMain();
-        User user=new User(1,1,"admin@gmail.com","Fahim Rahman","1234","address","01729273");
+//        User user=new User(1,1,"admin@gmail.com","Fahim Rahman","1234","address","01729273");
         fxmain.startActivity(primaryStage,"AmariShop Dashboard", "Dashboard/DashboardLayout");
     }
 

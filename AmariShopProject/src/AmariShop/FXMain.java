@@ -13,7 +13,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.geometry.Pos;
+import javafx.scene.input.InputEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
@@ -46,6 +49,18 @@ public class FXMain {
             System.out.println("Can't load layout.");
         }
     }
+    public void openAddUser(){  
+        try {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("Dashboard/AddUserLayout.fxml"));
+            root=loader.load();
+            Stage stage=new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Add New User");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     public void openDashboard(ActionEvent event,User user,Connection connection){
         try {
@@ -62,8 +77,14 @@ public class FXMain {
             System.out.println("IOException occured in Dashboard.\nEx:"+ioException);
         } catch (Exception ex) {
             System.out.println("Unknown exception occured in Dashboard.");
-        }
-        
+        } 
+    }
+    
+    /* static methods */
+    public static void closePanel(InputEvent e){
+           Node node=(Node)e.getSource();
+           Stage stage=(Stage) node.getScene().getWindow();
+           stage.close();
     }
     public static void showNotification(String title,String text,String type){
         //new ImageView(Notifications.class.getResource("/org/controlsfx/dialog/dialog-warning.png").toExternalForm())
@@ -101,6 +122,8 @@ public class FXMain {
     }
    
     
+    
+    /* getter - setter methods */
     public Stage getStage() {
         return stage;
     }
@@ -108,7 +131,8 @@ public class FXMain {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-    //Testing purpose method
+    
+    /* Testing purpose methods */
     public void changeActivity(ActionEvent event,String pageTitle,String pageLayout) {
         ((Node) event.getSource()).getScene().getWindow().hide();
         openActivity(pageTitle,pageLayout);

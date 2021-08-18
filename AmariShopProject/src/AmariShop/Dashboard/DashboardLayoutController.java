@@ -27,9 +27,14 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import java.sql.Connection;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class DashboardLayoutController implements Initializable {
     @FXML
@@ -40,9 +45,6 @@ public class DashboardLayoutController implements Initializable {
 
     @FXML
     private Circle circle;
-    
-    @FXML
-    private Circle circle2;
 
     @FXML
     private ImageView Logout;
@@ -57,7 +59,13 @@ public class DashboardLayoutController implements Initializable {
     private AnchorPane slider;
 
     @FXML
-    private HBox dashboardMenu,profileMenu;
+    private HBox dashboardBtn;
+
+    @FXML
+    private HBox userProfileBtn;
+
+    @FXML
+    private HBox usersBtn;
 
     @FXML
     private AnchorPane mainContent;
@@ -66,28 +74,62 @@ public class DashboardLayoutController implements Initializable {
     private TabPane tabPane;
 
     @FXML
-    private Label copyrightLabel;
-    
+    private Circle circle2;
+
     @FXML
-    private Button updateProfileBtn;
-    
+    private Label profileNameLabel;
+
+
+    @FXML
+    private Label acIdLabel;
+
     @FXML
     private TextField nameTextField;
 
     @FXML
+    private Label emailLabel;
+
+    @FXML
     private TextField emailTextField;
+
 
     @FXML
     private TextField contactTextField;
 
+
     @FXML
     private TextArea addressTextField;
+
+    @FXML
+    private ImageView editBtn;
+
+    @FXML
+    private Button updateProfileBtn,addUserBtn;
+
+
+    @FXML
+    private Label copyrightLabel;
     
     @FXML
-    private Label acIdLabel;
-    
+    private TableView<User> usersTable;
+
     @FXML
-    private Label profileNameLabel;
+    private TableColumn<User, Integer> tableUserId;
+
+    @FXML
+    private TableColumn<User, String> tableUserName;
+
+    @FXML
+    private TableColumn<User, String> tableUserBranch;
+
+    @FXML
+    private TableColumn<User, String> tableUserEmail;
+
+    @FXML
+    private TableColumn<User, String> tableUserContact;
+
+    @FXML
+    private TableColumn<User, String> tableUserAddress;
     
     private User user;
     private Connection connection;
@@ -106,6 +148,8 @@ public class DashboardLayoutController implements Initializable {
         setCopyrightLabelText();
         setOnClickListeners();      
         setProfileSettingsEditable(false);
+        setProfileImage();
+        setUsersTableData();
     }
     public void setUserInfo(User user){
         setUser(user);
@@ -116,7 +160,25 @@ public class DashboardLayoutController implements Initializable {
         emailTextField.setText(user.getEmail());
         contactTextField.setText(user.getContact());
         addressTextField.setText(user.getAddress());
-        setProfileImage();  
+          
+    }
+    
+    ObservableList<User> userList=FXCollections.observableArrayList();
+    
+    private void setUsersTableData() {
+        tableUserId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tableUserName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tableUserBranch.setCellValueFactory(new PropertyValueFactory<>("branchName"));
+        tableUserEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        tableUserContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
+        tableUserAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        userList.add(new User(1,"Fahim","fahimpranto002@gmail.com","01833899","Dhaka","Dhanmondi"));
+        userList.add(new User(2,"Fahim","fahimpranto002@gmail.com","01833899","Dhaka","Dhanmondi"));
+        userList.add(new User(3,"Fahim","fahimpranto002@gmail.com","01833899","Dhaka","Dhanmondi"));
+        userList.add(new User(4,"Fahim","fahimpranto002@gmail.com","01833899","Dhaka","Dhanmondi"));
+        usersTable.setItems(userList);
+
+
     }
     private void setProfileSettingsEditable(boolean editable) {
             nameTextField.setEditable(editable);
@@ -148,12 +210,20 @@ public class DashboardLayoutController implements Initializable {
             Menu.setVisible(true);
             MenuClose.setVisible(false);
         });
-        dashboardMenu.setOnMouseClicked(event -> {
+        dashboardBtn.setOnMouseClicked(event -> {
             tabPane.getSelectionModel().select(0);
         });
-        profileMenu.setOnMouseClicked(event -> {
+        userProfileBtn.setOnMouseClicked(event -> {
             tabPane.getSelectionModel().select(1);
         });
+        usersBtn.setOnMouseClicked(event -> {
+            tabPane.getSelectionModel().select(2);
+        });
+        addUserBtn.setOnMouseClicked(event -> {
+           new FXMain().openAddUser();
+        });
+        
+        
         updateProfileBtn.setOnMouseClicked(event->{
         
         FXMain.showNotification("Update Successful", "Your profile has been updated successfully", "confirm");
@@ -181,6 +251,8 @@ public class DashboardLayoutController implements Initializable {
     public void setUser(User user) {
         this.user = user;
     }
+
+    
 
     
 }
