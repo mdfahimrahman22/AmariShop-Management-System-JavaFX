@@ -10,30 +10,41 @@ package AmariShop.Models;
  * @author fahim
  */
 public class User {
-    private String email,name,userRole,address,contact,branchName;
-    private int id,branchId;
+    private String email,name,address,contact,branchName,userRoleTitle;
+    private int id,branchId,userRoleId;
 
     public User() {
     }
 
-    public User(int id,String name,String email, String contact, String address,  String branchName) {
+    public User(String email, String name, String address, String contact, String branchName, String userRoleTitle, int id, int branchId, int userRoleId) {
         this.email = email;
         this.name = name;
-        this.userRole = userRole;
         this.address = address;
         this.contact = contact;
         this.branchName = branchName;
+        this.userRoleTitle = userRoleTitle;
         this.id = id;
+        this.branchId = branchId;
+        this.userRoleId = userRoleId;
+    }
+    
+
+    public String getUserRoleTitle() {
+        return userRoleTitle;
     }
 
-    public User(int id,int branchId,String name,String email, String address, String contact) {
-        this.id=id;
-        this.email = email;
-        this.name = name;
-        this.address = address;
-        this.contact = contact;
-        this.branchId = branchId;
+    public void setUserRoleTitle(String userRoleTitle) {
+        this.userRoleTitle = userRoleTitle;
     }
+
+    public int getUserRoleId() {
+        return userRoleId;
+    }
+
+    public void setUserRoleId(int userRoleId) {
+        this.userRoleId = userRoleId;
+    }
+
     
     
     public String getBranchName() {
@@ -66,14 +77,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
     }
 
     public String getAddress() {

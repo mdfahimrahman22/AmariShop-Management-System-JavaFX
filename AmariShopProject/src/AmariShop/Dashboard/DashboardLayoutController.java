@@ -78,6 +78,12 @@ public class DashboardLayoutController implements Initializable {
 
     @FXML
     private Label profileNameLabel;
+    
+    @FXML
+    private Label userRoleLabel;
+    
+    @FXML
+    private Label branchNameLabel;
 
 
     @FXML
@@ -160,6 +166,8 @@ public class DashboardLayoutController implements Initializable {
         emailTextField.setText(user.getEmail());
         contactTextField.setText(user.getContact());
         addressTextField.setText(user.getAddress());
+        branchNameLabel.setText(user.getBranchName());
+        userRoleLabel.setText(user.getUserRoleTitle());
           
     }
     
@@ -172,10 +180,11 @@ public class DashboardLayoutController implements Initializable {
         tableUserEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         tableUserContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
         tableUserAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
-        userList.add(new User(1,"Fahim","fahimpranto002@gmail.com","01833899","Dhaka","Dhanmondi"));
-        userList.add(new User(2,"Fahim","fahimpranto002@gmail.com","01833899","Dhaka","Dhanmondi"));
-        userList.add(new User(3,"Fahim","fahimpranto002@gmail.com","01833899","Dhaka","Dhanmondi"));
-        userList.add(new User(4,"Fahim","fahimpranto002@gmail.com","01833899","Dhaka","Dhanmondi"));
+        userList.add(new User("fahimpranto002@gmail.com","Fahim","Dhaka","01833899","Dhanmondi","Operator",1,1,4));
+        userList.add(new User("fahimpranto002@gmail.com","Fahim","Dhaka","01833899","Dhanmondi","Operator",2,1,4));
+        userList.add(new User("fahimpranto002@gmail.com","Fahim","Dhaka","01833899","Dhanmondi","Operator",3,1,4));
+        userList.add(new User("fahimpranto002@gmail.com","Fahim","Dhaka","01833899","Dhanmondi","Operator",4,1,4));
+
         usersTable.setItems(userList);
 
 
