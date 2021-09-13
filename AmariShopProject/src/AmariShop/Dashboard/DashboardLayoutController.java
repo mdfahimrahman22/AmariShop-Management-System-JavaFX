@@ -6,6 +6,7 @@
 package AmariShop.Dashboard;
 
 import AmariShop.Database.ConnectDB;
+import AmariShop.Database.UserAccount;
 import AmariShop.FXMain;
 import AmariShop.Models.User;
 import java.net.URL;
@@ -30,6 +31,7 @@ import java.sql.Connection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -37,6 +39,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class DashboardLayoutController implements Initializable {
+
     @FXML
     private ImageView shopIcon;
 
@@ -44,7 +47,7 @@ public class DashboardLayoutController implements Initializable {
     private Label userName;
 
     @FXML
-    private Circle circle;
+    private Circle profileImg1;
 
     @FXML
     private ImageView Logout;
@@ -74,17 +77,16 @@ public class DashboardLayoutController implements Initializable {
     private TabPane tabPane;
 
     @FXML
-    private Circle circle2;
+    private Circle profileImg2;
 
     @FXML
     private Label profileNameLabel;
-    
+
     @FXML
     private Label userRoleLabel;
-    
+
     @FXML
     private Label branchNameLabel;
-
 
     @FXML
     private Label acIdLabel;
@@ -98,10 +100,8 @@ public class DashboardLayoutController implements Initializable {
     @FXML
     private TextField emailTextField;
 
-
     @FXML
     private TextField contactTextField;
-
 
     @FXML
     private TextArea addressTextField;
@@ -110,12 +110,11 @@ public class DashboardLayoutController implements Initializable {
     private ImageView editBtn;
 
     @FXML
-    private Button updateProfileBtn,addUserBtn;
-
+    private Button updateProfileBtn, addUserBtn;
 
     @FXML
     private Label copyrightLabel;
-    
+
     @FXML
     private TableView<User> usersTable;
 
@@ -136,43 +135,54 @@ public class DashboardLayoutController implements Initializable {
 
     @FXML
     private TableColumn<User, String> tableUserAddress;
-    
+
+    @FXML
+    private Button updatePassBtn;
+
+    @FXML
+    private PasswordField oldPassField, newPassField, confirmPassField;
+
     private User user;
     private Connection connection;
 
-    public DashboardLayoutController(){
+    public DashboardLayoutController() {
     }
 
     public DashboardLayoutController(User user, Connection connection) {
         this.user = user;
         this.connection = connection;
     }
-    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         setCopyrightLabelText();
-        setOnClickListeners();      
+        setOnClickListeners();
         setProfileSettingsEditable(false);
         setProfileImage();
         setUsersTableData();
     }
-    public void setUserInfo(User user){
-        setUser(user);
-        userName.setText(user.getName());
-        acIdLabel.setText("Account ID: "+Integer.toString(user.getId()));
-        profileNameLabel.setText(user.getName());
-        nameTextField.setText(user.getName());
-        emailTextField.setText(user.getEmail());
-        contactTextField.setText(user.getContact());
-        addressTextField.setText(user.getAddress());
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+
+    public void setUserInfo(User user) {
+        this.user = user;
+//        setUser(user);
+        userName.textProperty().bind(user.getName());
+        acIdLabel.setText("Account ID: " + Integer.toString(user.getId()));
+        profileNameLabel.textProperty().bind(user.getName());
+        nameTextField.setText(user.getName().get());
+        emailTextField.setText(user.getEmail().get());
+        contactTextField.setText(user.getContact().get());
+        addressTextField.setText(user.getAddress().get());
         branchNameLabel.setText(user.getBranchName());
         userRoleLabel.setText(user.getUserRoleTitle());
-          
+
     }
-    
-    ObservableList<User> userList=FXCollections.observableArrayList();
-    
+
+    ObservableList<User> userList = FXCollections.observableArrayList();
+
     private void setUsersTableData() {
         tableUserId.setCellValueFactory(new PropertyValueFactory<>("id"));
         tableUserName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -180,21 +190,22 @@ public class DashboardLayoutController implements Initializable {
         tableUserEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         tableUserContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
         tableUserAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
-        userList.add(new User("fahimpranto002@gmail.com","Fahim","Dhaka","01833899","Dhanmondi","Operator",1,1,4));
-        userList.add(new User("fahimpranto002@gmail.com","Fahim","Dhaka","01833899","Dhanmondi","Operator",2,1,4));
-        userList.add(new User("fahimpranto002@gmail.com","Fahim","Dhaka","01833899","Dhanmondi","Operator",3,1,4));
-        userList.add(new User("fahimpranto002@gmail.com","Fahim","Dhaka","01833899","Dhanmondi","Operator",4,1,4));
+        userList.add(new User("fahimpranto002@gmail.com", "Fahim", "Dhaka", "01833899", "Dhanmondi", "Operator", 1, 1, 4));
+        userList.add(new User("fahimpranto002@gmail.com", "Fahim", "Dhaka", "01833899", "Dhanmondi", "Operator", 2, 1, 4));
+        userList.add(new User("fahimpranto002@gmail.com", "Fahim", "Dhaka", "01833899", "Dhanmondi", "Operator", 3, 1, 4));
+        userList.add(new User("fahimpranto002@gmail.com", "Fahim", "Dhaka", "01833899", "Dhanmondi", "Operator", 4, 1, 4));
 
         usersTable.setItems(userList);
 
+    }
 
-    }
     private void setProfileSettingsEditable(boolean editable) {
-            nameTextField.setEditable(editable);
-            emailTextField.setEditable(editable);
-            contactTextField.setEditable(editable);
-            addressTextField.setEditable(editable);
+        nameTextField.setEditable(editable);
+        emailTextField.setEditable(editable);
+        contactTextField.setEditable(editable);
+        addressTextField.setEditable(editable);
     }
+
     public void animateOnWidthChange(final AnchorPane pane, double width) {
         Duration cycleDuration = Duration.millis(350);
         Timeline timeline = new Timeline(
@@ -225,18 +236,60 @@ public class DashboardLayoutController implements Initializable {
         userProfileBtn.setOnMouseClicked(event -> {
             tabPane.getSelectionModel().select(1);
         });
+        userName.setOnMouseClicked(event -> {
+            tabPane.getSelectionModel().select(1);
+        });
         usersBtn.setOnMouseClicked(event -> {
             tabPane.getSelectionModel().select(2);
         });
         addUserBtn.setOnMouseClicked(event -> {
-           new FXMain().openAddUser();
+            new FXMain().openAddUser();
         });
-        
-        
-        updateProfileBtn.setOnMouseClicked(event->{
-        
-        FXMain.showNotification("Update Successful", "Your profile has been updated successfully", "confirm");
-        
+        Logout.setOnMouseClicked(event -> {
+            new FXMain().openLogin(event, connection);
+        });
+        editBtn.setOnMouseClicked(event -> {
+            setProfileSettingsEditable(true);
+        });
+        updatePassBtn.setOnMouseClicked(event -> {
+            String oldPass = oldPassField.getText();
+            String newPass = newPassField.getText();
+            String confirmPass = confirmPassField.getText();
+            if (newPass.equals(confirmPass)) {
+                UserAccount ua = new UserAccount(connection);
+                int res = ua.updatePassword(user.getId(), oldPass, newPass);
+                if (res == 1) {
+                    FXMain.showNotification("Update Successful", user.getName().get() + ", Your password has been updated successfully", "confirm");
+                    oldPassField.setText("");
+                    newPassField.setText("");
+                    confirmPassField.setText("");
+                } else {
+                    FXMain.showNotification("Invalid Credentials", "Old Password is wrong.", "warning");
+                }
+
+            } else {
+                FXMain.showNotification("Invalid Credentials", "Confirm Password Not Matching", "warning");
+            }
+
+        });
+
+        updateProfileBtn.setOnMouseClicked(event -> {
+            setProfileSettingsEditable(false);
+            UserAccount userAccount = new UserAccount(connection);
+            String newEmail = emailTextField.getText();
+            String newName = nameTextField.getText();
+            String newContact = contactTextField.getText();
+            String newAddress = addressTextField.getText();
+            int res = userAccount.updateProfile(user.getId(), newEmail, newName, newContact, newAddress);
+            if (res == 1) {
+                user.setName(newName);
+                user.setAddress(newAddress);
+                user.setEmail(newEmail);
+                user.setContact(newContact);
+                FXMain.showNotification("Update Successful", user.getName().get() + ", Your profile has been updated successfully", "confirm");
+            } else {
+                FXMain.showNotification("Update Failed", "Sorry " + user.getName().get() + ", something went wrong.", "error");
+            }
         });
 
     }
@@ -249,10 +302,11 @@ public class DashboardLayoutController implements Initializable {
     }
 
     private void setProfileImage() {
-        Image profilePic = new Image("AmariShop/Dashboard/img/face1.jpg");
-        circle.setFill(new ImagePattern(profilePic));
-        circle2.setFill(new ImagePattern(profilePic));
+        Image profilePic = new Image("https://www.w3schools.com/howto/img_avatar.png");
+        profileImg1.setFill(new ImagePattern(profilePic));
+        profileImg2.setFill(new ImagePattern(profilePic));
     }
+
     public User getUser() {
         return user;
     }
@@ -261,7 +315,4 @@ public class DashboardLayoutController implements Initializable {
         this.user = user;
     }
 
-    
-
-    
 }

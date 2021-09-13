@@ -13,16 +13,19 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.geometry.Pos;
 import javafx.scene.input.InputEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
 public class FXMain {
+
 
     private Stage stage;
     private Parent root;
@@ -62,12 +65,29 @@ public class FXMain {
         }
     }
     
+    public void openLogin(MouseEvent event,Connection connection){
+          try {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("Login/LoginLayout.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("AmariShop Login");
+            stage.show();
+            ((Node) event.getSource()).getScene().getWindow().hide();
+        } catch (IOException ioException) {
+            System.out.println("IOException occured in Dashboard.\nEx:"+ioException);
+        } catch (Exception ex) {
+            System.out.println("Unknown exception occured in Dashboard.");
+        } 
+    }
+    
     public void openDashboard(ActionEvent event,User user,Connection connection){
         try {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("Dashboard/DashboardLayout.fxml"));
             Parent root = loader.load();
             DashboardLayoutController dashboardController=loader.getController();
             dashboardController.setUserInfo(user);
+            dashboardController.setConnection(connection);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Dashboard");
