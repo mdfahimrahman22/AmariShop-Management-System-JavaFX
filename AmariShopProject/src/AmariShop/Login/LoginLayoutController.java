@@ -38,13 +38,14 @@ public class LoginLayoutController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
     }
+    
 
     public void loginBtnClick(ActionEvent event) {
         FXMain fxmain=new FXMain();
         connection=ConnectDB.getConnection();
         UserAccount userAccount=new UserAccount(connection);
         String email="fahimpranto002@gmail.com";
-        String pass="123456";
+        String pass="1234567";
 //        String email=emailField.getText();
 //        String pass=passField.getText();
         User user=userAccount.getUserProfile(email,pass);
@@ -54,7 +55,6 @@ public class LoginLayoutController implements Initializable {
         else{
             FXMain.showNotification("Varification Failed", "Can't varify the user.", "warning");
         }
-    
     }
     
     

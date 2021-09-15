@@ -1,5 +1,6 @@
 package AmariShop;
 
+import AmariShop.Dashboard.AddUserLayoutController;
 import AmariShop.Dashboard.DashboardLayoutController;
 import AmariShop.Database.ConnectDB;
 import AmariShop.Models.User;
@@ -16,6 +17,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseEvent;
@@ -52,10 +54,15 @@ public class FXMain {
             System.out.println("Can't load layout.");
         }
     }
-    public void openAddUser(){  
+    public void openAddUser(Connection conn,ObservableList<User> userList){  
         try {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("Dashboard/AddUserLayout.fxml"));
-            root=loader.load();
+            Parent root=loader.load();
+            AddUserLayoutController addUserLayoutController=loader.getController();
+            addUserLayoutController.setConnection(conn);
+            addUserLayoutController.setBranchComboBoxItems(conn);
+            addUserLayoutController.setUserRoleComboBoxItems(conn);
+            addUserLayoutController.setUserList(userList);
             Stage stage=new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Add New User");
@@ -88,6 +95,7 @@ public class FXMain {
             DashboardLayoutController dashboardController=loader.getController();
             dashboardController.setUserInfo(user);
             dashboardController.setConnection(connection);
+            dashboardController.setUsersTableData(connection);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Dashboard");

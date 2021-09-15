@@ -37,6 +37,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import java.sql.*;
 
 public class DashboardLayoutController implements Initializable {
 
@@ -135,6 +136,9 @@ public class DashboardLayoutController implements Initializable {
 
     @FXML
     private TableColumn<User, String> tableUserAddress;
+    
+    @FXML
+    private TableColumn<User, String> tableUserRole;
 
     @FXML
     private Button updatePassBtn;
@@ -159,7 +163,7 @@ public class DashboardLayoutController implements Initializable {
         setOnClickListeners();
         setProfileSettingsEditable(false);
         setProfileImage();
-        setUsersTableData();
+
     }
 
     public void setConnection(Connection connection) {
@@ -168,7 +172,6 @@ public class DashboardLayoutController implements Initializable {
 
     public void setUserInfo(User user) {
         this.user = user;
-//        setUser(user);
         userName.textProperty().bind(user.getName());
         acIdLabel.setText("Account ID: " + Integer.toString(user.getId()));
         profileNameLabel.textProperty().bind(user.getName());
@@ -183,17 +186,38 @@ public class DashboardLayoutController implements Initializable {
 
     ObservableList<User> userList = FXCollections.observableArrayList();
 
-    private void setUsersTableData() {
+    public void setUsersTableData(Connection conn) {
         tableUserId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tableUserName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tableUserName.setCellValueFactory(cellData -> cellData.getValue().getName());
         tableUserBranch.setCellValueFactory(new PropertyValueFactory<>("branchName"));
-        tableUserEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-        tableUserContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
-        tableUserAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
-        userList.add(new User("fahimpranto002@gmail.com", "Fahim", "Dhaka", "01833899", "Dhanmondi", "Operator", 1, 1, 4));
-        userList.add(new User("fahimpranto002@gmail.com", "Fahim", "Dhaka", "01833899", "Dhanmondi", "Operator", 2, 1, 4));
-        userList.add(new User("fahimpranto002@gmail.com", "Fahim", "Dhaka", "01833899", "Dhanmondi", "Operator", 3, 1, 4));
-        userList.add(new User("fahimpranto002@gmail.com", "Fahim", "Dhaka", "01833899", "Dhanmondi", "Operator", 4, 1, 4));
+        tableUserEmail.setCellValueFactory(cellData -> cellData.getValue().getEmail());
+        tableUserContact.setCellValueFactory(cellData -> cellData.getValue().getContact());
+        tableUserAddress.setCellValueFactory(cellData -> cellData.getValue().getAddress());
+        tableUserRole.setCellValueFactory(new PropertyValueFactory<>("userRoleTitle"));
+        String sql = "select u.userid,u.name,u.email,u.address,u.contact,\n"
+                + "u.created_at,b.branchid,b.branch_name,r.UserRoleID,r.user_role_title from \n"
+                + "Users u \n"
+                + "inner join Branch b on u.BranchID= b.BranchID \n"
+                + "inner join UserRole r on u.UserRoleID=r.UserRoleID";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String email = rs.getString("email");
+                String name = rs.getString("name");
+                String address = rs.getString("address");
+                String contact = rs.getString("contact");
+                String branch = rs.getString("branch_name");
+                String role = rs.getString("user_role_title");
+                int roleId = rs.getInt("UserRoleID");
+                int id = rs.getInt("userid");
+                int branchId = rs.getInt("branchid");
+
+                userList.add(new User(email, name, address, contact, branch, role, id, branchId, roleId));
+            }
+        } catch (SQLException ex) {
+            System.out.println("SQL Exception:" + ex);
+        }
 
         usersTable.setItems(userList);
 
@@ -243,7 +267,12 @@ public class DashboardLayoutController implements Initializable {
             tabPane.getSelectionModel().select(2);
         });
         addUserBtn.setOnMouseClicked(event -> {
-            new FXMain().openAddUser();
+            if (user.getUserRoleId() == 1) {
+                new FXMain().openAddUser(connection,userList);
+            } else {
+                FXMain.showNotification("Permission Denyed", "You are not allowed to add user.", "warning");
+            }
+
         });
         Logout.setOnMouseClicked(event -> {
             new FXMain().openLogin(event, connection);

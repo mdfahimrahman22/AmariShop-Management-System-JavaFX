@@ -12,6 +12,15 @@ update users set name='Fahim Rahman', email='fahimpranto002@gmail.com',contact='
 --update password
 update users set password='123456' where UserID=1 and password='1234567'
 
+--add new user
+insert into users(UserRoleID,BranchID,name,email,password) values 
+(1,1,'fahim','fahim2@gmail.com','123456')
+
+
+select * from Branch
+
+select UserID from users where email=''
+--check
 select * from users where userid=1
 select * from UserRole
 select * from Branch

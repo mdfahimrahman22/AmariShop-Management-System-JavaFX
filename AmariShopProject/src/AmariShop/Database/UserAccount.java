@@ -21,7 +21,7 @@ public class UserAccount {
     public UserAccount(Connection connection) {
         this.conn = connection;
     }
-
+    
     public int updatePassword(int id, String oldPass, String newPass) {
         String sql = String.format("update users set password='%s' where UserID=%d and password='%s'", newPass, id, oldPass);
         try {
