@@ -13,15 +13,10 @@ import java.sql.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.util.Duration;
-import org.controlsfx.control.Notifications;
 
 
 public class LoginLayoutController implements Initializable {
@@ -44,10 +39,10 @@ public class LoginLayoutController implements Initializable {
         FXMain fxmain=new FXMain();
         connection=ConnectDB.getConnection();
         UserAccount userAccount=new UserAccount(connection);
-        String email="fahimpranto002@gmail.com";
-        String pass="1234567";
-//        String email=emailField.getText();
-//        String pass=passField.getText();
+//        String email="fahimpranto002@gmail.com";String pass="1234567";
+        String email="f2@gmail.com";String pass="123456";
+        
+//        String email=emailField.getText();String pass=passField.getText();
         User user=userAccount.getUserProfile(email,pass);
         if(user!=null){
             fxmain.openDashboard(event,user,connection);

@@ -1,8 +1,9 @@
 package AmariShop;
 
+import AmariShop.Dashboard.AddBranchController;
 import AmariShop.Dashboard.AddUserLayoutController;
 import AmariShop.Dashboard.DashboardLayoutController;
-import AmariShop.Database.ConnectDB;
+import AmariShop.Models.Branch;
 import AmariShop.Models.User;
 import java.awt.Toolkit;
 import java.io.IOException;
@@ -14,32 +15,28 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.control.TableView;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
 public class FXMain {
 
-
     private Stage stage;
     private Parent root;
-  
+
     public FXMain() {
-        
+
     }
 
     public FXMain(Stage stage) {
-        this.stage = stage; 
+        this.stage = stage;
     }
-   
 
     public void startLoginActivity() {
         try {
@@ -54,16 +51,29 @@ public class FXMain {
             System.out.println("Can't load layout.");
         }
     }
-    public void openAddUser(Connection conn,ObservableList<User> userList){  
+
+    public void openUpdateUser(Connection conn, TableView<User> usersTable, User user) {
         try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("Dashboard/AddUserLayout.fxml"));
-            Parent root=loader.load();
-            AddUserLayoutController addUserLayoutController=loader.getController();
-            addUserLayoutController.setConnection(conn);
-            addUserLayoutController.setBranchComboBoxItems(conn);
-            addUserLayoutController.setUserRoleComboBoxItems(conn);
-            addUserLayoutController.setUserList(userList);
-            Stage stage=new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard/AddUserLayout.fxml"));
+            Parent root = loader.load();
+            AddUserLayoutController addUserLayoutController = loader.getController();
+            addUserLayoutController.initializeUpdateUserLayout(conn,usersTable,user);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Update User");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void openAddUser(Connection conn, ObservableList<User> userList) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard/AddUserLayout.fxml"));
+            Parent root = loader.load();
+            AddUserLayoutController addUserLayoutController = loader.getController();
+            addUserLayoutController.initializeAddUserLayout(conn,userList);
+            Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Add New User");
             stage.show();
@@ -71,10 +81,39 @@ public class FXMain {
             Logger.getLogger(FXMain.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void openLogin(MouseEvent event,Connection connection){
-          try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("Login/LoginLayout.fxml"));
+    public void openUpdateBranch(Connection conn, TableView<Branch> branchTable,Branch branch) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard/AddBranch.fxml"));
+            Parent root = loader.load();
+            AddBranchController addBranchController = loader.getController();
+            addBranchController.initializeUpdateBranch(conn,branchTable,branch);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Add New Branch");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void openAddBranch(Connection conn, ObservableList<Branch> branchList) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard/AddBranch.fxml"));
+            Parent root = loader.load();
+            AddBranchController addBranchController = loader.getController();
+            addBranchController.initializeAddBranch(conn,branchList);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Add New Branch");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void openLogin(MouseEvent event, Connection connection) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Login/LoginLayout.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
@@ -82,51 +121,50 @@ public class FXMain {
             stage.show();
             ((Node) event.getSource()).getScene().getWindow().hide();
         } catch (IOException ioException) {
-            System.out.println("IOException occured in Dashboard.\nEx:"+ioException);
+            System.out.println("IOException occured in Dashboard.\nEx:" + ioException);
         } catch (Exception ex) {
             System.out.println("Unknown exception occured in Dashboard.");
-        } 
+        }
     }
-    
-    public void openDashboard(ActionEvent event,User user,Connection connection){
+
+    public void openDashboard(ActionEvent event, User user, Connection connection) {
         try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("Dashboard/DashboardLayout.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard/DashboardLayout.fxml"));
             Parent root = loader.load();
-            DashboardLayoutController dashboardController=loader.getController();
-            dashboardController.setUserInfo(user);
-            dashboardController.setConnection(connection);
-            dashboardController.setUsersTableData(connection);
+            DashboardLayoutController dashboardController = loader.getController();
+            dashboardController.initializeDashboardLayout(connection,user);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Dashboard");
             stage.show();
             ((Node) event.getSource()).getScene().getWindow().hide();
         } catch (IOException ioException) {
-            System.out.println("IOException occured in Dashboard.\nEx:"+ioException);
+            System.out.println("IOException occured in Dashboard.\nEx:" + ioException);
         } catch (Exception ex) {
             System.out.println("Unknown exception occured in Dashboard.");
-        } 
+        }
     }
-    
+
     /* static methods */
-    public static void closePanel(InputEvent e){
-           Node node=(Node)e.getSource();
-           Stage stage=(Stage) node.getScene().getWindow();
-           stage.close();
+    public static void closePanel(InputEvent e) {
+        Node node = (Node) e.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.close();
     }
-    public static void showNotification(String title,String text,String type){
+
+    public static void showNotification(String title, String text, String type) {
         //new ImageView(Notifications.class.getResource("/org/controlsfx/dialog/dialog-warning.png").toExternalForm())
-        Notifications notificationBuilder=Notifications.create()
+        Notifications notificationBuilder = Notifications.create()
                 .title(title)
                 .text(text)
                 .graphic(null)
                 .hideAfter(Duration.seconds(5))
                 .position(Pos.BASELINE_CENTER)
-                .onAction(e->{
-                
+                .onAction(e -> {
+
                 }
                 );
-        switch(type){
+        switch (type) {
             case "warning":
                 Toolkit.getDefaultToolkit().beep();
                 notificationBuilder.showWarning();
@@ -148,9 +186,7 @@ public class FXMain {
 //        Toolkit.getDefaultToolkit().beep();
 
     }
-   
-    
-    
+
     /* getter - setter methods */
     public Stage getStage() {
         return stage;
@@ -159,14 +195,15 @@ public class FXMain {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-    
+
     /* Testing purpose methods */
-    public void changeActivity(ActionEvent event,String pageTitle,String pageLayout) {
+    public void changeActivity(ActionEvent event, String pageTitle, String pageLayout) {
         ((Node) event.getSource()).getScene().getWindow().hide();
-        openActivity(pageTitle,pageLayout);
+        openActivity(pageTitle, pageLayout);
     }
+
     //Testing purpose method
-    public void startActivity(Stage stage,String pageTitle,String pageLayout) {
+    public void startActivity(Stage stage, String pageTitle, String pageLayout) {
         try {
             root = FXMLLoader.load(getClass().getResource(pageLayout + ".fxml"));
             Scene scene = new Scene(root);
@@ -179,8 +216,9 @@ public class FXMain {
             System.out.println("Can't load layout.");
         }
     }
+
     //Testing purpose method
-    public void openActivity(String pageTitle,String pageLayout) {
+    public void openActivity(String pageTitle, String pageLayout) {
         try {
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader();
@@ -196,5 +234,4 @@ public class FXMain {
         }
     }
 
-    
 }

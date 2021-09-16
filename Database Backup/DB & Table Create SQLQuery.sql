@@ -20,10 +20,18 @@ branch_contact VARCHAR(20) NULL,
 branch_email VARCHAR(30) NULL
 )
 
+--> Altering default value of ShopID in Branch table
+ALTER TABLE Branch
+ADD CONSTRAINT ShopID
+DEFAULT 1 FOR ShopID;
+
 CREATE TABLE UserRole(
 UserRoleID INT IDENTITY(1,1) PRIMARY KEY,
 user_role_title VARCHAR(30) NOT NULL unique,
 )
+
+alter table UserRole 
+add user_role_description text
 
 CREATE TABLE Users(
 UserID INT IDENTITY(1,1) PRIMARY KEY,

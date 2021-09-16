@@ -22,6 +22,14 @@ public class Branch {
         this.id = id;
         this.shopId = shopId;
     }
+    
+     public Branch(int id,String name, String address, String contact, String email) {
+        this.name = name;
+        this.address = address;
+        this.contact = contact;
+        this.email = email;
+        this.id = id;
+    }
 
     public String getName() {
         return name;
