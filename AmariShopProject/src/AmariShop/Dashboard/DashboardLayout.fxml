@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
@@ -643,11 +644,7 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="addUserBtn" layoutX="31.0" layoutY="44.0" mnemonicParsing="false" text="Add User">
-                                 <font>
-                                    <Font name="Cambria Bold" size="18.0" />
-                                 </font></Button>
-                              <TableView fx:id="usersTable" layoutX="26.0" layoutY="132.0" prefHeight="452.0" prefWidth="752.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                              <TableView fx:id="usersTable" layoutX="26.0" layoutY="246.0" prefHeight="363.0" prefWidth="752.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                                 <columns>
                                     <TableColumn fx:id="tableUserId" prefWidth="60.0" text="User ID" />
                                   <TableColumn fx:id="tableUserName" prefWidth="99.0" text="Name" />
@@ -658,16 +655,79 @@
                                     <TableColumn fx:id="tableUserAddress" prefWidth="192.0" text="Address" />
                                 </columns>
                               </TableView>
-                              <Button fx:id="deleteUserBtn" layoutX="321.0" layoutY="44.0" mnemonicParsing="false" text="Delete User">
+                              <AnchorPane layoutY="67.0" prefHeight="135.0" prefWidth="779.0">
+                                 <children>
+                                    <TextField fx:id="usersNameField" layoutX="16.0" layoutY="14.0" prefHeight="23.0" prefWidth="206.0" promptText="Name" AnchorPane.leftAnchor="16.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <ComboBox fx:id="usersBranchComboBox" layoutX="469.0" layoutY="30.0" prefHeight="25.0" prefWidth="150.0" promptText="Branch" AnchorPane.rightAnchor="160.0" />
+                                    <ComboBox fx:id="usersRoleComboBox" layoutX="469.0" layoutY="93.0" prefHeight="25.0" prefWidth="149.0" promptText="User Role" AnchorPane.rightAnchor="161.0" />
+                                    <TextField fx:id="usersEmailField" layoutX="17.0" layoutY="52.0" prefHeight="23.0" prefWidth="206.0" promptText="Email" AnchorPane.leftAnchor="16.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField fx:id="usersContactField" layoutX="241.0" layoutY="14.0" prefHeight="28.0" prefWidth="205.0" promptText="Contact" AnchorPane.leftAnchor="241.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextArea fx:id="usersAddressField" layoutX="241.0" layoutY="48.0" prefHeight="72.0" prefWidth="204.0" promptText="Address" AnchorPane.leftAnchor="241.0" AnchorPane.rightAnchor="334.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextArea>
+                                    <PasswordField fx:id="usersPassField" layoutX="16.0" layoutY="91.0" prefHeight="28.0" prefWidth="206.0" promptText="Password">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </PasswordField>
+                                    <ImageView fx:id="addUserBtn" fitHeight="44.0" fitWidth="50.0" layoutX="664.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/add-user.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="deleteUserBtn" fitHeight="44.0" fitWidth="39.0" layoutX="722.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/delete.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="updateUserBtn" fitHeight="64.0" fitWidth="71.0" layoutX="677.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/updated.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="468.0" layoutY="72.0" text="Select User Role">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="469.0" layoutY="9.0" text="Select Branch">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <ComboBox fx:id="usersSearchByComboBox" layoutX="20.0" layoutY="212.0" prefHeight="25.0" prefWidth="122.0" promptText="Search By" />
+                              <TextField fx:id="usersSearchByField" layoutX="156.0" layoutY="212.0" prefHeight="28.0" prefWidth="155.0" promptText="Name">
                                  <font>
-                                    <Font name="Cambria Bold" size="18.0" />
+                                    <Font name="Cambria" size="14.0" />
                                  </font>
-                              </Button>
-                              <Button fx:id="updateUserBtn" layoutX="166.0" layoutY="44.0" mnemonicParsing="false" text="Update User">
+                              </TextField>
+                              <ComboBox fx:id="usersOrderByComboBox" layoutX="666.0" layoutY="214.0" prefHeight="25.0" prefWidth="106.0" promptText="Order By" />
+                              <Label alignment="CENTER" layoutX="282.0" layoutY="9.0" prefHeight="58.0" prefWidth="229.0" text="Users Data">
                                  <font>
-                                    <Font name="Cambria Bold" size="18.0" />
+                                    <Font name="Arial Black" size="35.0" />
                                  </font>
-                              </Button>
+                              </Label>
+                              <ImageView fx:id="clearUserTableBtn" fitHeight="44.0" fitWidth="50.0" layoutX="615.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/clear-table2.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </AnchorPane>
                     </content>
@@ -676,7 +736,7 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="branchTable" layoutX="35.0" layoutY="124.0" prefHeight="425.0" prefWidth="794.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+                              <TableView fx:id="branchTable" layoutX="35.0" layoutY="237.0" prefHeight="369.0" prefWidth="742.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
                                 <columns>
                                   <TableColumn fx:id="branchIdCol" prefWidth="75.0" text="Branch ID" />
                                   <TableColumn fx:id="branchNameCol" prefWidth="180.0" text="Name" />
@@ -685,21 +745,62 @@
                                     <TableColumn fx:id="branchEmailCol" prefWidth="153.0" text="Email" />
                                 </columns>
                               </TableView>
-                              <Button fx:id="addBranchBtn" layoutX="35.0" layoutY="54.0" mnemonicParsing="false" text="Add Branch">
+                              <AnchorPane layoutX="16.0" layoutY="63.0" prefHeight="135.0" prefWidth="761.0">
+                                 <children>
+                                    <TextField fx:id="branchNameField" layoutX="84.0" layoutY="16.0" prefHeight="23.0" prefWidth="206.0" promptText="Name" AnchorPane.leftAnchor="84.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField fx:id="branchEmailField" layoutX="84.0" layoutY="54.0" prefHeight="23.0" prefWidth="206.0" promptText="Email" AnchorPane.leftAnchor="84.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField fx:id="branchContactField" layoutX="84.0" layoutY="91.0" prefHeight="23.0" prefWidth="206.0" promptText="Contact" AnchorPane.leftAnchor="84.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextArea fx:id="branchAddressField" layoutX="309.0" layoutY="14.0" prefHeight="108.0" prefWidth="223.0" promptText="Address" AnchorPane.leftAnchor="309.0" AnchorPane.rightAnchor="229.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextArea>
+                                    <ImageView fx:id="deleteBranchBtn" fitHeight="43.0" fitWidth="40.0" layoutX="638.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/delete.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="updateBranchBtn" fitHeight="66.0" fitWidth="73.0" layoutX="592.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/updated.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="addBranchBtn" fitHeight="42.0" fitWidth="44.0" layoutX="571.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/plus.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <ComboBox fx:id="branchSearchByComboBox" layoutX="31.0" layoutY="198.0" prefHeight="25.0" prefWidth="122.0" promptText="Search By" />
+                              <TextField fx:id="branchSearchByField" layoutX="169.0" layoutY="198.0" prefHeight="28.0" prefWidth="155.0" promptText="Name">
                                  <font>
-                                    <Font name="Cambria Bold" size="18.0" />
+                                    <Font name="Cambria" size="14.0" />
                                  </font>
-                              </Button>
-                              <Button fx:id="deleteBranchBtn" layoutX="368.0" layoutY="54.0" mnemonicParsing="false" text="Delete Branch">
+                              </TextField>
+                              <ComboBox fx:id="branchOrderByComboBox" layoutX="661.0" layoutY="198.0" prefHeight="25.0" prefWidth="106.0" promptText="Order By" />
+                              <Label alignment="CENTER" layoutX="264.0" layoutY="4.0" prefHeight="59.0" prefWidth="266.0" text="Branch Table">
                                  <font>
-                                    <Font name="Cambria Bold" size="18.0" />
+                                    <Font name="Arial Black" size="35.0" />
                                  </font>
-                              </Button>
-                              <Button fx:id="updateBranchBtn" layoutX="191.0" layoutY="54.0" mnemonicParsing="false" text="Update Branch">
-                                 <font>
-                                    <Font name="Cambria Bold" size="18.0" />
-                                 </font>
-                              </Button>
+                              </Label>
+                              <ImageView fx:id="clearBranchTableBtn" fitHeight="44.0" fitWidth="50.0" layoutX="606.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/clear-table2.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </AnchorPane>
                     </content>
@@ -727,9 +828,62 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Label alignment="CENTER" layoutX="124.0" layoutY="120.0" prefHeight="44.0" prefWidth="170.0" text="Products">
+                              <AnchorPane prefHeight="135.0" prefWidth="779.0">
+                                 <children>
+                                    <TextField layoutX="448.0" layoutY="14.0" promptText="Salary" AnchorPane.rightAnchor="158.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField layoutX="16.0" layoutY="14.0" prefHeight="23.0" prefWidth="206.0" promptText="Name" AnchorPane.leftAnchor="16.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <ComboBox layoutX="446.0" layoutY="51.0" prefHeight="25.0" prefWidth="175.0" promptText="Position" AnchorPane.rightAnchor="158.0" />
+                                    <ComboBox layoutX="446.0" layoutY="90.0" prefHeight="25.0" prefWidth="175.0" promptText="Branch" AnchorPane.rightAnchor="158.0" />
+                                    <TextField layoutX="17.0" layoutY="52.0" prefHeight="23.0" prefWidth="206.0" promptText="Email" AnchorPane.leftAnchor="16.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField layoutX="18.0" layoutY="89.0" prefHeight="23.0" prefWidth="206.0" promptText="Contact" AnchorPane.leftAnchor="16.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextArea layoutX="241.0" layoutY="12.0" prefHeight="108.0" prefWidth="184.0" promptText="Address" AnchorPane.leftAnchor="241.0" AnchorPane.rightAnchor="354.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextArea>
+                                    <Button layoutX="655.0" layoutY="16.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="ADD" AnchorPane.rightAnchor="20.0">
+                                       <font>
+                                          <Font name="Cambria Bold" size="14.0" />
+                                       </font>
+                                    </Button>
+                                    <Button layoutX="655.0" layoutY="52.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="UPDATE" AnchorPane.rightAnchor="20.0">
+                                       <font>
+                                          <Font name="Cambria Bold" size="14.0" />
+                                       </font>
+                                    </Button>
+                                    <Button layoutX="655.0" layoutY="89.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="DELETE" AnchorPane.rightAnchor="20.0">
+                                       <font>
+                                          <Font name="Cambria Bold" size="14.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <ComboBox layoutX="345.0" layoutY="158.0" prefHeight="25.0" prefWidth="122.0" promptText="Search By" />
+                              <TextField layoutX="485.0" layoutY="156.0" prefHeight="28.0" prefWidth="155.0" promptText="Name">
                                  <font>
-                                    <Font name="Cambria" size="24.0" />
+                                    <Font name="Cambria" size="14.0" />
+                                 </font>
+                              </TextField>
+                              <ComboBox layoutX="654.0" layoutY="157.0" prefHeight="27.0" prefWidth="106.0" promptText="Order By" />
+                              <Label layoutX="14.0" layoutY="135.0" prefHeight="64.0" prefWidth="330.0" text="Products Table">
+                                 <font>
+                                    <Font name="Arial Black" size="35.0" />
                                  </font>
                               </Label>
                            </children>
@@ -740,23 +894,91 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Label alignment="CENTER" layoutX="66.0" layoutY="30.0" prefHeight="44.0" prefWidth="170.0" text="Employees">
-                                 <font>
-                                    <Font name="Cambria" size="24.0" />
-                                 </font>
-                              </Label>
-                              <TableView fx:id="employeeTable" layoutX="25.0" layoutY="117.0" prefHeight="472.0" prefWidth="742.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+                              <TableView fx:id="employeeTable" layoutX="25.0" layoutY="237.0" prefHeight="371.0" prefWidth="754.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="13.0">
                                 <columns>
                                   <TableColumn fx:id="emIdCol" prefWidth="51.0" text="ID" />
                                   <TableColumn fx:id="emNameCol" prefWidth="118.0" text="Name" />
                                     <TableColumn fx:id="emPositionCol" prefWidth="115.0" text="Position" />
-                                    <TableColumn fx:id="emBranchCol" prefWidth="90.0" text="Branch" />
-                                    <TableColumn fx:id="emSalaryCol" prefWidth="81.0" text="Salary" />
+                                    <TableColumn fx:id="emBranchCol" prefWidth="87.0" text="Branch" />
+                                    <TableColumn fx:id="emSalaryCol" prefWidth="84.0" text="Salary" />
                                     <TableColumn fx:id="emContactCol" prefWidth="92.0" text="Contact" />
                                     <TableColumn fx:id="emEmailCol" prefWidth="99.0" text="Email" />
                                     <TableColumn fx:id="emAddressCol" prefWidth="95.0" text="Address" />
                                 </columns>
                               </TableView>
+                              <AnchorPane layoutX="7.0" layoutY="66.0" prefHeight="135.0" prefWidth="779.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="66.0">
+                                 <children>
+                                    <TextField fx:id="emSalaryField" layoutX="246.0" layoutY="14.0" prefHeight="28.0" prefWidth="185.0" promptText="Salary" AnchorPane.rightAnchor="353.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField fx:id="emNameField" layoutX="16.0" layoutY="14.0" prefHeight="23.0" prefWidth="206.0" promptText="Name" AnchorPane.leftAnchor="16.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <ComboBox fx:id="emPositionComboBox" layoutX="446.0" layoutY="36.0" prefHeight="25.0" prefWidth="175.0" promptText="Position" AnchorPane.rightAnchor="158.0" />
+                                    <ComboBox fx:id="emBranchComboBox" layoutX="446.0" layoutY="90.0" prefHeight="25.0" prefWidth="175.0" promptText="Branch" AnchorPane.rightAnchor="158.0" />
+                                    <TextField fx:id="emEmailField" layoutX="17.0" layoutY="52.0" prefHeight="23.0" prefWidth="206.0" promptText="Email" AnchorPane.leftAnchor="16.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField fx:id="emContactField" layoutX="18.0" layoutY="89.0" prefHeight="23.0" prefWidth="206.0" promptText="Contact" AnchorPane.leftAnchor="16.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextArea fx:id="emAddressField" layoutX="241.0" layoutY="53.0" prefHeight="67.0" prefWidth="184.0" promptText="Address" AnchorPane.leftAnchor="241.0" AnchorPane.rightAnchor="354.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextArea>
+                                    <ImageView fx:id="deleteEmployeeBtn" fitHeight="43.0" fitWidth="40.0" layoutX="718.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/delete.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="updateEmployeeBtn" fitHeight="66.0" fitWidth="73.0" layoutX="672.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/updated.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="addEmployeeBtn" fitHeight="38.0" fitWidth="42.0" layoutX="657.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/add-user2.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="446.0" layoutY="11.0" text="Select Position">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="446.0" layoutY="70.0" text="Select Branch">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <ComboBox fx:id="employeeSearchByComboBox" layoutX="25.0" layoutY="201.0" prefHeight="25.0" prefWidth="122.0" promptText="Search By" />
+                              <TextField layoutX="159.0" layoutY="201.0" prefHeight="28.0" prefWidth="155.0" promptText="Name">
+                                 <font>
+                                    <Font name="Cambria" size="14.0" />
+                                 </font>
+                              </TextField>
+                              <ComboBox fx:id="employeeOrderByComboBox" layoutX="663.0" layoutY="201.0" prefHeight="25.0" prefWidth="106.0" promptText="Order By" />
+                              <Label alignment="CENTER" layoutX="245.0" layoutY="8.0" prefHeight="58.0" prefWidth="314.0" text="Employee Table">
+                                 <font>
+                                    <Font name="Arial Black" size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="clearEmployeeTableBtn" fitHeight="44.0" fitWidth="50.0" layoutX="613.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/clear-table2.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </AnchorPane>
                      </content>
@@ -765,9 +987,62 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Label alignment="CENTER" layoutX="124.0" layoutY="120.0" prefHeight="44.0" prefWidth="170.0" text="Customers">
+                              <AnchorPane layoutX="6.0" layoutY="56.0" prefHeight="137.0" prefWidth="774.0">
+                                 <children>
+                                    <TextField layoutX="448.0" layoutY="14.0" promptText="Salary" AnchorPane.rightAnchor="158.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField layoutX="16.0" layoutY="14.0" prefHeight="23.0" prefWidth="206.0" promptText="Name" AnchorPane.leftAnchor="16.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <ComboBox layoutX="446.0" layoutY="51.0" prefHeight="25.0" prefWidth="175.0" promptText="Position" AnchorPane.rightAnchor="158.0" />
+                                    <ComboBox layoutX="446.0" layoutY="90.0" prefHeight="25.0" prefWidth="175.0" promptText="Branch" AnchorPane.rightAnchor="158.0" />
+                                    <TextField layoutX="17.0" layoutY="52.0" prefHeight="23.0" prefWidth="206.0" promptText="Email" AnchorPane.leftAnchor="16.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField layoutX="18.0" layoutY="89.0" prefHeight="23.0" prefWidth="206.0" promptText="Contact" AnchorPane.leftAnchor="16.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextArea layoutX="241.0" layoutY="12.0" prefHeight="108.0" prefWidth="184.0" promptText="Address" AnchorPane.leftAnchor="241.0" AnchorPane.rightAnchor="354.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextArea>
+                                    <Button layoutX="655.0" layoutY="16.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="ADD" AnchorPane.rightAnchor="20.0">
+                                       <font>
+                                          <Font name="Cambria Bold" size="14.0" />
+                                       </font>
+                                    </Button>
+                                    <Button layoutX="655.0" layoutY="52.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="UPDATE" AnchorPane.rightAnchor="20.0">
+                                       <font>
+                                          <Font name="Cambria Bold" size="14.0" />
+                                       </font>
+                                    </Button>
+                                    <Button layoutX="655.0" layoutY="89.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="DELETE" AnchorPane.rightAnchor="20.0">
+                                       <font>
+                                          <Font name="Cambria Bold" size="14.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <ComboBox layoutX="21.0" layoutY="212.0" prefHeight="25.0" prefWidth="122.0" promptText="Search By" />
+                              <TextField layoutX="164.0" layoutY="211.0" prefHeight="28.0" prefWidth="155.0" promptText="Name">
                                  <font>
-                                    <Font name="Cambria" size="24.0" />
+                                    <Font name="Cambria" size="14.0" />
+                                 </font>
+                              </TextField>
+                              <ComboBox layoutX="642.0" layoutY="213.0" prefHeight="25.0" prefWidth="106.0" promptText="Order By" />
+                              <Label alignment="CENTER" layoutX="235.0" layoutY="11.0" prefHeight="56.0" prefWidth="331.0" text="Customer Table">
+                                 <font>
+                                    <Font name="Arial Black" size="35.0" />
                                  </font>
                               </Label>
                            </children>

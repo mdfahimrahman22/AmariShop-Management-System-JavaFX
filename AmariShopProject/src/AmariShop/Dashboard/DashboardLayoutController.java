@@ -5,7 +5,6 @@
  */
 package AmariShop.Dashboard;
 
-import AmariShop.Database.ConnectDB;
 import AmariShop.Database.UserAccount;
 import AmariShop.FXMain;
 import AmariShop.Models.Branch;
@@ -41,6 +40,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.sql.*;
+import java.util.HashMap;
+import javafx.scene.control.ComboBox;
 
 public class DashboardLayoutController implements Initializable {
 
@@ -63,17 +64,19 @@ public class DashboardLayoutController implements Initializable {
     private Label copyrightLabel, userName, profileNameLabel, userRoleLabel, branchNameLabel, acIdLabel;
 
     @FXML
-    private TextField emailTextField, contactTextField, nameTextField;
+    private TextField emNameField, emContactField, emEmailField, emSalaryField, usersNameField, usersEmailField, usersContactField, branchNameField, branchEmailField, branchContactField, emailTextField, contactTextField, nameTextField;
 
     @FXML
-    private TextArea addressTextField;
+    private ComboBox emPositionComboBox, emBranchComboBox, usersBranchComboBox, usersRoleComboBox, usersSearchByComboBox, usersOrderByComboBox, branchSearchByComboBox, branchOrderByComboBox, employeeOrderByComboBox, employeeSearchByComboBox, employeeBranchComboBox, employeePositionComboBox;
 
     @FXML
-    private ImageView editBtn;
+    private TextArea emAddressField, addressTextField, usersAddressField, branchAddressField;
 
     @FXML
-    private Button updateBranchBtn, updateUserBtn, updateProfileBtn, addUserBtn, addBranchBtn, deleteBranchBtn;
+    private ImageView clearEmployeeTableBtn, addEmployeeBtn, deleteEmployeeBtn, updateEmployeeBtn, clearBranchTableBtn, clearUserTableBtn, editBtn, updateUserBtn, updateBranchBtn, addBranchBtn, deleteBranchBtn, addUserBtn, deleteUserBtn;
 
+    @FXML
+    private Button updatePassBtn, updateProfileBtn;
     @FXML
     private TableView<User> usersTable;
     @FXML
@@ -105,15 +108,15 @@ public class DashboardLayoutController implements Initializable {
     private TableColumn<Employee, String> emNameCol, emEmailCol, emBranchCol, emPositionCol, emContactCol, emAddressCol;
 
     @FXML
-    private Button updatePassBtn, deleteUserBtn;
-
-    @FXML
-    private PasswordField oldPassField, newPassField, confirmPassField;
+    private PasswordField oldPassField, newPassField, confirmPassField, usersPassField;
 
     private User user;
     private Connection connection;
     PreparedStatement ps;
     ResultSet rs;
+    HashMap<String, Integer> branches = new HashMap<String, Integer>();
+    HashMap<String, Integer> userRoles = new HashMap<String, Integer>();
+    HashMap<String, Integer> positions = new HashMap<String, Integer>();
 
     public DashboardLayoutController() {
     }
@@ -129,13 +132,78 @@ public class DashboardLayoutController implements Initializable {
         setOnClickListeners();
         setProfileSettingsEditable(false);
         setProfileImage();
+
         initializeEmployeeTable();
         initializeBranchTable();
         initializeUserRoleTable();
         initializeUserTable();
+
     }
 
-    public void initializeUserTable() {
+    public void setPositionComboBoxItems(ComboBox comboBox) {
+        String sql = "select * from EmployeePosition";
+        try {
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            positions.clear();
+            comboBox.getItems().clear();
+            while (rs.next()) {
+                String branchName = rs.getString("position_title");
+                positions.put(branchName, rs.getInt("EmployeePositionID"));
+                comboBox.getItems().add(branchName);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Sql exception");
+            System.out.println(ex);
+        }
+    }
+
+    public void setBranchComboBoxItems(ComboBox comboBox) {
+        String sql = "select * from Branch";
+        try {
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            branches.clear();
+            comboBox.getItems().clear();
+            while (rs.next()) {
+                String branchName = rs.getString("branch_name");
+                branches.put(branchName, rs.getInt("BranchID"));
+                comboBox.getItems().add(branchName);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Sql exception");
+            System.out.println(ex);
+        }
+    }
+
+    public void setUserRoleComboBoxItems(ComboBox comboBox) {
+        String sql = "select * from UserRole";
+        try {
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            comboBox.getItems().clear();
+            userRoles.clear();
+            while (rs.next()) {
+                userRoles.put(rs.getString("user_role_title"), rs.getInt("UserRoleID"));
+                comboBox.getItems().add(rs.getString("user_role_title"));
+            }
+        } catch (SQLException ex) {
+            System.out.println("Can't get user roles");
+        }
+    }
+
+    private void initUsersTab() {
+        setBranchComboBoxItems(usersBranchComboBox);
+        setUserRoleComboBoxItems(usersRoleComboBox);
+    }
+
+    private void initEmployeeTab() {
+        setBranchComboBoxItems(emBranchComboBox);
+        setPositionComboBoxItems(emPositionComboBox);
+
+    }
+
+    private void initializeUserTable() {
         tableUserId.setCellValueFactory(new PropertyValueFactory<>("id"));
         tableUserName.setCellValueFactory(cellData -> cellData.getValue().getName());
         tableUserBranch.setCellValueFactory(new PropertyValueFactory<>("branchName"));
@@ -256,15 +324,12 @@ public class DashboardLayoutController implements Initializable {
                 int roleId = rs.getInt("UserRoleID");
                 int id = rs.getInt("userid");
                 int branchId = rs.getInt("branchid");
-
                 userList.add(new User(email, name, address, contact, branch, role, id, branchId, roleId));
             }
         } catch (SQLException ex) {
             System.out.println("SQL Exception:" + ex);
         }
-
         usersTable.setItems(userList);
-
     }
 
     ObservableList<Employee> employeeList = FXCollections.observableArrayList();
@@ -341,6 +406,7 @@ public class DashboardLayoutController implements Initializable {
             tabPane.getSelectionModel().select(1);
         });
         usersBtn.setOnMouseClicked(event -> {
+            initUsersTab();
             setUsersTableData();
             tabPane.getSelectionModel().select(2);
         });
@@ -356,6 +422,7 @@ public class DashboardLayoutController implements Initializable {
             tabPane.getSelectionModel().select(7);
         });
         employeesBtn.setOnMouseClicked(event -> {
+            initEmployeeTab();
             setEmployeeTableData();
             tabPane.getSelectionModel().select(6);
         });
@@ -378,6 +445,8 @@ public class DashboardLayoutController implements Initializable {
                         int res = ps.executeUpdate();
                         if (res == 1) {
                             branchTable.getItems().removeAll(selectedBranch);
+                            clearBranchForm();
+                            branchTable.getSelectionModel().clearSelection();
                             FXMain.showNotification("Deleted Successfully", "Branch is deleted successfully.", "success");
                         }
                     } catch (SQLException ex) {
@@ -403,7 +472,9 @@ public class DashboardLayoutController implements Initializable {
                         ps.setInt(1, selectedUser.getId());
                         int res = ps.executeUpdate();
                         if (res == 1) {
-                            usersTable.getItems().removeAll(selectedUser);
+                            usersTable.getItems().remove(selectedUser);
+                            clearUsersForm();
+                            usersTable.getSelectionModel().clearSelection();
                             FXMain.showNotification("User Deleted Successfully", "User is deleted successfully.", "success");
                         }
                     } catch (SQLException ex) {
@@ -422,23 +493,78 @@ public class DashboardLayoutController implements Initializable {
                 FXMain.showNotification("No Selected Row", "Please select a row to update branch.", "warning");
                 return;
             }
-
+            int id = selectedBranch.getId();
+            String name = branchNameField.getText();
+            String email = branchEmailField.getText();
+            String contact = branchContactField.getText();
+            String address = branchAddressField.getText();
             if (user.getUserRoleId() == 1) {
-                new FXMain().openUpdateBranch(connection, branchTable, selectedBranch);
+                updateBranch(selectedBranch, id, name, email, address, contact);
             } else if (user.getUserRoleId() == 2 && user.getBranchId() == selectedBranch.getId()) {
-                new FXMain().openUpdateBranch(connection, branchTable, selectedBranch);
+                updateBranch(selectedBranch, id, name, email, address, contact);
             } else {
                 FXMain.showNotification("Permission Denyed", "You are not allowed to update this branch.", "warning");
             }
         });
+        employeeTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                Employee selectedEmployee = newSelection;
+                emNameField.setText(selectedEmployee.getName());
+                emEmailField.setText(selectedEmployee.getEmail());
+                emContactField.setText(selectedEmployee.getContact());
+                emAddressField.setText(selectedEmployee.getAddress());
+                emSalaryField.setText(Integer.toString(selectedEmployee.getSalary()));
+                emPositionComboBox.getSelectionModel().select(selectedEmployee.getPositionTitle());
+                emBranchComboBox.getSelectionModel().select(selectedEmployee.getBranchName());
+            }
+        });
 
+        usersTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                User selectedUser = newSelection;
+                usersNameField.setText(selectedUser.getName().get());
+                usersEmailField.setText(selectedUser.getEmail().get());
+                usersContactField.setText(selectedUser.getContact().get());
+                usersAddressField.setText(selectedUser.getAddress().get());
+                usersBranchComboBox.getSelectionModel().select(selectedUser.getBranchName());
+                usersRoleComboBox.getSelectionModel().select(selectedUser.getUserRoleTitle());
+            }
+        });
+        branchTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                Branch selectedBranch = newSelection;
+                branchNameField.setText(selectedBranch.getName());
+                branchEmailField.setText(selectedBranch.getEmail());
+                branchContactField.setText(selectedBranch.getContact());
+                branchAddressField.setText(selectedBranch.getAddress());
+            }
+        });
         updateUserBtn.setOnMouseClicked(event -> {
             if (user.getUserRoleId() == 1) {
                 User selectedUser = usersTable.getSelectionModel().getSelectedItem();
                 if (selectedUser == null) {
                     FXMain.showNotification("No Selected Row", "Please select a row to update user.", "warning");
                 } else {
-                    new FXMain().openUpdateUser(connection, usersTable, selectedUser);
+                    try {
+                        String selectedUserRole = usersRoleComboBox.getValue().toString();
+                        String selectedBranch = usersBranchComboBox.getValue().toString();
+                        String name = usersNameField.getText();
+                        String email = usersEmailField.getText();
+                        String contact = usersContactField.getText();
+                        String address = usersAddressField.getText();
+
+                        if (email.trim().isEmpty()) {
+                            throw new IllegalArgumentException("Illegal Arguments");
+                        } else {
+                            updateUser(selectedUser, selectedUser.getId(), userRoles.get(selectedUserRole), branches.get(selectedBranch),
+                                    name, email, contact, address, selectedBranch, selectedUserRole
+                            );
+                        }
+                    } catch (NullPointerException np) {
+                        FXMain.showNotification("Invalid Credentials", "Please fill up the form properly. Branch and User Role must be selected.", "warning");
+                    } catch (IllegalArgumentException iae) {
+                        FXMain.showNotification("Invalid Credentials", "Please fill up the form properly. Email and Password must be there.", "warning");
+                    }
                 }
             } else {
                 FXMain.showNotification("Permission Denyed", "You are not allowed to update user.", "warning");
@@ -447,25 +573,56 @@ public class DashboardLayoutController implements Initializable {
 
         addBranchBtn.setOnMouseClicked(event -> {
             if (user.getUserRoleId() == 1) {
-                new FXMain().openAddBranch(connection, branchList);
+                String name = branchNameField.getText();
+                String contact = branchContactField.getText();
+                String address = branchAddressField.getText();
+                String email = branchEmailField.getText();
+                addBranch(name, email, contact, address);
             } else {
                 FXMain.showNotification("Permission Denyed", "You are not allowed to delete user.", "warning");
             }
         });
+        clearUserTableBtn.setOnMouseClicked(event -> {
+            clearUsersForm();
+            usersTable.getSelectionModel().clearSelection();
+        });
+        clearEmployeeTableBtn.setOnMouseClicked(event -> {
+            clearEmployeeForm();
+            employeeTable.getSelectionModel().clearSelection();
+        });
+        clearBranchTableBtn.setOnMouseClicked(event -> {
+            clearBranchForm();
+            branchTable.getSelectionModel().clearSelection();
+        });
         addUserBtn.setOnMouseClicked(event -> {
             if (user.getUserRoleId() == 1) {
-                new FXMain().openAddUser(connection, userList);
+                try {
+                    String selectedUserRole = usersRoleComboBox.getValue().toString();
+                    String selectedBranch = usersBranchComboBox.getValue().toString();
+                    String name = usersNameField.getText();
+                    String email = usersEmailField.getText();
+                    String pass = usersPassField.getText();
+                    String contact = usersContactField.getText();
+                    String address = usersAddressField.getText();
+                    if (email.trim().isEmpty() || pass.trim().isEmpty()) {
+                        throw new IllegalArgumentException("Illegal Arguments");
+                    } else {
+                        addNewUser(userRoles.get(selectedUserRole), branches.get(selectedBranch),
+                                name, email, pass, selectedBranch, selectedUserRole,
+                                contact, address);
+                    }
+
+                } catch (NullPointerException np) {
+                    FXMain.showNotification("Invalid Credentials", "Please fill up the form properly. Branch and User Role must be selected.", "warning");
+                } catch (IllegalArgumentException iae) {
+                    FXMain.showNotification("Invalid Credentials", "Please fill up the form properly. Email and Password must be there.", "warning");
+                }
+
             } else {
                 FXMain.showNotification("Permission Denyed", "You are not allowed to add user.", "warning");
             }
         });
-        addUserBtn.setOnMouseClicked(event -> {
-            if (user.getUserRoleId() == 1) {
-                new FXMain().openAddUser(connection, userList);
-            } else {
-                FXMain.showNotification("Permission Denyed", "You are not allowed to add user.", "warning");
-            }
-        });
+
         Logout.setOnMouseClicked(event -> {
             new FXMain().openLogin(event, connection);
         });
@@ -513,6 +670,148 @@ public class DashboardLayoutController implements Initializable {
             }
         });
 
+    }
+
+    private void updateBranch(Branch selectedBranch, int id, String name, String email, String address, String contact) {
+        String sql = "update Branch set branch_name=?,branch_email=?,branch_address=?,branch_contact=? where BranchID=?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setString(2, email);
+            ps.setString(3, address);
+            ps.setString(4, contact);
+            ps.setInt(5, id);
+
+            int rs = ps.executeUpdate();
+            if (rs == 1) {
+                branchTable.getItems().remove(selectedBranch);
+                selectedBranch = new Branch(id, name, address, contact, email);
+                branchTable.getItems().add(selectedBranch);
+                branchTable.getSelectionModel().select(selectedBranch);
+                FXMain.showNotification("Branch Info Updated", "Successfully updated branch information.", "success");
+            } else {
+                FXMain.showNotification("Failed to update the branch", "Something went worng.", "warning");
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+    }
+
+    private void clearEmployeeForm() {
+        emNameField.setText("");
+        emEmailField.setText("");
+        emContactField.setText("");
+        emAddressField.setText("");
+        emSalaryField.setText("");
+        emPositionComboBox.getSelectionModel().clearSelection();
+        emBranchComboBox.getSelectionModel().clearSelection();
+    }
+
+    private void clearUsersForm() {
+        usersNameField.setText("");
+        usersEmailField.setText("");
+        usersPassField.setText("");
+        usersContactField.setText("");
+        usersAddressField.setText("");
+        usersBranchComboBox.getSelectionModel().clearSelection();
+        usersRoleComboBox.getSelectionModel().clearSelection();
+    }
+
+    private void clearBranchForm() {
+        branchNameField.setText("");
+        branchEmailField.setText("");
+        branchContactField.setText("");
+        branchAddressField.setText("");
+    }
+
+    private void addBranch(String name, String email, String contact, String address) {
+        String sql = "insert into Branch(branch_name,branch_address,branch_email,branch_contact)\n"
+                + "values (?,?,?,?)";
+
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setString(2, address);
+            ps.setString(3, email);
+            ps.setString(4, contact);
+            int res = ps.executeUpdate();
+            if (res == 1) {
+                rs = connection.prepareStatement(String.format("select BranchID from Branch where branch_name='%s' and branch_email='%s'", name, email)).executeQuery();
+                int bid = 0;
+                while (rs.next()) {
+                    bid = rs.getInt("BranchID");
+                }
+                FXMain.showNotification("Insert Successful", "New Branch inserted successfully", "successs");
+                clearBranchForm();
+                branchList.add(new Branch(bid, name, address, contact, email));
+
+            } else {
+                FXMain.showNotification("Insertion Failed", "Failed to insert new branch.", "warning");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+
+        }
+    }
+
+    private void updateUser(User selectedUser, int userId, int userRoleId, int branchId, String name, String email, String contact, String address, String branchName, String userRoleTitle) {
+        String sql = "update users set BranchID=?,UserRoleID=?,name=?, email=?,"
+                + "contact=?,address=? where userid=? ";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, branchId);
+            ps.setInt(2, userRoleId);
+            ps.setString(3, name);
+            ps.setString(4, email);
+            ps.setString(5, contact);
+            ps.setString(6, address);
+            ps.setInt(7, userId);
+            int res = ps.executeUpdate();
+            if (res == 1) {
+                usersTable.getItems().remove(selectedUser);
+                selectedUser = new User(email, name, address, contact, branchName, userRoleTitle, userId, branchId, userRoleId);
+                usersTable.getItems().add(selectedUser);
+                usersTable.getSelectionModel().select(selectedUser);
+                FXMain.showNotification("User Info Updated", "Successfully updated user information.", "success");
+            } else {
+                FXMain.showNotification("Failed to update the user", "Something went worng.", "warning");
+            }
+        } catch (SQLException ex) {
+            FXMain.showNotification("SQL Error", "Can't create new user.", "error");
+        }
+
+    }
+
+    private void addNewUser(int userRoleId, int branchId, String name, String email, String password, String branchName, String userRoleTitle, String contact, String address) {
+        String sql = "insert into users(UserRoleID,BranchID,name,email,password,contact,address) values \n"
+                + "(?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, userRoleId);
+            ps.setInt(2, branchId);
+            ps.setString(3, name);
+            ps.setString(4, email);
+            ps.setString(5, password);
+            ps.setString(6, contact);
+            ps.setString(7, address);
+            int res = ps.executeUpdate();
+            if (res == 1) {
+                ResultSet rs = connection.prepareStatement(String.format("select UserID from users where email='%s'", email)).executeQuery();
+                int uid = 0;
+                while (rs.next()) {
+                    uid = rs.getInt("UserID");
+                }
+                userList.add(new User(email, name, address, contact, branchName, userRoleTitle, uid, branchId, userRoleId));
+                clearUsersForm();
+                FXMain.showNotification("New User Created", "Successfully created new user", "success");
+            } else {
+                FXMain.showNotification("Failed to create new user", "Something went worng.", "warning");
+            }
+        } catch (SQLException ex) {
+            FXMain.showNotification("SQL Error", "Can't create new user.", "error");
+        }
     }
 
     private void setCopyrightLabelText() {
