@@ -46,6 +46,49 @@ inner join Branch b on em.BranchID= b.BranchID
 inner join EmployeePosition p on em.EmployeePositionID=p.EmployeePositionID 
 
 
+--> Insert into Employee
+insert into Employee(employee_name,employee_email,employee_contact,employee_address,employee_salary,BranchId,EmployeePositionID) values 
+('fahim','fahim2@gmail.com','01928304','Dhaka',12000,1,2)
+
+--> Update Employee Info
+update Employee set employee_name='',employee_email='',
+employee_contact='',employee_address='',employee_salary=0
+,BranchId=0,EmployeePositionID=0 where EmployeeID=1
+
+--> Employee search by name
+select em.EmployeeID,em.branchid,em.employee_name,em.employee_email,em.employee_address,em.employee_contact,
+em.employee_salary,b.branchid,b.branch_name,p.position_title,p.EmployeePositionID from Employee em 
+inner join Branch b on em.BranchID= b.BranchID 
+inner join EmployeePosition p on em.EmployeePositionID=p.EmployeePositionID 
+where em.employee_name like 'Fahim 2'
+ 
+--> Employee Search by branch name
+select em.EmployeeID,em.branchid,em.employee_name,em.employee_email,em.employee_address,em.employee_contact,
+em.employee_salary,b.branchid,b.branch_name,p.position_title,p.EmployeePositionID from Employee em 
+inner join Branch b on em.BranchID= b.BranchID 
+inner join EmployeePosition p on em.EmployeePositionID=p.EmployeePositionID 
+where b.branch_name like 'Dhanmondi Branch'
+
+--> Employee Search by Position Title
+select em.EmployeeID,em.branchid,em.employee_name,em.employee_email,em.employee_address,em.employee_contact,
+em.employee_salary,b.branchid,b.branch_name,p.position_title,p.EmployeePositionID from Employee em 
+inner join Branch b on em.BranchID= b.BranchID 
+inner join EmployeePosition p on em.EmployeePositionID=p.EmployeePositionID 
+where p.position_title like 'Manager'
+
+--> Employee Search by Salary
+select em.EmployeeID,em.branchid,em.employee_name,em.employee_email,em.employee_address,em.employee_contact,
+em.employee_salary,b.branchid,b.branch_name,p.position_title,p.EmployeePositionID from Employee em 
+inner join Branch b on em.BranchID= b.BranchID 
+inner join EmployeePosition p on em.EmployeePositionID=p.EmployeePositionID 
+where em.employee_salary=12000
+
+--> User Search by name/contact/address/email
+select u.userid,u.name,u.email,u.address,u.contact,
+u.created_at,b.branchid,b.branch_name,r.UserRoleID,r.user_role_title from Users u 
+inner join Branch b on u.BranchID= b.BranchID 
+inner join UserRole r on u.UserRoleID=r.UserRoleID
+where u.name='Fahim 2' 
 
 
 --> Check

@@ -39,7 +39,7 @@ public class LoginLayoutController implements Initializable {
         FXMain fxmain=new FXMain();
         connection=ConnectDB.getConnection();
         UserAccount userAccount=new UserAccount(connection);
-        String email="fahimpranto002@gmail.com";String pass="1234567";
+        String email="fahimpranto002@gmail.com";String pass="123456";
       //  String email="f2@gmail.com";String pass="123456";
         
 //        String email=emailField.getText();String pass=passField.getText();

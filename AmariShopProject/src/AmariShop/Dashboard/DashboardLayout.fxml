@@ -646,13 +646,13 @@
                            <children>
                               <TableView fx:id="usersTable" layoutX="26.0" layoutY="246.0" prefHeight="363.0" prefWidth="752.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                                 <columns>
-                                    <TableColumn fx:id="tableUserId" prefWidth="60.0" text="User ID" />
-                                  <TableColumn fx:id="tableUserName" prefWidth="99.0" text="Name" />
-                                    <TableColumn fx:id="tableUserRole" prefWidth="103.0" text="User Role" />
-                                    <TableColumn fx:id="tableUserBranch" minWidth="0.0" prefWidth="128.0" text="Branch" />
-                                  <TableColumn fx:id="tableUserEmail" prefWidth="83.0" text="Email" />
-                                    <TableColumn fx:id="tableUserContact" prefWidth="147.0" text="Contact" />
-                                    <TableColumn fx:id="tableUserAddress" prefWidth="192.0" text="Address" />
+                                    <TableColumn fx:id="usersIdCol" prefWidth="60.0" text="User ID" />
+                                  <TableColumn fx:id="usersNameCol" prefWidth="99.0" text="Name" />
+                                    <TableColumn fx:id="usersRoleCol" prefWidth="103.0" text="User Role" />
+                                    <TableColumn fx:id="usersBranchCol" minWidth="0.0" prefWidth="128.0" text="Branch" />
+                                  <TableColumn fx:id="usersEmailCol" prefWidth="109.0" text="Email" />
+                                    <TableColumn fx:id="usersContactCol" prefWidth="121.0" text="Contact" />
+                                    <TableColumn fx:id="usersAddressCol" prefWidth="192.0" text="Address" />
                                 </columns>
                               </TableView>
                               <AnchorPane layoutY="67.0" prefHeight="135.0" prefWidth="779.0">
@@ -712,7 +712,7 @@
                                  </children>
                               </AnchorPane>
                               <ComboBox fx:id="usersSearchByComboBox" layoutX="20.0" layoutY="212.0" prefHeight="25.0" prefWidth="122.0" promptText="Search By" />
-                              <TextField fx:id="usersSearchByField" layoutX="156.0" layoutY="212.0" prefHeight="28.0" prefWidth="155.0" promptText="Name">
+                              <TextField fx:id="usersSearchByField" layoutX="156.0" layoutY="212.0" prefHeight="28.0" prefWidth="155.0" promptText="Search By">
                                  <font>
                                     <Font name="Cambria" size="14.0" />
                                  </font>
@@ -726,6 +726,16 @@
                               <ImageView fx:id="clearUserTableBtn" fitHeight="44.0" fitWidth="50.0" layoutX="615.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@img/clear-table2.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="refreshUsersTableBtn" fitHeight="38.0" fitWidth="39.0" layoutX="568.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/refresh.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="searchUsersBtn" fitHeight="40.0" fitWidth="42.0" layoutX="317.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/search-employee.png" />
                                  </image>
                               </ImageView>
                            </children>
@@ -745,7 +755,7 @@
                                     <TableColumn fx:id="branchEmailCol" prefWidth="153.0" text="Email" />
                                 </columns>
                               </TableView>
-                              <AnchorPane layoutX="16.0" layoutY="63.0" prefHeight="135.0" prefWidth="761.0">
+                              <AnchorPane layoutX="17.0" layoutY="48.0" prefHeight="135.0" prefWidth="761.0">
                                  <children>
                                     <TextField fx:id="branchNameField" layoutX="84.0" layoutY="16.0" prefHeight="23.0" prefWidth="206.0" promptText="Name" AnchorPane.leftAnchor="84.0">
                                        <font>
@@ -784,14 +794,14 @@
                                     </ImageView>
                                  </children>
                               </AnchorPane>
-                              <ComboBox fx:id="branchSearchByComboBox" layoutX="31.0" layoutY="198.0" prefHeight="25.0" prefWidth="122.0" promptText="Search By" />
-                              <TextField fx:id="branchSearchByField" layoutX="169.0" layoutY="198.0" prefHeight="28.0" prefWidth="155.0" promptText="Name">
+                              <ComboBox fx:id="branchSearchByComboBox" layoutX="31.0" layoutY="193.0" prefHeight="30.0" prefWidth="122.0" promptText="Search By" />
+                              <TextField fx:id="branchSearchByField" layoutX="169.0" layoutY="192.0" prefHeight="34.0" prefWidth="155.0" promptText="Search By">
                                  <font>
                                     <Font name="Cambria" size="14.0" />
                                  </font>
                               </TextField>
                               <ComboBox fx:id="branchOrderByComboBox" layoutX="661.0" layoutY="198.0" prefHeight="25.0" prefWidth="106.0" promptText="Order By" />
-                              <Label alignment="CENTER" layoutX="264.0" layoutY="4.0" prefHeight="59.0" prefWidth="266.0" text="Branch Table">
+                              <Label alignment="CENTER" layoutX="264.0" layoutY="4.0" prefHeight="59.0" prefWidth="266.0" text="Branch Data">
                                  <font>
                                     <Font name="Arial Black" size="35.0" />
                                  </font>
@@ -799,6 +809,16 @@
                               <ImageView fx:id="clearBranchTableBtn" fitHeight="44.0" fitWidth="50.0" layoutX="606.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@img/clear-table2.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="refreshBranchTableBtn" fitHeight="38.0" fitWidth="39.0" layoutX="555.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/refresh.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="searchBranchBtn" fitHeight="42.0" fitWidth="46.0" layoutX="330.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/search.png" />
                                  </image>
                               </ImageView>
                            </children>
@@ -908,7 +928,7 @@
                               </TableView>
                               <AnchorPane layoutX="7.0" layoutY="66.0" prefHeight="135.0" prefWidth="779.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="66.0">
                                  <children>
-                                    <TextField fx:id="emSalaryField" layoutX="246.0" layoutY="14.0" prefHeight="28.0" prefWidth="185.0" promptText="Salary" AnchorPane.rightAnchor="353.0">
+                                    <TextField fx:id="emSalaryField" layoutX="246.0" layoutY="14.0" prefHeight="28.0" prefWidth="185.0" promptText="Salary" AnchorPane.leftAnchor="241.0">
                                        <font>
                                           <Font name="Cambria" size="14.0" />
                                        </font>
@@ -918,8 +938,8 @@
                                           <Font name="Cambria" size="14.0" />
                                        </font>
                                     </TextField>
-                                    <ComboBox fx:id="emPositionComboBox" layoutX="446.0" layoutY="36.0" prefHeight="25.0" prefWidth="175.0" promptText="Position" AnchorPane.rightAnchor="158.0" />
-                                    <ComboBox fx:id="emBranchComboBox" layoutX="446.0" layoutY="90.0" prefHeight="25.0" prefWidth="175.0" promptText="Branch" AnchorPane.rightAnchor="158.0" />
+                                    <ComboBox fx:id="emPositionComboBox" layoutX="446.0" layoutY="36.0" prefHeight="25.0" prefWidth="175.0" promptText="Position" AnchorPane.rightAnchor="158.0" AnchorPane.topAnchor="36.0" />
+                                    <ComboBox fx:id="emBranchComboBox" layoutX="446.0" layoutY="90.0" prefHeight="25.0" prefWidth="175.0" promptText="Branch" AnchorPane.rightAnchor="158.0" AnchorPane.topAnchor="90.0" />
                                     <TextField fx:id="emEmailField" layoutX="17.0" layoutY="52.0" prefHeight="23.0" prefWidth="206.0" promptText="Email" AnchorPane.leftAnchor="16.0">
                                        <font>
                                           <Font name="Cambria" size="14.0" />
@@ -935,48 +955,58 @@
                                           <Font size="14.0" />
                                        </font>
                                     </TextArea>
-                                    <ImageView fx:id="deleteEmployeeBtn" fitHeight="43.0" fitWidth="40.0" layoutX="718.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="deleteEmployeeBtn" fitHeight="43.0" fitWidth="40.0" layoutX="718.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="21.0">
                                        <image>
                                           <Image url="@img/delete.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fx:id="updateEmployeeBtn" fitHeight="66.0" fitWidth="73.0" layoutX="672.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="updateEmployeeBtn" fitHeight="66.0" fitWidth="73.0" layoutX="672.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="58.0">
                                        <image>
                                           <Image url="@img/updated.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fx:id="addEmployeeBtn" fitHeight="38.0" fitWidth="42.0" layoutX="657.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="addEmployeeBtn" fitHeight="38.0" fitWidth="42.0" layoutX="657.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="88.0">
                                        <image>
                                           <Image url="@img/add-user2.png" />
                                        </image>
                                     </ImageView>
-                                    <Label layoutX="446.0" layoutY="11.0" text="Select Position">
+                                    <Label layoutX="446.0" layoutY="11.0" text="Select Position" AnchorPane.rightAnchor="235.0" AnchorPane.topAnchor="10.0">
                                        <font>
                                           <Font name="Comic Sans MS" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="446.0" layoutY="70.0" text="Select Branch">
+                                    <Label layoutX="446.0" layoutY="70.0" text="Select Branch" AnchorPane.rightAnchor="238.0" AnchorPane.topAnchor="66.0">
                                        <font>
                                           <Font name="Comic Sans MS" size="14.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </AnchorPane>
-                              <ComboBox fx:id="employeeSearchByComboBox" layoutX="25.0" layoutY="201.0" prefHeight="25.0" prefWidth="122.0" promptText="Search By" />
-                              <TextField layoutX="159.0" layoutY="201.0" prefHeight="28.0" prefWidth="155.0" promptText="Name">
+                              <ComboBox fx:id="employeeSearchByComboBox" layoutX="25.0" layoutY="194.0" prefHeight="32.0" prefWidth="122.0" promptText="Search By" />
+                              <TextField fx:id="emSearchByTextField" layoutX="159.0" layoutY="194.0" prefHeight="35.0" prefWidth="155.0" promptText="Search By">
                                  <font>
                                     <Font name="Cambria" size="14.0" />
                                  </font>
                               </TextField>
-                              <ComboBox fx:id="employeeOrderByComboBox" layoutX="663.0" layoutY="201.0" prefHeight="25.0" prefWidth="106.0" promptText="Order By" />
-                              <Label alignment="CENTER" layoutX="245.0" layoutY="8.0" prefHeight="58.0" prefWidth="314.0" text="Employee Table">
+                              <ComboBox fx:id="employeeOrderByComboBox" layoutX="663.0" layoutY="201.0" prefHeight="30.0" prefWidth="106.0" promptText="Order By" AnchorPane.rightAnchor="23.0" />
+                              <Label alignment="CENTER" layoutX="245.0" layoutY="8.0" prefHeight="58.0" prefWidth="314.0" text="Employee Data">
                                  <font>
                                     <Font name="Arial Black" size="35.0" />
                                  </font>
                               </Label>
-                              <ImageView fx:id="clearEmployeeTableBtn" fitHeight="44.0" fitWidth="50.0" layoutX="613.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="clearEmployeeTableBtn" fitHeight="49.0" fitWidth="48.0" layoutX="600.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="144.0">
                                  <image>
                                     <Image url="@img/clear-table2.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="refreshEmTableBtn" fitHeight="38.0" fitWidth="39.0" layoutX="545.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/refresh.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="searchEmployeeBtn" fitHeight="40.0" fitWidth="42.0" layoutX="322.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/search-employee.png" />
                                  </image>
                               </ImageView>
                            </children>

@@ -40,8 +40,15 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import javafx.scene.control.ComboBox;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 
 public class DashboardLayoutController implements Initializable {
 
@@ -64,7 +71,7 @@ public class DashboardLayoutController implements Initializable {
     private Label copyrightLabel, userName, profileNameLabel, userRoleLabel, branchNameLabel, acIdLabel;
 
     @FXML
-    private TextField emNameField, emContactField, emEmailField, emSalaryField, usersNameField, usersEmailField, usersContactField, branchNameField, branchEmailField, branchContactField, emailTextField, contactTextField, nameTextField;
+    private TextField branchSearchByField, usersSearchByField, emSearchByTextField, emNameField, emContactField, emEmailField, emSalaryField, usersNameField, usersEmailField, usersContactField, branchNameField, branchEmailField, branchContactField, emailTextField, contactTextField, nameTextField;
 
     @FXML
     private ComboBox emPositionComboBox, emBranchComboBox, usersBranchComboBox, usersRoleComboBox, usersSearchByComboBox, usersOrderByComboBox, branchSearchByComboBox, branchOrderByComboBox, employeeOrderByComboBox, employeeSearchByComboBox, employeeBranchComboBox, employeePositionComboBox;
@@ -73,7 +80,7 @@ public class DashboardLayoutController implements Initializable {
     private TextArea emAddressField, addressTextField, usersAddressField, branchAddressField;
 
     @FXML
-    private ImageView clearEmployeeTableBtn, addEmployeeBtn, deleteEmployeeBtn, updateEmployeeBtn, clearBranchTableBtn, clearUserTableBtn, editBtn, updateUserBtn, updateBranchBtn, addBranchBtn, deleteBranchBtn, addUserBtn, deleteUserBtn;
+    private ImageView searchBranchBtn, refreshBranchTableBtn, searchUsersBtn, refreshUsersTableBtn, searchEmployeeBtn, refreshEmTableBtn, clearEmployeeTableBtn, addEmployeeBtn, deleteEmployeeBtn, updateEmployeeBtn, clearBranchTableBtn, clearUserTableBtn, editBtn, updateUserBtn, updateBranchBtn, addBranchBtn, deleteBranchBtn, addUserBtn, deleteUserBtn;
 
     @FXML
     private Button updatePassBtn, updateProfileBtn;
@@ -88,10 +95,10 @@ public class DashboardLayoutController implements Initializable {
     private TableColumn<UserRole, String> userRoleTitleCol, userRoleDescCol;
 
     @FXML
-    private TableColumn<User, Integer> tableUserId;
+    private TableColumn<User, Integer> usersIdCol;
 
     @FXML
-    private TableColumn<User, String> tableUserName, tableUserRole, tableUserContact, tableUserEmail, tableUserBranch, tableUserAddress;
+    private TableColumn<User, String> usersNameCol, usersRoleCol, usersContactCol, usersEmailCol, usersBranchCol, usersAddressCol;
 
     @FXML
     private TableView<Branch> branchTable;
@@ -195,22 +202,285 @@ public class DashboardLayoutController implements Initializable {
     private void initUsersTab() {
         setBranchComboBoxItems(usersBranchComboBox);
         setUserRoleComboBoxItems(usersRoleComboBox);
+        String searchBy[] = {"User ID", "Name", "Email", "Contact", "Address", "Branch", "User Role"};
+        setSearchByComboBoxItems(usersSearchByComboBox, searchBy);
+        String orderBy[] = {"User ID", "Name", "Email", "Contact", "Address", "Branch", "User Role"};
+        setSearchByComboBoxItems(usersOrderByComboBox, orderBy);
+        refreshUsersTableBtn.setOnMouseClicked(e -> {
+            usersSearchByField.setText("");
+            setUsersTableData();
+        });
+        clearUserTableBtn.setOnMouseClicked(event -> {
+            clearUsersForm();
+            usersTable.getSelectionModel().clearSelection();
+            usersTable.getSortOrder().clear();
+        });
+        usersSearchByField.setOnKeyPressed(key -> {
+            switch (key.getCode()) {
+                case ENTER:
+                    setUsersTableSearchBy();
+            }
+        });
+        searchUsersBtn.setOnMouseClicked(e -> {
+            setUsersTableSearchBy();
+        });
+        usersOrderByComboBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            if (newValue != null) {
+                String ob = newValue.toString().toLowerCase();
+                if (ob.equals("name")) {
+                    usersTable.getSortOrder().add(usersNameCol);
+                } else if (ob.equals("email")) {
+                    usersTable.getSortOrder().add(usersEmailCol);
+                } else if (ob.equals("contact")) {
+                    usersTable.getSortOrder().add(usersContactCol);
+                } else if (ob.equals("user id")) {
+                    usersTable.getSortOrder().add(usersIdCol);
+                } else if (ob.equals("branch")) {
+                    usersTable.getSortOrder().add(usersBranchCol);
+                } else if (ob.equals("user role")) {
+                    usersTable.getSortOrder().add(usersRoleCol);
+                } else if (ob.equals("address")) {
+                    usersTable.getSortOrder().add(usersAddressCol);
+                }
+            }
+        });
+
+    }
+
+    public String getSqlQueryForUsersSearch(String col, String search) {
+        String sql = "select u.userid,u.name,u.email,u.address,u.contact,\n"
+                + "u.created_at,b.branchid,b.branch_name,r.UserRoleID,r.user_role_title from \n"
+                + "Users u \n"
+                + "inner join Branch b on u.BranchID= b.BranchID \n"
+                + "inner join UserRole r on u.UserRoleID=r.UserRoleID ";
+        if (col.equals("name") || col.equals("email") || col.equals("contact") || col.equals("address")) {
+            sql += String.format("where u.%s like '%s'", col, search);
+        } else if (col.equals("user id")) {
+            sql += String.format("where u.userid=%d", Integer.parseInt(search));
+        } else if (col.equals("branch")) {
+            sql += String.format("where b.branch_name like '%s'", search);
+        } else if (col.equals("user role")) {
+            sql += String.format("where r.user_role_title like '%s'", search);
+        }
+
+        return sql;
+    }
+
+    private void setUsersTableSearchBy() {
+        String col = usersSearchByComboBox.getValue().toString().toLowerCase();
+        String search = usersSearchByField.getText();
+        if (col.trim().isEmpty() || search.trim().isEmpty()) {
+            FXMain.showNotification("Invalid Input", "Search Field can not be emply and you must select Search By", "warning");
+            return;
+        }
+        userList.clear();
+        String sql = getSqlQueryForUsersSearch(col, search);
+
+        try {
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ps = connection.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    String email = rs.getString("email");
+                    String name = rs.getString("name");
+                    String address = rs.getString("address");
+                    String contact = rs.getString("contact");
+                    String branch = rs.getString("branch_name");
+                    String role = rs.getString("user_role_title");
+                    int roleId = rs.getInt("UserRoleID");
+                    int id = rs.getInt("userid");
+                    int branchId = rs.getInt("branchid");
+                    userList.add(new User(email, name, address, contact, branch, role, id, branchId, roleId));
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public String getSqlQueryForBranchSearch(String col, String search) {
+        String sql = "select * from Branch ";
+        if (col.equals("name") || col.equals("email") || col.equals("contact") || col.equals("address")) {
+            sql += String.format("where branch_%s like '%s'", col, search);
+        } else if (col.equals("branch id")) {
+            sql += String.format("where BranchID=%d", Integer.parseInt(search));
+        }
+
+        return sql;
+    }
+
+    private void setBranchTableSearchBy() {
+        String col = branchSearchByComboBox.getValue().toString().toLowerCase();
+        String search = branchSearchByField.getText();
+        if (col.trim().isEmpty() || search.trim().isEmpty()) {
+            FXMain.showNotification("Invalid Input", "Search Field can not be emply and you must select Search By", "warning");
+            return;
+        }
+        branchList.clear();
+        String sql = getSqlQueryForBranchSearch(col, search);
+
+        try {
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("BranchID");
+                String name = rs.getString("branch_name");
+                String address = rs.getString("branch_address");
+                String contact = rs.getString("branch_contact");
+                String email = rs.getString("branch_email");
+                branchList.add(new Branch(id, name, address, contact, email));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+    }
+
+    private void initBranchTab() {
+        String searchBy[] = {"Branch ID", "Name", "Contact", "Email", "Address"};
+        setSearchByComboBoxItems(branchSearchByComboBox, searchBy);
+        String orderBy[] = {"Branch ID", "Name", "Contact", "Email", "Address"};
+        setSearchByComboBoxItems(branchOrderByComboBox, orderBy);
+        refreshBranchTableBtn.setOnMouseClicked(e -> {
+            branchSearchByField.setText("");
+            setBranchTableData();
+        });
+        branchSearchByField.setOnKeyPressed(key -> {
+            switch (key.getCode()) {
+                case ENTER:
+                    setBranchTableSearchBy();
+            }
+        });
+        searchBranchBtn.setOnMouseClicked(event -> {
+            setBranchTableSearchBy();
+        });
+        branchOrderByComboBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            if (newValue != null) {
+                String ob = newValue.toString().toLowerCase();
+                if (ob.equals("name")) {
+                    branchTable.getSortOrder().add(branchNameCol);
+                } else if (ob.equals("email")) {
+                    branchTable.getSortOrder().add(branchEmailCol);
+                } else if (ob.equals("contact")) {
+                    branchTable.getSortOrder().add(branchContactCol);
+                } else if (ob.equals("address")) {
+                    branchTable.getSortOrder().add(branchAddressCol);
+                } else if (ob.equals("branch id")) {
+                    branchTable.getSortOrder().add(branchIdCol);
+                }
+            }
+        });
     }
 
     private void initEmployeeTab() {
         setBranchComboBoxItems(emBranchComboBox);
         setPositionComboBoxItems(emPositionComboBox);
+        String searchBy[] = {"ID", "Name", "Contact", "Email", "Address", "Salary", "Branch", "Position"};
+        setSearchByComboBoxItems(employeeSearchByComboBox, searchBy);
+        String orderBy[] = {"ID", "Name", "Contact", "Email", "Salary", "Branch", "Position"};
+        setSearchByComboBoxItems(employeeOrderByComboBox, orderBy);
+        refreshEmTableBtn.setOnMouseClicked(e -> {
+            emSearchByTextField.setText("");
+            setEmployeeTableData();
+        });
+        emSearchByTextField.setOnKeyPressed(key -> {
+            switch (key.getCode()) {
+                case ENTER:
+                    setEmTableSearchBy();
+            }
+        });
+        searchEmployeeBtn.setOnMouseClicked(event -> {
+            setEmTableSearchBy();
+        });
+        employeeOrderByComboBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            if (newValue != null) {
+                String ob = newValue.toString().toLowerCase();
+                if (ob.equals("name")) {
+                    employeeTable.getSortOrder().add(emNameCol);
+                } else if (ob.equals("email")) {
+                    employeeTable.getSortOrder().add(emEmailCol);
+                } else if (ob.equals("contact")) {
+                    employeeTable.getSortOrder().add(emContactCol);
+                } else if (ob.equals("id")) {
+                    employeeTable.getSortOrder().add(emIdCol);
+                } else if (ob.equals("branch")) {
+                    employeeTable.getSortOrder().add(emBranchCol);
+                } else if (ob.equals("position")) {
+                    employeeTable.getSortOrder().add(emPositionCol);
+                } else if (ob.equals("salary")) {
+                    employeeTable.getSortOrder().add(emSalaryCol);
+                }
+            }
+        });
+    }
 
+    public String getSqlQueryForEmSearch(String col, String search) {
+        String sql = "select em.EmployeeID,em.branchid,em.employee_name,em.employee_email,em.employee_address,em.employee_contact,\n"
+                + "em.employee_salary,b.branchid,b.branch_name,p.position_title,p.EmployeePositionID from Employee em \n"
+                + "inner join Branch b on em.BranchID= b.BranchID \n"
+                + "inner join EmployeePosition p on em.EmployeePositionID=p.EmployeePositionID ";
+
+        if (col.equals("name") || col.equals("email") || col.equals("contact") || col.equals("address")) {
+            sql += String.format("where em.employee_%s like '%s'", col, search);
+        }else if (col.equals("id")) {
+            sql += String.format("where em.EmployeeID=%d", Integer.parseInt(search));
+        } else if (col.equals("salary")) {
+            sql += String.format("where em.employee_salary=%d", Integer.parseInt(search));
+        } else if (col.equals("branch")) {
+            sql += String.format("where b.branch_name like '%s'", search);
+        } else if (col.equals("position")) {
+            sql += String.format("where p.position_title like '%s'", search);
+        }
+
+        return sql;
+    }
+
+    public void setEmTableSearchBy() {
+        String col = employeeSearchByComboBox.getValue().toString().toLowerCase();
+        String search = emSearchByTextField.getText();
+        if (col.trim().isEmpty() || search.trim().isEmpty()) {
+            FXMain.showNotification("Invalid Input", "Search Field can not be emply and you must select Search By", "warning");
+            return;
+        }
+        employeeList.clear();
+        String sql = getSqlQueryForEmSearch(col, search);
+
+        try {
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("EmployeeID");
+                int bId = rs.getInt("branchid");
+                int pId = rs.getInt("EmployeePositionID");
+                int salary = rs.getInt("employee_salary");
+                String name = rs.getString("employee_name");
+                String email = rs.getString("employee_email");
+                String address = rs.getString("employee_address");
+                String contact = rs.getString("employee_contact");
+                String bName = rs.getString("branch_name");
+                String pTitle = rs.getString("position_title");
+                employeeList.add(new Employee(id, bId, bName, pId, pTitle, salary, name, email, contact, address));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    private void setSearchByComboBoxItems(ComboBox comboBox, String searchBy[]) {
+        comboBox.getItems().clear();
+        comboBox.getItems().addAll(searchBy);
     }
 
     private void initializeUserTable() {
-        tableUserId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tableUserName.setCellValueFactory(cellData -> cellData.getValue().getName());
-        tableUserBranch.setCellValueFactory(new PropertyValueFactory<>("branchName"));
-        tableUserEmail.setCellValueFactory(cellData -> cellData.getValue().getEmail());
-        tableUserContact.setCellValueFactory(cellData -> cellData.getValue().getContact());
-        tableUserAddress.setCellValueFactory(cellData -> cellData.getValue().getAddress());
-        tableUserRole.setCellValueFactory(new PropertyValueFactory<>("userRoleTitle"));
+        usersIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        usersNameCol.setCellValueFactory(cellData -> cellData.getValue().getName());
+        usersBranchCol.setCellValueFactory(new PropertyValueFactory<>("branchName"));
+        usersEmailCol.setCellValueFactory(cellData -> cellData.getValue().getEmail());
+        usersContactCol.setCellValueFactory(cellData -> cellData.getValue().getContact());
+        usersAddressCol.setCellValueFactory(cellData -> cellData.getValue().getAddress());
+        usersRoleCol.setCellValueFactory(new PropertyValueFactory<>("userRoleTitle"));
     }
 
     public void initializeUserRoleTable() {
@@ -411,6 +681,7 @@ public class DashboardLayoutController implements Initializable {
             tabPane.getSelectionModel().select(2);
         });
         branchesBtn.setOnMouseClicked(event -> {
+            initBranchTab();
             setBranchTableData();
             tabPane.getSelectionModel().select(3);
         });
@@ -431,6 +702,33 @@ public class DashboardLayoutController implements Initializable {
         });
         salesBtn.setOnMouseClicked(event -> {
             tabPane.getSelectionModel().select(8);
+        });
+        deleteEmployeeBtn.setOnMouseClicked(event -> {
+            Employee selectedEmployee = employeeTable.getSelectionModel().getSelectedItem();
+            if (selectedEmployee == null) {
+                FXMain.showNotification("No Selected Row", "Please select a row to delete.", "warning");
+            } else {
+                if (verifyShopAdmin() || verifyBranchAdminPermission(selectedEmployee.getBranchId())) {
+                    String sql = "delete from Employee where EmployeeID=?";
+                    try {
+                        ps = connection.prepareStatement(sql);
+                        ps.setInt(1, selectedEmployee.getId());
+                        int res = ps.executeUpdate();
+                        if (res == 1) {
+                            employeeTable.getItems().removeAll(selectedEmployee);
+                            clearEmployeeForm();
+                            employeeTable.getSelectionModel().clearSelection();
+                            FXMain.showNotification("Deleted Successfully", "Employee is deleted successfully.", "success");
+                        }
+                    } catch (SQLException ex) {
+                        System.out.println(ex);
+                    }
+
+                } else {
+                    FXMain.showNotification("Permission Denyed", "You are not allowed to delete employee.", "warning");
+                }
+            }
+
         });
         deleteBranchBtn.setOnMouseClicked(event -> {
             Branch selectedBranch = branchTable.getSelectionModel().getSelectedItem();
@@ -482,7 +780,7 @@ public class DashboardLayoutController implements Initializable {
                     }
 
                 } else {
-                    FXMain.showNotification("Permission Denyed", "You are not allowed to add user.", "warning");
+                    FXMain.showNotification("Permission Denyed", "You are not allowed to delete user.", "warning");
                 }
             }
 
@@ -498,9 +796,9 @@ public class DashboardLayoutController implements Initializable {
             String email = branchEmailField.getText();
             String contact = branchContactField.getText();
             String address = branchAddressField.getText();
-            if (user.getUserRoleId() == 1) {
+            if (verifyShopAdmin()) {
                 updateBranch(selectedBranch, id, name, email, address, contact);
-            } else if (user.getUserRoleId() == 2 && user.getBranchId() == selectedBranch.getId()) {
+            } else if (verifyBranchAdminPermission(selectedBranch.getId())) {
                 updateBranch(selectedBranch, id, name, email, address, contact);
             } else {
                 FXMain.showNotification("Permission Denyed", "You are not allowed to update this branch.", "warning");
@@ -539,8 +837,17 @@ public class DashboardLayoutController implements Initializable {
                 branchAddressField.setText(selectedBranch.getAddress());
             }
         });
+        employeeSearchByComboBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            setEmSearchByField((String) newValue);
+        });
+        usersSearchByComboBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            setUsersSearchByField((String) newValue);
+        });
+        branchSearchByComboBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            setBranchSearchByField((String) newValue);
+        });
         updateUserBtn.setOnMouseClicked(event -> {
-            if (user.getUserRoleId() == 1) {
+            if (verifyShopAdmin()) {
                 User selectedUser = usersTable.getSelectionModel().getSelectedItem();
                 if (selectedUser == null) {
                     FXMain.showNotification("No Selected Row", "Please select a row to update user.", "warning");
@@ -570,16 +877,69 @@ public class DashboardLayoutController implements Initializable {
                 FXMain.showNotification("Permission Denyed", "You are not allowed to update user.", "warning");
             }
         });
+        updateEmployeeBtn.setOnMouseClicked(event -> {
+            int salary = 0, branchId = 0, positionId = 0;
+            String positionTitle = "", branchName = "";
+            String name = emNameField.getText();
+            String contact = emContactField.getText();
+            String address = emAddressField.getText();
+            String email = emEmailField.getText();
+            try {
+                salary = Integer.parseInt(emSalaryField.getText());
+                branchId = branches.get(emBranchComboBox.getValue().toString());
+                positionId = positions.get(emPositionComboBox.getValue().toString());
+                positionTitle = emPositionComboBox.getValue().toString();
+                branchName = emBranchComboBox.getValue().toString();
+            } catch (Exception ex) {
+                FXMain.showNotification("Input Error", "Please fill up the form properly", "warning");
+                System.out.println(ex);
+            }
+            Employee selectedEmployee = employeeTable.getSelectionModel().getSelectedItem();
+            if (selectedEmployee == null) {
+                FXMain.showNotification("No Selected Row", "Please select a row to update employee.", "warning");
+                return;
+            }
+            if (verifyBranchAdminPermission(selectedEmployee.getBranchId()) || verifyShopAdmin()) {
+                updateEmployee(selectedEmployee, selectedEmployee.getId(), name, email, contact, address, salary, branchId, branchName, positionId, positionTitle);
+            } else {
+                FXMain.showNotification("Permission Denyed", "You are not allowed to update this employee.", "warning");
+            }
+        });
+
+        addEmployeeBtn.setOnMouseClicked(event -> {
+            int salary = 0, branchId = 0, positionId = 0;
+            String positionTitle = "", branchName = "";
+            String name = emNameField.getText();
+            String contact = emContactField.getText();
+            String address = emAddressField.getText();
+            String email = emEmailField.getText();
+            try {
+                salary = Integer.parseInt(emSalaryField.getText());
+                branchId = branches.get(emBranchComboBox.getValue().toString());
+                positionId = positions.get(emPositionComboBox.getValue().toString());
+                positionTitle = emPositionComboBox.getValue().toString();
+                branchName = emBranchComboBox.getValue().toString();
+            } catch (Exception ex) {
+                FXMain.showNotification("Input Error", "Please fill up the form properly", "warning");
+                System.out.println(ex);
+            }
+            if (verifyBranchAdminPermission(branchId) || verifyShopAdmin()) {
+                addEmployee(name, email, contact, address, salary, branchId, branchName, positionId, positionTitle);
+            } else {
+                FXMain.showNotification("Permission Denyed", "You are not allowed to add this employee.", "warning");
+            }
+
+        });
 
         addBranchBtn.setOnMouseClicked(event -> {
-            if (user.getUserRoleId() == 1) {
+            if (verifyShopAdmin()) {
                 String name = branchNameField.getText();
                 String contact = branchContactField.getText();
                 String address = branchAddressField.getText();
                 String email = branchEmailField.getText();
                 addBranch(name, email, contact, address);
             } else {
-                FXMain.showNotification("Permission Denyed", "You are not allowed to delete user.", "warning");
+                FXMain.showNotification("Permission Denyed", "You are not allowed to add branch.", "warning");
             }
         });
         clearUserTableBtn.setOnMouseClicked(event -> {
@@ -589,13 +949,15 @@ public class DashboardLayoutController implements Initializable {
         clearEmployeeTableBtn.setOnMouseClicked(event -> {
             clearEmployeeForm();
             employeeTable.getSelectionModel().clearSelection();
+            employeeTable.getSortOrder().clear();
         });
         clearBranchTableBtn.setOnMouseClicked(event -> {
             clearBranchForm();
             branchTable.getSelectionModel().clearSelection();
+            branchTable.getSortOrder().clear();
         });
         addUserBtn.setOnMouseClicked(event -> {
-            if (user.getUserRoleId() == 1) {
+            if (verifyShopAdmin()) {
                 try {
                     String selectedUserRole = usersRoleComboBox.getValue().toString();
                     String selectedBranch = usersBranchComboBox.getValue().toString();
@@ -671,6 +1033,195 @@ public class DashboardLayoutController implements Initializable {
         });
 
     }
+    private AutoCompletionBinding<String> autoCompletionBindingString;
+    private AutoCompletionBinding<Integer> autoCompletionBindingInt;
+
+    private void setBranchSearchByField(String searchBy) {
+        int n = branchList.size();
+        Set<String> possibleSet = new HashSet<>();
+        Set<Integer> possibleSet2 = new HashSet<>();
+        if (autoCompletionBindingString != null) {
+            autoCompletionBindingString.dispose();
+        }
+        if (autoCompletionBindingInt != null) {
+            autoCompletionBindingInt.dispose();
+        }
+        if (searchBy == "Name") {
+            for (int i = 0; i < n; i++) {
+                possibleSet.add(branchList.get(i).getName());
+            }
+            autoCompletionBindingString = TextFields.bindAutoCompletion(branchSearchByField, possibleSet);
+        } else if (searchBy == "Email") {
+            for (int i = 0; i < n; i++) {
+                possibleSet.add(branchList.get(i).getEmail());
+            }
+            autoCompletionBindingString = TextFields.bindAutoCompletion(branchSearchByField, possibleSet);
+        } else if (searchBy == "Contact") {
+            for (int i = 0; i < n; i++) {
+                possibleSet.add(branchList.get(i).getContact());
+            }
+            autoCompletionBindingString = TextFields.bindAutoCompletion(branchSearchByField, possibleSet);
+        } else if (searchBy == "Address") {
+            for (int i = 0; i < n; i++) {
+                possibleSet.add(branchList.get(i).getAddress());
+            }
+            autoCompletionBindingString = TextFields.bindAutoCompletion(branchSearchByField, possibleSet);
+        } else if (searchBy == "Branch ID") {
+            for (int i = 0; i < n; i++) {
+                possibleSet2.add(branchList.get(i).getId());
+            }
+            autoCompletionBindingInt = TextFields.bindAutoCompletion(branchSearchByField, possibleSet2);
+        }
+    }
+
+    private void setUsersSearchByField(String searchBy) {
+        int n = userList.size();
+        Set<String> possibleSet = new HashSet<>();
+        Set<Integer> possibleSet2 = new HashSet<>();
+        if (autoCompletionBindingString != null) {
+            autoCompletionBindingString.dispose();
+        }
+        if (autoCompletionBindingInt != null) {
+            autoCompletionBindingInt.dispose();
+        }
+        if (searchBy == "Name") {
+            for (int i = 0; i < n; i++) {
+                possibleSet.add(userList.get(i).getName().get());
+            }
+            autoCompletionBindingString = TextFields.bindAutoCompletion(usersSearchByField, possibleSet);
+        } else if (searchBy == "Email") {
+            for (int i = 0; i < n; i++) {
+                possibleSet.add(userList.get(i).getEmail().get());
+            }
+            autoCompletionBindingString = TextFields.bindAutoCompletion(usersSearchByField, possibleSet);
+        } else if (searchBy == "Contact") {
+            for (int i = 0; i < n; i++) {
+                possibleSet.add(userList.get(i).getContact().get());
+            }
+            autoCompletionBindingString = TextFields.bindAutoCompletion(usersSearchByField, possibleSet);
+        } else if (searchBy == "Address") {
+            for (int i = 0; i < n; i++) {
+                possibleSet.add(userList.get(i).getAddress().get());
+            }
+            autoCompletionBindingString = TextFields.bindAutoCompletion(usersSearchByField, possibleSet);
+        } else if (searchBy == "User Role") {
+            for (int i = 0; i < n; i++) {
+                possibleSet.add(userList.get(i).getUserRoleTitle());
+            }
+            autoCompletionBindingString = TextFields.bindAutoCompletion(usersSearchByField, possibleSet);
+        } else if (searchBy == "Branch") {
+            for (int i = 0; i < n; i++) {
+                possibleSet.add(userList.get(i).getBranchName());
+            }
+            autoCompletionBindingString = TextFields.bindAutoCompletion(usersSearchByField, possibleSet);
+        } else if (searchBy == "User ID") {
+            for (int i = 0; i < n; i++) {
+                possibleSet2.add(userList.get(i).getId());
+            }
+            autoCompletionBindingInt = TextFields.bindAutoCompletion(usersSearchByField, possibleSet2);
+        }
+    }
+
+    private void setEmSearchByField(String searchBy) {
+        int n = employeeList.size();
+        Set<String> possibleSet = new HashSet<>();
+        Set<Integer> possibleSet2 = new HashSet<>();
+        if (autoCompletionBindingString != null) {
+            autoCompletionBindingString.dispose();
+        }
+        if (autoCompletionBindingInt != null) {
+            autoCompletionBindingInt.dispose();
+        }
+        if (searchBy == "Name") {
+            for (int i = 0; i < n; i++) {
+                possibleSet.add(employeeList.get(i).getName());
+            }
+            autoCompletionBindingString = TextFields.bindAutoCompletion(emSearchByTextField, possibleSet);
+        } else if (searchBy == "Email") {
+            for (int i = 0; i < n; i++) {
+                possibleSet.add(employeeList.get(i).getEmail());
+            }
+            autoCompletionBindingString = TextFields.bindAutoCompletion(emSearchByTextField, possibleSet);
+        } else if (searchBy == "Contact") {
+            for (int i = 0; i < n; i++) {
+                possibleSet.add(employeeList.get(i).getContact());
+            }
+            autoCompletionBindingString = TextFields.bindAutoCompletion(emSearchByTextField, possibleSet);
+        } else if (searchBy == "Address") {
+            for (int i = 0; i < n; i++) {
+                possibleSet.add(employeeList.get(i).getAddress());
+            }
+            autoCompletionBindingString = TextFields.bindAutoCompletion(emSearchByTextField, possibleSet);
+        } else if (searchBy == "Position") {
+            for (int i = 0; i < n; i++) {
+                possibleSet.add(employeeList.get(i).getPositionTitle());
+            }
+            autoCompletionBindingString = TextFields.bindAutoCompletion(emSearchByTextField, possibleSet);
+        } else if (searchBy == "Branch") {
+            for (int i = 0; i < n; i++) {
+                possibleSet.add(employeeList.get(i).getBranchName());
+            }
+            autoCompletionBindingString = TextFields.bindAutoCompletion(emSearchByTextField, possibleSet);
+        } else if (searchBy == "ID") {
+            for (int i = 0; i < n; i++) {
+                possibleSet2.add(employeeList.get(i).getId());
+            }
+            autoCompletionBindingInt = TextFields.bindAutoCompletion(emSearchByTextField, possibleSet2);
+        } else if (searchBy == "Salary") {
+            for (int i = 0; i < n; i++) {
+                possibleSet2.add(employeeList.get(i).getSalary());
+            }
+            autoCompletionBindingInt = TextFields.bindAutoCompletion(emSearchByTextField, possibleSet2);
+        }
+    }
+
+    private boolean verifyBranchAdminPermission(int branchId) {
+        if (user.getBranchId() == branchId) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void updateEmployee(Employee selectedEmployee, int emId, String name, String email, String contact, String address, int salary, int branchId, String branchName, int positionId, String positionTitle) {
+        String sql = "update Employee set employee_name=?,employee_email=?,\n"
+                + "employee_contact=?,employee_address=?,employee_salary=?\n"
+                + ",BranchId=?,EmployeePositionID=? where EmployeeID=?";
+
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setString(2, email);
+            ps.setString(3, contact);
+            ps.setString(4, address);
+            ps.setInt(5, salary);
+            ps.setInt(6, branchId);
+            ps.setInt(7, positionId);
+            ps.setInt(8, emId);
+
+            int rs = ps.executeUpdate();
+            if (rs == 1) {
+                employeeTable.getItems().remove(selectedEmployee);
+                selectedEmployee = new Employee(emId, branchId, branchName, positionId, positionTitle, salary, name, email, contact, address);
+                employeeTable.getItems().add(selectedEmployee);
+                employeeTable.getSelectionModel().select(selectedEmployee);
+                FXMain.showNotification("Employee Info Updated", "Successfully updated employee information.", "success");
+            } else {
+                FXMain.showNotification("Failed to update the branch", "Something went worng.", "warning");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+    }
+
+    private boolean verifyShopAdmin() {
+        if (user.getUserRoleId() == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     private void updateBranch(Branch selectedBranch, int id, String name, String email, String address, String contact) {
         String sql = "update Branch set branch_name=?,branch_email=?,branch_address=?,branch_contact=? where BranchID=?";
@@ -697,6 +1248,37 @@ public class DashboardLayoutController implements Initializable {
             System.out.println(ex);
         }
 
+    }
+
+    private void addEmployee(String name, String email, String contact, String address, int salary, int branchId, String branchName, int positionId, String positionTitle) {
+        String sql = "insert into Employee(employee_name,employee_email,employee_contact,employee_address,employee_salary,BranchId,EmployeePositionID) values \n"
+                + "(?,?,?,?,?,?,?)";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setString(2, email);
+            ps.setString(3, contact);
+            ps.setString(4, address);
+            ps.setInt(5, salary);
+            ps.setInt(6, branchId);
+            ps.setInt(7, positionId);
+            int res = ps.executeUpdate();
+            if (res == 1) {
+                rs = connection.prepareStatement(String.format("select EmployeeID from Employee where employee_name='%s' and employee_email='%s' and employee_contact='%s'", name, email, contact)).executeQuery();
+                int emId = 0;
+                while (rs.next()) {
+                    emId = rs.getInt("EmployeeID");
+                }
+                clearEmployeeForm();
+                employeeList.add(new Employee(emId, branchId, branchName, positionId, positionTitle, salary, name, email, contact, address));
+                FXMain.showNotification("Insert Successful", "New Branch inserted successfully", "successs");
+            } else {
+                FXMain.showNotification("Insertion Failed", "Failed to insert new branch.", "warning");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+
+        }
     }
 
     private void clearEmployeeForm() {
