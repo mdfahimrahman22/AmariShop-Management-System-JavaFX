@@ -70,6 +70,12 @@ CategoryID INT IDENTITY(1,1) PRIMARY KEY,
 category_title VARCHAR(30) NOT NULL
 )
 
+CREATE TABLE Subcategory(
+SubcategoryID INT IDENTITY(1,1) PRIMARY KEY,
+subcategory_title VARCHAR(30) NOT NULL,
+CategoryID INT NOT NULL FOREIGN KEY REFERENCES Category(CategoryID),
+)
+
 CREATE TABLE Product(
 ProductID INT IDENTITY(1,1) PRIMARY KEY,
 product_name VARCHAR(30) NOT NULL,
@@ -80,9 +86,10 @@ product_purchase_rate INT NOT NULL,
 product_sales_rate INT NOT NULL,
 product_discount INT DEFAULT 0,
 total_quantity INT DEFAULT 0,
-product_type VARCHAR(10) NOT NULL,
-CategoryID INT NOT NULL FOREIGN key REFERENCES Category(CategoryID),
+CategoryID INT NOT NULL FOREIGN KEY REFERENCES Category(CategoryID),
+BranchID INT NOT NULL FOREIGN KEY REFERENCES Branch(BranchID)
 )
+
 
 CREATE TABLE AvailabeProduct(
 AvailabeProductID INT IDENTITY(1,1) PRIMARY KEY,

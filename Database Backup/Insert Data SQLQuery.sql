@@ -48,8 +48,36 @@ insert into EmployeePosition(EmployeePositionID,position_title)
 values (1,'Manager'),(2,'Accountant'),(3,'Cashier'),(4,'Cleaner')
 set identity_insert EmployeePosition off
 
-
 --> Insert Employee
 insert into Employee(BranchID,EmployeePositionID,employee_name,employee_email,employee_contact,employee_address,employee_salary)
 values(1,1,'Fahim','fahim@gmail.com','01615990017','AUST, Dhaka',12000)
 
+--> Inserting Categories
+set identity_insert Category on
+insert into Category(CategoryID,category_title) values(1,'Desktop PC')
+insert into Category(CategoryID,category_title) values(2,'Laptop')
+insert into Category(CategoryID,category_title) values(3,'PC Component')
+insert into Category(CategoryID,category_title) values(4,'Networking')
+insert into Category(CategoryID,category_title) values(5,'Office Solution')
+insert into Category(CategoryID,category_title) values(6,'Software')
+insert into Category(CategoryID,category_title) values(7,'Home Security')
+insert into Category(CategoryID,category_title) values(8,'Server')
+insert into Category(CategoryID,category_title) values(9,'Camera')
+insert into Category(CategoryID,category_title) values(10,'Gaming')
+insert into Category(CategoryID,category_title) values(11,'TV')
+insert into Category(CategoryID,category_title) values(12,'Accessories')			
+set identity_insert Category off
+select * from Category
+--> Inserting Subcategories
+
+DECLARE @CategoryID AS int=11
+insert into Subcategory(CategoryID,subcategory_title) values(@CategoryID,'Sony')
+insert into Subcategory(CategoryID,subcategory_title) values(@CategoryID,'Starex')
+insert into Subcategory(CategoryID,subcategory_title) values(@CategoryID,'Sky View')
+insert into Subcategory(CategoryID,subcategory_title) values(@CategoryID,'Xiaomi MI')
+insert into Subcategory(CategoryID,subcategory_title) values(@CategoryID,'LG')
+insert into Subcategory(CategoryID,subcategory_title) values(@CategoryID,'Panasonic')
+
+
+
+select * from Subcategory

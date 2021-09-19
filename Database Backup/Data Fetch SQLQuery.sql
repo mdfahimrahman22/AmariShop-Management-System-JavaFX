@@ -90,6 +90,12 @@ inner join Branch b on u.BranchID= b.BranchID
 inner join UserRole r on u.UserRoleID=r.UserRoleID
 where u.name='Fahim 2' 
 
+--> Branch Search by name/contact/address/email
+select * from Branch where branch_name like ''
+
+--> Category & Subcategory
+select * from Category c inner join Subcategory sc on c.CategoryID=sc.CategoryID
+
 
 --> Check
 select * from users where userid=1
@@ -97,3 +103,4 @@ select * from UserRole
 select * from Branch
 select * from EmployeePosition
 select * from Employee
+select * from Product

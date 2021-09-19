@@ -23,6 +23,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
@@ -81,242 +82,245 @@
       </AnchorPane>
    </top>
    <left>
-      <AnchorPane fx:id="slider" prefWidth="237.0" style="-fx-background-color: #2c2e3e;" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="slider" prefHeight="585.0" prefWidth="237.0" style="-fx-background-color: #2c2e3e;" BorderPane.alignment="CENTER">
          <children>
-            <HBox fx:id="dashboardBtn" alignment="CENTER_LEFT" layoutY="8.0" prefHeight="70.0" prefWidth="229.0" styleClass="menuItem" stylesheets="@dashboardlayout.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="8.0">
+            <VBox layoutX="60.0" layoutY="-38.0" prefHeight="536.0" prefWidth="237.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/business-report.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </ImageView>
-                  <Label text="Dashboard" textFill="WHITE">
-                     <font>
-                        <Font name="SansSerif Bold Italic" size="23.0" />
-                     </font>
+                  <HBox fx:id="dashboardBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="229.0" styleClass="menuItem" stylesheets="@dashboardlayout.css">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/business-report.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="Dashboard" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold Italic" size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                      <padding>
-                        <Insets left="10.0" />
+                        <Insets left="20.0" />
                      </padding>
-                  </Label>
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-            </HBox>
-            <HBox fx:id="userProfileBtn" alignment="CENTER_LEFT" layoutY="78.0" prefHeight="70.0" prefWidth="229.0" styleClass="menuItem" stylesheets="@dashboardlayout.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="78.0">
-               <children>
-                  <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/user.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </ImageView>
-                  <Label text="User Profile" textFill="WHITE">
-                     <font>
-                        <Font name="SansSerif Bold Italic" size="23.0" />
-                     </font>
+                  </HBox>
+                  <HBox fx:id="userProfileBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="229.0" styleClass="menuItem" stylesheets="@dashboardlayout.css">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/user.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="User Profile" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold Italic" size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                      <padding>
-                        <Insets left="10.0" />
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
                      </padding>
-                  </Label>
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <padding>
-                  <Insets bottom="10.0" left="20.0" top="10.0" />
-               </padding>
-            </HBox>
-            <HBox fx:id="usersBtn" alignment="CENTER_LEFT" layoutY="425.0" prefHeight="70.0" prefWidth="226.0" styleClass="menuItem" stylesheets="@dashboardlayout.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="425.0">
-               <children>
-                  <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/team.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </ImageView>
-                  <Label text="Users" textFill="WHITE">
-                     <font>
-                        <Font name="SansSerif Bold Italic" size="23.0" />
-                     </font>
+                  </HBox>
+                  <HBox fx:id="productsBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="237.0" styleClass="menuItem" stylesheets="@dashboardlayout.css">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/products.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="Products" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold Italic" size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                      <padding>
-                        <Insets left="10.0" />
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
                      </padding>
-                  </Label>
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <padding>
-                  <Insets bottom="10.0" left="20.0" top="10.0" />
-               </padding>
-            </HBox>
-            <HBox fx:id="userRolesBtn" alignment="CENTER_LEFT" layoutY="565.0" prefHeight="70.0" prefWidth="227.0" styleClass="menuItem" stylesheets="@dashboardlayout.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-               <children>
-                  <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/user_roles.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </ImageView>
-                  <Label text="Users Roles" textFill="WHITE">
-                     <font>
-                        <Font name="SansSerif Bold Italic" size="23.0" />
-                     </font>
+                  </HBox>
+                  <HBox fx:id="salesBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="237.0" styleClass="menuItem" stylesheets="@dashboardlayout.css">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/business-and-finance.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="Sales" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold Italic" size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                      <padding>
-                        <Insets left="10.0" />
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
                      </padding>
-                  </Label>
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <padding>
-                  <Insets bottom="10.0" left="20.0" top="10.0" />
-               </padding>
-            </HBox>
-            <HBox fx:id="productsBtn" alignment="CENTER_LEFT" layoutY="148.0" prefHeight="70.0" prefWidth="237.0" styleClass="menuItem" stylesheets="@dashboardlayout.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-               <children>
-                  <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/products.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </ImageView>
-                  <Label text="Products" textFill="WHITE">
-                     <font>
-                        <Font name="SansSerif Bold Italic" size="23.0" />
-                     </font>
+                  </HBox>
+                  <HBox fx:id="customersBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="237.0" styleClass="menuItem" stylesheets="@dashboardlayout.css">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/customers.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="Customers" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold Italic" size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                      <padding>
-                        <Insets left="10.0" />
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
                      </padding>
-                  </Label>
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <padding>
-                  <Insets bottom="10.0" left="20.0" top="10.0" />
-               </padding>
-            </HBox>
-            <HBox fx:id="branchesBtn" alignment="CENTER_LEFT" layoutY="495.0" prefHeight="70.0" prefWidth="226.0" styleClass="menuItem" stylesheets="@dashboardlayout.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-               <children>
-                  <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/store.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </ImageView>
-                  <Label text="Branches" textFill="WHITE">
-                     <font>
-                        <Font name="SansSerif Bold Italic" size="23.0" />
-                     </font>
+                  </HBox>
+                  <HBox fx:id="employeesBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="237.0" styleClass="menuItem" stylesheets="@dashboardlayout.css">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/workers.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="Employees" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold Italic" size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                      <padding>
-                        <Insets left="10.0" />
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
                      </padding>
-                  </Label>
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <padding>
-                  <Insets bottom="10.0" left="20.0" top="10.0" />
-               </padding>
-            </HBox>
-            <HBox fx:id="employeesBtn" alignment="CENTER_LEFT" layoutY="355.0" prefHeight="70.0" prefWidth="237.0" styleClass="menuItem" stylesheets="@dashboardlayout.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-               <children>
-                  <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/workers.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </ImageView>
-                  <Label text="Employees" textFill="WHITE">
-                     <font>
-                        <Font name="SansSerif Bold Italic" size="23.0" />
-                     </font>
+                  </HBox>
+                  <HBox fx:id="usersBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="226.0" styleClass="menuItem" stylesheets="@dashboardlayout.css">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/team.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="Users" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold Italic" size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                      <padding>
-                        <Insets left="10.0" />
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
                      </padding>
-                  </Label>
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <padding>
-                  <Insets bottom="10.0" left="20.0" top="10.0" />
-               </padding>
-            </HBox>
-            <HBox fx:id="customersBtn" alignment="CENTER_LEFT" layoutY="285.0" prefHeight="70.0" prefWidth="237.0" styleClass="menuItem" stylesheets="@dashboardlayout.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-               <children>
-                  <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/customers.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </ImageView>
-                  <Label text="Customers" textFill="WHITE">
-                     <font>
-                        <Font name="SansSerif Bold Italic" size="23.0" />
-                     </font>
+                  </HBox>
+                  <HBox fx:id="branchesBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="226.0" styleClass="menuItem" stylesheets="@dashboardlayout.css">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/store.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="Branches" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold Italic" size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                      <padding>
-                        <Insets left="10.0" />
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
                      </padding>
-                  </Label>
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <padding>
-                  <Insets bottom="10.0" left="20.0" top="10.0" />
-               </padding>
-            </HBox>
-            <HBox fx:id="salesBtn" alignment="CENTER_LEFT" layoutY="218.0" prefHeight="70.0" prefWidth="237.0" styleClass="menuItem" stylesheets="@dashboardlayout.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-               <children>
-                  <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/business-and-finance.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </ImageView>
-                  <Label text="Sales" textFill="WHITE">
-                     <font>
-                        <Font name="SansSerif Bold Italic" size="23.0" />
-                     </font>
+                  </HBox>
+                  <HBox fx:id="userRolesBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="227.0" styleClass="menuItem" stylesheets="@dashboardlayout.css">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/user_roles.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="Users Roles" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold Italic" size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                      <padding>
-                        <Insets left="10.0" />
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
                      </padding>
-                  </Label>
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <padding>
-                  <Insets bottom="10.0" left="20.0" top="10.0" />
-               </padding>
-            </HBox>
+                  </HBox>
+               </children></VBox>
          </children>
          <BorderPane.margin>
             <Insets />
@@ -684,27 +688,27 @@
                                           <Font name="Cambria" size="14.0" />
                                        </font>
                                     </PasswordField>
-                                    <ImageView fx:id="addUserBtn" fitHeight="44.0" fitWidth="50.0" layoutX="664.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="addUserBtn" fitHeight="44.0" fitWidth="50.0" layoutX="664.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="71.0" AnchorPane.topAnchor="8.0">
                                        <image>
                                           <Image url="@img/add-user.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fx:id="deleteUserBtn" fitHeight="44.0" fitWidth="39.0" layoutX="722.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="deleteUserBtn" fitHeight="44.0" fitWidth="39.0" layoutX="731.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="11.0">
                                        <image>
                                           <Image url="@img/delete.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fx:id="updateUserBtn" fitHeight="64.0" fitWidth="71.0" layoutX="677.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="updateUserBtn" fitHeight="64.0" fitWidth="71.0" layoutX="686.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="59.0">
                                        <image>
                                           <Image url="@img/updated.png" />
                                        </image>
                                     </ImageView>
-                                    <Label layoutX="468.0" layoutY="72.0" text="Select User Role">
+                                    <Label layoutX="469.0" layoutY="9.0" text="Select User Role" AnchorPane.rightAnchor="199.0" AnchorPane.topAnchor="9.0">
                                        <font>
                                           <Font name="Comic Sans MS" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="469.0" layoutY="9.0" text="Select Branch">
+                                    <Label layoutX="469.0" layoutY="70.0" text="Select Branch" AnchorPane.rightAnchor="217.0" AnchorPane.topAnchor="70.0">
                                        <font>
                                           <Font name="Comic Sans MS" size="14.0" />
                                        </font>
@@ -728,7 +732,7 @@
                                     <Image url="@img/clear-table2.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="refreshUsersTableBtn" fitHeight="38.0" fitWidth="39.0" layoutX="568.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="refreshUsersTableBtn" fitHeight="38.0" fitWidth="39.0" layoutX="465.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@img/refresh.png" />
                                  </image>
@@ -777,17 +781,17 @@
                                           <Font size="14.0" />
                                        </font>
                                     </TextArea>
-                                    <ImageView fx:id="deleteBranchBtn" fitHeight="43.0" fitWidth="40.0" layoutX="638.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="deleteBranchBtn" fitHeight="43.0" fitWidth="40.0" layoutX="643.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="12.0">
                                        <image>
                                           <Image url="@img/delete.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fx:id="updateBranchBtn" fitHeight="66.0" fitWidth="73.0" layoutX="592.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="updateBranchBtn" fitHeight="66.0" fitWidth="73.0" layoutX="597.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="98.0" AnchorPane.topAnchor="58.0">
                                        <image>
                                           <Image url="@img/updated.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fx:id="addBranchBtn" fitHeight="42.0" fitWidth="44.0" layoutX="571.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="addBranchBtn" fitHeight="42.0" fitWidth="44.0" layoutX="576.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="143.0" AnchorPane.topAnchor="11.0">
                                        <image>
                                           <Image url="@img/plus.png" />
                                        </image>
@@ -811,7 +815,7 @@
                                     <Image url="@img/clear-table2.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="refreshBranchTableBtn" fitHeight="38.0" fitWidth="39.0" layoutX="555.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="refreshBranchTableBtn" fitHeight="38.0" fitWidth="39.0" layoutX="471.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@img/refresh.png" />
                                  </image>
@@ -848,64 +852,118 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <AnchorPane prefHeight="135.0" prefWidth="779.0">
-                                 <children>
-                                    <TextField layoutX="448.0" layoutY="14.0" promptText="Salary" AnchorPane.rightAnchor="158.0">
-                                       <font>
-                                          <Font name="Cambria" size="14.0" />
-                                       </font>
-                                    </TextField>
-                                    <TextField layoutX="16.0" layoutY="14.0" prefHeight="23.0" prefWidth="206.0" promptText="Name" AnchorPane.leftAnchor="16.0">
-                                       <font>
-                                          <Font name="Cambria" size="14.0" />
-                                       </font>
-                                    </TextField>
-                                    <ComboBox layoutX="446.0" layoutY="51.0" prefHeight="25.0" prefWidth="175.0" promptText="Position" AnchorPane.rightAnchor="158.0" />
-                                    <ComboBox layoutX="446.0" layoutY="90.0" prefHeight="25.0" prefWidth="175.0" promptText="Branch" AnchorPane.rightAnchor="158.0" />
-                                    <TextField layoutX="17.0" layoutY="52.0" prefHeight="23.0" prefWidth="206.0" promptText="Email" AnchorPane.leftAnchor="16.0">
-                                       <font>
-                                          <Font name="Cambria" size="14.0" />
-                                       </font>
-                                    </TextField>
-                                    <TextField layoutX="18.0" layoutY="89.0" prefHeight="23.0" prefWidth="206.0" promptText="Contact" AnchorPane.leftAnchor="16.0">
-                                       <font>
-                                          <Font name="Cambria" size="14.0" />
-                                       </font>
-                                    </TextField>
-                                    <TextArea layoutX="241.0" layoutY="12.0" prefHeight="108.0" prefWidth="184.0" promptText="Address" AnchorPane.leftAnchor="241.0" AnchorPane.rightAnchor="354.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </TextArea>
-                                    <Button layoutX="655.0" layoutY="16.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="ADD" AnchorPane.rightAnchor="20.0">
-                                       <font>
-                                          <Font name="Cambria Bold" size="14.0" />
-                                       </font>
-                                    </Button>
-                                    <Button layoutX="655.0" layoutY="52.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="UPDATE" AnchorPane.rightAnchor="20.0">
-                                       <font>
-                                          <Font name="Cambria Bold" size="14.0" />
-                                       </font>
-                                    </Button>
-                                    <Button layoutX="655.0" layoutY="89.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="DELETE" AnchorPane.rightAnchor="20.0">
-                                       <font>
-                                          <Font name="Cambria Bold" size="14.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                              </AnchorPane>
-                              <ComboBox layoutX="345.0" layoutY="158.0" prefHeight="25.0" prefWidth="122.0" promptText="Search By" />
-                              <TextField layoutX="485.0" layoutY="156.0" prefHeight="28.0" prefWidth="155.0" promptText="Name">
+                              <ComboBox fx:id="productSearchByComboBox" layoutX="21.0" layoutY="219.0" prefHeight="28.0" prefWidth="110.0" promptText="Search By" />
+                              <TextField fx:id="productSearchByField" layoutX="138.0" layoutY="220.0" prefHeight="28.0" prefWidth="165.0" promptText="Search By">
                                  <font>
                                     <Font name="Cambria" size="14.0" />
                                  </font>
                               </TextField>
-                              <ComboBox layoutX="654.0" layoutY="157.0" prefHeight="27.0" prefWidth="106.0" promptText="Order By" />
-                              <Label layoutX="14.0" layoutY="135.0" prefHeight="64.0" prefWidth="330.0" text="Products Table">
+                              <ComboBox fx:id="productOrderByComboBox" layoutX="672.0" layoutY="220.0" prefHeight="27.0" prefWidth="106.0" promptText="Order By" />
+                              <Label alignment="CENTER" layoutX="254.0" prefHeight="50.0" prefWidth="285.0" text="Products Data">
                                  <font>
                                     <Font name="Arial Black" size="35.0" />
                                  </font>
                               </Label>
+                              <AnchorPane layoutY="45.0" prefHeight="176.0" prefWidth="792.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                 <children>
+                                    <TextField fx:id="productModelField" layoutX="16.0" layoutY="45.0" prefHeight="23.0" prefWidth="206.0" promptText="Model" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="52.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <ComboBox fx:id="productSubcategoryComboBox" layoutX="332.0" layoutY="132.0" prefHeight="25.0" prefWidth="121.0" promptText="Subcategory" />
+                                    <TextField fx:id="productNameField" layoutX="16.0" layoutY="14.0" prefHeight="23.0" prefWidth="206.0" promptText="Name" AnchorPane.leftAnchor="16.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField fx:id="productPurchaseRateField" layoutX="465.0" layoutY="14.0" prefHeight="28.0" prefWidth="157.0" promptText="Purchase Rate" AnchorPane.rightAnchor="170.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextArea fx:id="productDescriptionField" layoutX="235.0" layoutY="12.0" prefHeight="109.0" prefWidth="218.0" promptText="Description" AnchorPane.leftAnchor="235.0" AnchorPane.rightAnchor="339.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextArea>
+                                    <ImageView fx:id="addProductBtn" fitHeight="53.0" fitWidth="53.0" layoutX="638.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="101.0" AnchorPane.topAnchor="20.0">
+                                       <image>
+                                          <Image url="@img/add-to-cart.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="deleteProductBtn" fitHeight="46.0" fitWidth="48.0" layoutX="722.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="24.0">
+                                       <image>
+                                          <Image url="@img/delete.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="updateProductBtn" fitHeight="64.0" fitWidth="71.0" layoutX="672.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="56.0" AnchorPane.topAnchor="86.0">
+                                       <image>
+                                          <Image url="@img/updated.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="235.0" layoutY="134.0" prefHeight="21.0" prefWidth="95.0" text="Subcategory :" AnchorPane.leftAnchor="235.0" AnchorPane.topAnchor="134.0">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="productBrandField" layoutX="16.0" layoutY="77.0" prefHeight="23.0" prefWidth="206.0" promptText="Brand" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="90.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField fx:id="productSalesRateField" layoutX="464.0" layoutY="52.0" prefHeight="28.0" prefWidth="160.0" promptText="Sales Rate" AnchorPane.rightAnchor="170.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField fx:id="productQuantityField" layoutX="462.0" layoutY="131.0" prefHeight="28.0" prefWidth="162.0" promptText="Quantity" AnchorPane.rightAnchor="170.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <ComboBox fx:id="productCategoryComboBox" layoutX="98.0" layoutY="132.0" prefHeight="25.0" prefWidth="121.0" promptText="Category" />
+                                    <Label layoutX="19.0" layoutY="134.0" prefHeight="21.0" prefWidth="78.0" text="Category :">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="productDiscountField" layoutX="464.0" layoutY="90.0" prefHeight="28.0" prefWidth="160.0" promptText="Discount" AnchorPane.rightAnchor="170.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </AnchorPane>
+                              <TableView layoutX="176.0" layoutY="255.0" prefHeight="354.0" prefWidth="773.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.0">
+                                <columns>
+                                  <TableColumn prefWidth="36.0" text="ID" />
+                                  <TableColumn prefWidth="86.0" text="Name" />
+                                    <TableColumn prefWidth="99.0" text="Model" />
+                                    <TableColumn prefWidth="76.0" text="Brand" />
+                                    <TableColumn prefWidth="94.0" text="Description" />
+                                    <TableColumn prefWidth="96.0" text="Purchase Rate" />
+                                    <TableColumn prefWidth="88.0" text="Sales Rate" />
+                                    <TableColumn prefWidth="88.0" text="Discount" />
+                                    <TableColumn minWidth="0.0" prefWidth="99.0" text="Category" />
+                                    <TableColumn prefWidth="122.0" text="Quantity" />
+                                </columns>
+                              </TableView>
+                              <ImageView fx:id="clearProductTableBtn" fitHeight="44.0" fitWidth="50.0" layoutX="628.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/clear-table2.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="refreshProductTableBtn" fitHeight="38.0" fitWidth="39.0" layoutX="468.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/refresh.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="searchProductBtn" fitHeight="46.0" fitWidth="52.0" layoutX="303.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/search2.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </AnchorPane>
                     </content>
@@ -994,12 +1052,12 @@
                                     <Font name="Arial Black" size="35.0" />
                                  </font>
                               </Label>
-                              <ImageView fx:id="clearEmployeeTableBtn" fitHeight="49.0" fitWidth="48.0" layoutX="600.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="144.0">
+                              <ImageView fx:id="clearEmployeeTableBtn" fitHeight="49.0" fitWidth="48.0" layoutX="605.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="139.0">
                                  <image>
                                     <Image url="@img/clear-table2.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="refreshEmTableBtn" fitHeight="38.0" fitWidth="39.0" layoutX="545.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="refreshEmTableBtn" fitHeight="38.0" fitWidth="39.0" layoutX="472.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@img/refresh.png" />
                                  </image>

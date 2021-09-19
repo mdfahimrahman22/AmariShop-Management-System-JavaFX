@@ -45,6 +45,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import javafx.scene.control.ComboBox;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
@@ -74,10 +75,13 @@ public class DashboardLayoutController implements Initializable {
     private TextField branchSearchByField, usersSearchByField, emSearchByTextField, emNameField, emContactField, emEmailField, emSalaryField, usersNameField, usersEmailField, usersContactField, branchNameField, branchEmailField, branchContactField, emailTextField, contactTextField, nameTextField;
 
     @FXML
-    private ComboBox emPositionComboBox, emBranchComboBox, usersBranchComboBox, usersRoleComboBox, usersSearchByComboBox, usersOrderByComboBox, branchSearchByComboBox, branchOrderByComboBox, employeeOrderByComboBox, employeeSearchByComboBox, employeeBranchComboBox, employeePositionComboBox;
+    private TextField productNameField,productModelField,productBrandField,productPurchaseRateField,productSalesRateField,productDiscountField,productQuantityField;
+    
+    @FXML
+    private ComboBox productSubcategoryComboBox, productCategoryComboBox, emPositionComboBox, emBranchComboBox, usersBranchComboBox, usersRoleComboBox, usersSearchByComboBox, usersOrderByComboBox, branchSearchByComboBox, branchOrderByComboBox, employeeOrderByComboBox, employeeSearchByComboBox, employeeBranchComboBox, employeePositionComboBox;
 
     @FXML
-    private TextArea emAddressField, addressTextField, usersAddressField, branchAddressField;
+    private TextArea productDescriptionField,emAddressField, addressTextField, usersAddressField, branchAddressField;
 
     @FXML
     private ImageView searchBranchBtn, refreshBranchTableBtn, searchUsersBtn, refreshUsersTableBtn, searchEmployeeBtn, refreshEmTableBtn, clearEmployeeTableBtn, addEmployeeBtn, deleteEmployeeBtn, updateEmployeeBtn, clearBranchTableBtn, clearUserTableBtn, editBtn, updateUserBtn, updateBranchBtn, addBranchBtn, deleteBranchBtn, addUserBtn, deleteUserBtn;
@@ -374,6 +378,51 @@ public class DashboardLayoutController implements Initializable {
         });
     }
 
+    HashMap<String, Integer> categories = new HashMap<String, Integer>();
+    HashMap<String, Integer> subcategories = new HashMap<String, Integer>();
+    Map<String, List<String>> subcategoryMap = new HashMap<>();
+
+    private void setProductCategoryComboBoxItems() {
+        String sql = "select * from Category c inner join Subcategory sc on c.CategoryID=sc.CategoryID";
+        try {
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String categoryTitle = rs.getString("category_title");
+                String subcategoryTitle = rs.getString("subcategory_title");
+                int categoryId = rs.getInt("CategoryID");
+                int subcategoryId = rs.getInt("SubcategoryID");
+                categories.putIfAbsent(categoryTitle, categoryId);
+                subcategories.putIfAbsent(subcategoryTitle, subcategoryId);
+                subcategoryMap.computeIfAbsent(categoryTitle, k -> new ArrayList<>()).add(subcategoryTitle);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        productCategoryComboBox.getItems().addAll(categories.keySet());
+
+    }
+
+    private void setSubcategoryComboBoxItems() {
+        productCategoryComboBox
+                .getSelectionModel()
+                .selectedItemProperty()
+                .addListener((options, oldValue, newValue) -> {
+                    if (newValue != null) {
+                        productSubcategoryComboBox.getItems().clear();
+                        productSubcategoryComboBox.getItems().addAll(subcategoryMap.get(newValue));
+                    }
+
+                });
+    }
+
+    private void initProductsTab() {
+        setProductCategoryComboBoxItems();
+        setSubcategoryComboBoxItems();
+
+    }
+
     private void initEmployeeTab() {
         setBranchComboBoxItems(emBranchComboBox);
         setPositionComboBoxItems(emPositionComboBox);
@@ -424,7 +473,7 @@ public class DashboardLayoutController implements Initializable {
 
         if (col.equals("name") || col.equals("email") || col.equals("contact") || col.equals("address")) {
             sql += String.format("where em.employee_%s like '%s'", col, search);
-        }else if (col.equals("id")) {
+        } else if (col.equals("id")) {
             sql += String.format("where em.EmployeeID=%d", Integer.parseInt(search));
         } else if (col.equals("salary")) {
             sql += String.format("where em.employee_salary=%d", Integer.parseInt(search));
@@ -698,6 +747,7 @@ public class DashboardLayoutController implements Initializable {
             tabPane.getSelectionModel().select(6);
         });
         productsBtn.setOnMouseClicked(event -> {
+            initProductsTab();
             tabPane.getSelectionModel().select(5);
         });
         salesBtn.setOnMouseClicked(event -> {
