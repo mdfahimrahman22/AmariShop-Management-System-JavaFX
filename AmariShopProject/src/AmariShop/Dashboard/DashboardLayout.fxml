@@ -759,7 +759,7 @@
                                     <TableColumn fx:id="branchEmailCol" prefWidth="153.0" text="Email" />
                                 </columns>
                               </TableView>
-                              <AnchorPane layoutX="17.0" layoutY="48.0" prefHeight="135.0" prefWidth="761.0">
+                              <AnchorPane layoutX="25.0" layoutY="48.0" prefHeight="135.0" prefWidth="742.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
                                  <children>
                                     <TextField fx:id="branchNameField" layoutX="84.0" layoutY="16.0" prefHeight="23.0" prefWidth="206.0" promptText="Name" AnchorPane.leftAnchor="84.0">
                                        <font>
@@ -852,13 +852,13 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <ComboBox fx:id="productSearchByComboBox" layoutX="21.0" layoutY="219.0" prefHeight="28.0" prefWidth="110.0" promptText="Search By" />
-                              <TextField fx:id="productSearchByField" layoutX="138.0" layoutY="220.0" prefHeight="28.0" prefWidth="165.0" promptText="Search By">
+                              <ComboBox fx:id="productSearchByComboBox" layoutX="10.0" layoutY="220.0" prefHeight="28.0" prefWidth="99.0" promptText="Search By" />
+                              <TextField fx:id="productSearchByField" layoutX="186.0" layoutY="220.0" prefHeight="28.0" prefWidth="165.0" promptText="Search By">
                                  <font>
                                     <Font name="Cambria" size="14.0" />
                                  </font>
                               </TextField>
-                              <ComboBox fx:id="productOrderByComboBox" layoutX="672.0" layoutY="220.0" prefHeight="27.0" prefWidth="106.0" promptText="Order By" />
+                              <ComboBox fx:id="productOrderByComboBox" layoutX="672.0" layoutY="220.0" prefHeight="27.0" prefWidth="106.0" promptText="Order By" AnchorPane.rightAnchor="14.0" />
                               <Label alignment="CENTER" layoutX="254.0" prefHeight="50.0" prefWidth="285.0" text="Products Data">
                                  <font>
                                     <Font name="Arial Black" size="35.0" />
@@ -872,7 +872,7 @@
                                        </font>
                                     </TextField>
                                     <ComboBox fx:id="productSubcategoryComboBox" layoutX="332.0" layoutY="132.0" prefHeight="25.0" prefWidth="121.0" promptText="Subcategory" />
-                                    <TextField fx:id="productNameField" layoutX="16.0" layoutY="14.0" prefHeight="23.0" prefWidth="206.0" promptText="Name" AnchorPane.leftAnchor="16.0">
+                                    <TextField fx:id="productNameField" layoutX="16.0" layoutY="14.0" prefHeight="23.0" prefWidth="206.0" promptText="Name" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="14.0">
                                        <font>
                                           <Font name="Cambria" size="14.0" />
                                        </font>
@@ -897,7 +897,7 @@
                                           <Image url="@img/delete.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fx:id="updateProductBtn" fitHeight="64.0" fitWidth="71.0" layoutX="672.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="56.0" AnchorPane.topAnchor="86.0">
+                                    <ImageView fx:id="updateProductBtn" fitHeight="64.0" fitWidth="71.0" layoutX="671.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="86.0">
                                        <image>
                                           <Image url="@img/updated.png" />
                                        </image>
@@ -935,33 +935,36 @@
                                     </TextField>
                                  </children>
                               </AnchorPane>
-                              <TableView layoutX="176.0" layoutY="255.0" prefHeight="354.0" prefWidth="773.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.0">
+                              <TableView fx:id="productTable" layoutX="176.0" layoutY="255.0" prefHeight="354.0" prefWidth="773.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.0">
                                 <columns>
-                                  <TableColumn prefWidth="36.0" text="ID" />
-                                  <TableColumn prefWidth="86.0" text="Name" />
-                                    <TableColumn prefWidth="99.0" text="Model" />
-                                    <TableColumn prefWidth="76.0" text="Brand" />
-                                    <TableColumn prefWidth="94.0" text="Description" />
-                                    <TableColumn prefWidth="96.0" text="Purchase Rate" />
-                                    <TableColumn prefWidth="88.0" text="Sales Rate" />
-                                    <TableColumn prefWidth="88.0" text="Discount" />
-                                    <TableColumn minWidth="0.0" prefWidth="99.0" text="Category" />
-                                    <TableColumn prefWidth="122.0" text="Quantity" />
+                                  <TableColumn fx:id="productIdCol" prefWidth="36.0" text="ID" />
+                                  <TableColumn fx:id="productNameCol" prefWidth="86.0" text="Name" />
+                                    <TableColumn fx:id="productModelCol" prefWidth="99.0" text="Model" />
+                                    <TableColumn fx:id="productBrandCol" prefWidth="76.0" text="Brand" />
+                                    <TableColumn fx:id="productQuantityCol" text="Quantity" />
+                                    <TableColumn fx:id="productPurchaseRateCol" prefWidth="84.0" text="Purchase Rate" />
+                                    <TableColumn fx:id="productSalesRateCol" prefWidth="94.0" text="Sales Rate" />
+                                    <TableColumn fx:id="productDiscountCol" prefWidth="76.0" text="Discount" />
+                                    <TableColumn fx:id="productCategoryCol" minWidth="0.0" prefWidth="159.0" text="Category" />
+                                    <TableColumn fx:id="productSubcategoryCol" minWidth="0.0" prefWidth="99.0" text="Subcategory" />
+                                    <TableColumn fx:id="productDescriptionCol" prefWidth="94.0" text="Description" />
+                                    <TableColumn fx:id="productBranchCol" prefWidth="94.0" text="Branch" />
                                 </columns>
                               </TableView>
-                              <ImageView fx:id="clearProductTableBtn" fitHeight="44.0" fitWidth="50.0" layoutX="628.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@img/clear-table2.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fx:id="refreshProductTableBtn" fitHeight="38.0" fitWidth="39.0" layoutX="468.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="refreshProductTableBtn" fitHeight="38.0" fitWidth="39.0" layoutX="493.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@img/refresh.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="searchProductBtn" fitHeight="46.0" fitWidth="52.0" layoutX="303.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="searchProductBtn" fitHeight="46.0" fitWidth="52.0" layoutX="351.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@img/search2.png" />
+                                 </image>
+                              </ImageView>
+                              <ComboBox fx:id="productCompareComboBox" accessibleText="Compare" layoutX="116.0" layoutY="220.0" prefHeight="29.0" prefWidth="65.0" promptText="=" />
+                              <ImageView fx:id="clearProductTableBtn" fitHeight="44.0" fitWidth="50.0" layoutX="630.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="118.0">
+                                 <image>
+                                    <Image url="@img/clear-table2.png" />
                                  </image>
                               </ImageView>
                            </children>
@@ -1040,8 +1043,8 @@
                                     </Label>
                                  </children>
                               </AnchorPane>
-                              <ComboBox fx:id="employeeSearchByComboBox" layoutX="25.0" layoutY="194.0" prefHeight="32.0" prefWidth="122.0" promptText="Search By" />
-                              <TextField fx:id="emSearchByTextField" layoutX="159.0" layoutY="194.0" prefHeight="35.0" prefWidth="155.0" promptText="Search By">
+                              <ComboBox fx:id="employeeSearchByComboBox" accessibleHelp="Search By" accessibleText="Search By" layoutX="25.0" layoutY="196.0" prefHeight="32.0" prefWidth="111.0" promptText="Search By" />
+                              <TextField fx:id="emSearchByTextField" layoutX="224.0" layoutY="194.0" prefHeight="35.0" prefWidth="155.0" promptText="Search By">
                                  <font>
                                     <Font name="Cambria" size="14.0" />
                                  </font>
@@ -1062,11 +1065,12 @@
                                     <Image url="@img/refresh.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="searchEmployeeBtn" fitHeight="40.0" fitWidth="42.0" layoutX="322.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="searchEmployeeBtn" fitHeight="40.0" fitWidth="42.0" layoutX="387.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@img/search-employee.png" />
                                  </image>
                               </ImageView>
+                              <ComboBox fx:id="emCompareComboBox" accessibleText="Compare" layoutX="142.0" layoutY="196.0" prefHeight="32.0" prefWidth="73.0" promptText="=" />
                            </children>
                         </AnchorPane>
                      </content>

@@ -50,7 +50,17 @@ set identity_insert EmployeePosition off
 
 --> Insert Employee
 insert into Employee(BranchID,EmployeePositionID,employee_name,employee_email,employee_contact,employee_address,employee_salary)
-values(1,1,'Fahim','fahim@gmail.com','01615990017','AUST, Dhaka',12000)
+OUTPUT Inserted.EmployeeID
+values(1,2,'Fahim 3','fahim3@gmail.com','01615990017','AUST, Dhaka',12000)
+
+--> Insert Product
+insert into Product(product_name,product_model,product_brand,product_description,
+product_purchase_rate,product_sales_rate,product_discount,total_quantity,
+SubcategoryID,BranchID) output Inserted.ProductID
+values('Hevit keyboard','xyz','Hevit','good product',1500,2000,200,2,1,1)
+
+select * from Branch
+select * from Product
 
 --> Inserting Categories
 set identity_insert Category on

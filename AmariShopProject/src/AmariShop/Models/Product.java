@@ -10,13 +10,13 @@ package AmariShop.Models;
  * @author fahim
  */
 public class Product {
-    private String name,model,brand,description,categoryTitle,subcategoryTitle;
+    private String name,model,brand,description,categoryTitle,subcategoryTitle,branchName;
     private int id,purchaseRate,salesRate,discount,quantity;
 
     public Product() {
     }
 
-    public Product(int id, String name, String model, String brand, String description, String categoryTitle, String subcategoryTitle, int purchaseRate, int salesRate, int discount, int quantity) {
+    public Product(int id, String name, String model, String brand, String description, String categoryTitle, String subcategoryTitle, int purchaseRate, int salesRate, int discount, int quantity,String branchName) {
         this.name = name;
         this.model = model;
         this.brand = brand;
@@ -28,7 +28,18 @@ public class Product {
         this.salesRate = salesRate;
         this.discount = discount;
         this.quantity = quantity;
+        this.branchName=branchName;
     }
+
+    public String getBranchName() {
+        return branchName;
+    }
+
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
+    }
+    
+    
 
     public String getName() {
         return name;

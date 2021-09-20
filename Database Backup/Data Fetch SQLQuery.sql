@@ -96,6 +96,18 @@ select * from Branch where branch_name like ''
 --> Category & Subcategory
 select * from Category c inner join Subcategory sc on c.CategoryID=sc.CategoryID
 
+--> Product Details
+select p.productid, p.product_name,p.product_model,p.product_brand,p.product_discount,
+p.product_description,p.product_purchase_rate,p.product_sales_rate,c.category_title,
+s.subcategory_title, p.total_quantity,b.branch_name from Product p 
+inner join Subcategory s on s.SubcategoryID=p.SubcategoryID
+inner join Category c on s.CategoryID=c.CategoryID
+inner join Branch b on b.BranchID=p.BranchID where b.BranchID=1
+
+--> Update product
+update Product set product_name='',product_model='',product_brand='',product_description='',
+product_purchase_rate=1,product_sales_rate=1,product_discount=1, total_quantity=9,SubcategoryID=1
+where ProductID=1
 
 --> Check
 select * from users where userid=1
