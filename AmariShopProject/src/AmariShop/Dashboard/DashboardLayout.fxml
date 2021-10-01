@@ -1,0 +1,1214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AmariShop.Dashboard.DashboardLayoutController">
+   <top>
+      <AnchorPane prefHeight="60.0" prefWidth="1200.0" styleClass="header" stylesheets="@dashboardlayout.css" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="60.0" prefWidth="238.0" style="-fx-background-color: #282a3c;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label layoutX="18.0" layoutY="4.0" prefHeight="52.0" prefWidth="171.0" text="AmariShop" textFill="WHITE">
+                     <font>
+                        <Font name="Lucida Sans Demibold Italic" size="28.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="shopIcon" fitHeight="48.0" fitWidth="57.0" layoutX="184.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/online-shopping.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Label fx:id="userName" layoutX="871.0" layoutY="18.0" prefHeight="60.0" prefWidth="231.0" text="Full Name" textFill="#282a3c" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font name="SansSerif Bold" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Circle fx:id="profileImg1" fill="#1f93ff" layoutX="825.0" layoutY="41.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="348.0" AnchorPane.topAnchor="3.0" />
+            <ImageView fx:id="Logout" fitHeight="34.0" fitWidth="58.0" layoutX="1097.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="69.0" AnchorPane.topAnchor="17.0">
+               <image>
+                  <Image url="@img/logout.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="Menu" fitHeight="34.0" fitWidth="58.0" layoutX="294.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="258.0" AnchorPane.topAnchor="18.0">
+               <image>
+                  <Image url="@img/menu.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="CLOSED_HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="MenuClose" fitHeight="34.0" fitWidth="58.0" layoutX="294.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="258.0" AnchorPane.topAnchor="18.0">
+               <image>
+                  <Image url="@img/menu.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </top>
+   <left>
+      <AnchorPane fx:id="slider" prefHeight="585.0" prefWidth="237.0" style="-fx-background-color: #2c2e3e;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox layoutX="60.0" layoutY="-38.0" prefHeight="536.0" prefWidth="237.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <HBox fx:id="dashboardBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="229.0" styleClass="menuItem" stylesheets="@dashboardlayout.css">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/business-report.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="Dashboard" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold Italic" size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+                  <HBox fx:id="userProfileBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="229.0" styleClass="menuItem" stylesheets="@dashboardlayout.css">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/user.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="User Profile" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold Italic" size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox fx:id="productsBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="237.0" styleClass="menuItem" stylesheets="@dashboardlayout.css">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/products.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="Products" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold Italic" size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox fx:id="employeesBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="237.0" styleClass="menuItem" stylesheets="@dashboardlayout.css">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/workers.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="Employees" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold Italic" size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox fx:id="usersBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="226.0" styleClass="menuItem" stylesheets="@dashboardlayout.css">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/team.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="Users" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold Italic" size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox fx:id="branchesBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="226.0" styleClass="menuItem" stylesheets="@dashboardlayout.css">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/store.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="Branches" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold Italic" size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox fx:id="userRolesBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="227.0" styleClass="menuItem" stylesheets="@dashboardlayout.css">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/user_roles.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="Users Roles" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold Italic" size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox fx:id="customersBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="237.0" styleClass="menuItem" stylesheets="@dashboardlayout.css" visible="false">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/customers.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="Customers" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold Italic" size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox fx:id="salesBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="237.0" styleClass="menuItem" stylesheets="@dashboardlayout.css" visible="false">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/business-and-finance.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="Sales" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold Italic" size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children></VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin></AnchorPane>
+   </left>
+   <center>
+      <AnchorPane fx:id="mainContent" styleClass="bg-black" stylesheets="@dashboardlayout.css" BorderPane.alignment="CENTER">
+         <children>
+            <TabPane fx:id="tabPane" layoutX="292.0" layoutY="129.0" prefHeight="200.0" side="BOTTOM" styleClass="bg-gray" stylesheets="@dashboardlayout.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
+              <tabs>
+                <Tab text="Dashboard">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@dashboardlayout.css">
+                           <children>
+                              <GridPane layoutX="10.0" prefHeight="247.0" prefWidth="500.0" stylesheets="@dashboardlayout.css" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="96.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="200.0" minHeight="0.0" prefHeight="91.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <AnchorPane prefHeight="50.0" prefWidth="300.0" stylesheets="@dashboardlayout.css">
+                                       <children>
+                                          <Circle fill="WHITE" layoutX="53.0" layoutY="60.0" radius="39.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="15.0" />
+                                          <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="27.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="27.0" AnchorPane.topAnchor="28.0">
+                                             <image>
+                                                <Image url="@img/increase.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="111.0" layoutY="12.0" prefHeight="46.0" prefWidth="247.0" text="Average Profit" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="5.0">
+                                             <font>
+                                                <Font name="SansSerif Regular" size="28.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="avgProfit" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="102.0" layoutY="63.0" prefHeight="39.0" prefWidth="181.0" text="0৳" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="77.0" AnchorPane.topAnchor="52.0">
+                                             <font>
+                                                <Font name="SansSerif Regular" size="34.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="timelineText1" alignment="CENTER" contentDisplay="CENTER" layoutX="291.0" layoutY="77.0" prefHeight="21.0" prefWidth="63.0" text="This month" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="64.0">
+                                             <font>
+                                                <Font name="SansSerif Regular" size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <styleClass>
+                                          <String fx:value="bg-green" />
+                                          <String fx:value="cart-item" />
+                                          <String fx:value="box-shadow" />
+                                       </styleClass>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <GridPane.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </GridPane.margin>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="50.0" prefWidth="300.0" stylesheets="@dashboardlayout.css" GridPane.columnIndex="1">
+                                       <children>
+                                          <Circle fill="WHITE" layoutX="53.0" layoutY="60.0" radius="39.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="15.0" />
+                                          <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="27.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="27.0" AnchorPane.topAnchor="28.0">
+                                             <image>
+                                                <Image url="@img/checklist.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="12.0" prefHeight="46.0" prefWidth="247.0" text="Total Purchases" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="5.0">
+                                             <font>
+                                                <Font name="SansSerif Regular" size="28.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="totalPurchase" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="129.0" layoutY="63.0" prefHeight="39.0" prefWidth="181.0" text="0৳" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="77.0" AnchorPane.topAnchor="52.0">
+                                             <font>
+                                                <Font name="SansSerif Regular" size="34.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="timelineText2" alignment="CENTER" contentDisplay="CENTER" layoutX="320.0" layoutY="77.0" prefHeight="21.0" prefWidth="63.0" text="This month" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="64.0">
+                                             <font>
+                                                <Font name="SansSerif Regular" size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <styleClass>
+                                          <String fx:value="bg-blue" />
+                                          <String fx:value="cart-item" />
+                                          <String fx:value="box-shadow" />
+                                       </styleClass>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <GridPane.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </GridPane.margin>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="50.0" prefWidth="300.0" stylesheets="@dashboardlayout.css" GridPane.rowIndex="1">
+                                       <children>
+                                          <Circle fill="WHITE" layoutX="53.0" layoutY="60.0" radius="39.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="15.0" />
+                                          <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="27.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="27.0" AnchorPane.topAnchor="28.0">
+                                             <image>
+                                                <Image url="@img/tax.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="12.0" prefHeight="46.0" prefWidth="247.0" text="Max Purchase" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="5.0">
+                                             <font>
+                                                <Font name="SansSerif Regular" size="28.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="maxPurchase" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="129.0" layoutY="63.0" prefHeight="39.0" prefWidth="181.0" text="0৳" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="77.0" AnchorPane.topAnchor="52.0">
+                                             <font>
+                                                <Font name="SansSerif Regular" size="34.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="timelineText3" alignment="CENTER" contentDisplay="CENTER" layoutX="320.0" layoutY="77.0" prefHeight="21.0" prefWidth="63.0" text="This month" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="64.0">
+                                             <font>
+                                                <Font name="SansSerif Regular" size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <styleClass>
+                                          <String fx:value="bg-red" />
+                                          <String fx:value="cart-item" />
+                                          <String fx:value="box-shadow" />
+                                       </styleClass>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <GridPane.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </GridPane.margin>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="50.0" prefWidth="300.0" stylesheets="@dashboardlayout.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <children>
+                                          <Circle fill="WHITE" layoutX="53.0" layoutY="60.0" radius="39.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="15.0" />
+                                          <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="27.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="27.0" AnchorPane.topAnchor="28.0">
+                                             <image>
+                                                <Image url="@img/financial-profit.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="12.0" prefHeight="46.0" prefWidth="247.0" text="Max Profit" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="5.0">
+                                             <font>
+                                                <Font name="SansSerif Regular" size="28.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="totalProfit" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="129.0" layoutY="63.0" prefHeight="39.0" prefWidth="181.0" text="0৳" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="77.0" AnchorPane.topAnchor="52.0">
+                                             <font>
+                                                <Font name="SansSerif Regular" size="34.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="timelineText4" alignment="CENTER" contentDisplay="CENTER" layoutX="320.0" layoutY="77.0" prefHeight="21.0" prefWidth="63.0" text="This month" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="64.0">
+                                             <font>
+                                                <Font name="SansSerif Regular" size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <styleClass>
+                                          <String fx:value="bg-yellow" />
+                                          <String fx:value="cart-item" />
+                                          <String fx:value="box-shadow" />
+                                       </styleClass>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <GridPane.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </GridPane.margin>
+                                    </AnchorPane>
+                                 </children>
+                              </GridPane>
+                              <DatePicker fx:id="startingDate" layoutX="74.0" layoutY="297.0" prefHeight="48.0" prefWidth="202.0" promptText="Starting Date" />
+                              <DatePicker fx:id="endingDate" layoutX="349.0" layoutY="296.0" prefHeight="50.0" prefWidth="174.0" promptText="Ending Date" />
+                              <Label alignment="CENTER" layoutX="290.0" layoutY="292.0" prefHeight="58.0" prefWidth="51.0" text="To">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="filterByDateBtn" layoutX="536.0" layoutY="302.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="143.0" text="Filter by Date">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <ImageView fx:id="refreshDashboardBtn" fitHeight="38.0" fitWidth="39.0" layoutX="697.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/refresh.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Profile">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <AnchorPane layoutX="21.0" layoutY="79.0" prefHeight="205.0" prefWidth="254.0" stylesheets="@dashboardlayout.css" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="79.0">
+                                 <children>
+                                    <Circle fx:id="profileImg2" fill="#1f93ff" layoutX="121.0" layoutY="46.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.leftAnchor="89.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="22.0" />
+                                    <Label fx:id="profileNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="85.0" prefHeight="36.0" prefWidth="231.0" text="Full Name" textFill="#282a3c" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="102.0">
+                                       <font>
+                                          <Font name="SansSerif Bold" size="21.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="userRoleLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="122.0" prefHeight="27.0" prefWidth="254.0" text="Shop Admin" textFill="#2c2e3e" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="133.0">
+                                       <font>
+                                          <Font name="SansSerif Bold Italic" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="branchNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="144.0" prefHeight="35.0" prefWidth="254.0" text="Dhanmondi Branch" textFill="#2c2e3e" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="156.0">
+                                       <font>
+                                          <Font name="SansSerif Regular" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <styleClass>
+                                    <String fx:value="bg-white" />
+                                    <String fx:value="box-shadow" />
+                                    <String fx:value="box-border" />
+                                 </styleClass>
+                              </AnchorPane>
+                              <AnchorPane layoutX="288.0" layoutY="79.0" prefHeight="473.0" prefWidth="450.0" stylesheets="@dashboardlayout.css" AnchorPane.leftAnchor="316.0" AnchorPane.rightAnchor="34.0" AnchorPane.topAnchor="80.0">
+                                 <children>
+                                    <Label fx:id="nameLabel" contentDisplay="CENTER" layoutX="20.0" layoutY="57.0" prefHeight="29.0" prefWidth="152.0" text="Name" textFill="#2c2e3e" AnchorPane.leftAnchor="30.0">
+                                       <font>
+                                          <Font name="Arial" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Separator layoutX="9.0" layoutY="38.0" prefHeight="12.0" prefWidth="480.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0" />
+                                    <Label fx:id="acIdLabel" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="36.0" prefWidth="171.0" text="Account ID: 1" textFill="#2c2e3e" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="11.0">
+                                       <font>
+                                          <Font name="SansSerif Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="nameTextField" layoutX="20.0" layoutY="86.0" prefHeight="36.0" prefWidth="350.0" styleClass="text-field-style" stylesheets="@dashboardlayout.css" text="Full Name" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                                       <font>
+                                          <Font name="Cambria Italic" size="18.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label fx:id="emailLabel" contentDisplay="CENTER" layoutX="20.0" layoutY="130.0" prefHeight="29.0" prefWidth="152.0" text="Email" textFill="#2c2e3e" AnchorPane.leftAnchor="30.0">
+                                       <font>
+                                          <Font name="Arial" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="emailTextField" layoutX="20.0" layoutY="159.0" prefHeight="36.0" prefWidth="350.0" styleClass="text-field-style" stylesheets="@dashboardlayout.css" text="admin@gmail.com" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                                       <font>
+                                          <Font name="Cambria Italic" size="18.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label fx:id="contactLabel" contentDisplay="CENTER" layoutX="20.0" layoutY="204.0" prefHeight="29.0" prefWidth="152.0" text="Contact" textFill="#2c2e3e" AnchorPane.leftAnchor="30.0">
+                                       <font>
+                                          <Font name="Arial" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="contactTextField" layoutX="20.0" layoutY="233.0" prefHeight="36.0" prefWidth="350.0" styleClass="text-field-style" stylesheets="@dashboardlayout.css" text="017********" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                                       <font>
+                                          <Font name="Cambria Italic" size="18.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label fx:id="addressLabel" contentDisplay="CENTER" layoutX="20.0" layoutY="272.0" prefHeight="29.0" prefWidth="152.0" text="Address" textFill="#2c2e3e" AnchorPane.leftAnchor="30.0">
+                                       <font>
+                                          <Font name="Arial" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <TextArea fx:id="addressTextField" layoutX="20.0" layoutY="301.0" prefHeight="80.0" prefWidth="349.0" styleClass="text-field-style" stylesheets="@dashboardlayout.css" text="Address" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                                       <font>
+                                          <Font name="Cambria Italic" size="18.0" />
+                                       </font>
+                                    </TextArea>
+                                    <ImageView fx:id="editBtn" fitHeight="28.0" fitWidth="32.0" layoutX="370.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="15.0">
+                                       <image>
+                                          <Image url="@img/pencil.png" />
+                                       </image>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </ImageView>
+                                    <Button fx:id="updateProfileBtn" layoutX="151.0" layoutY="405.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="159.0" styleClass="button-style" stylesheets="@dashboardlayout.css" text="Update Profile" textFill="WHITE" AnchorPane.leftAnchor="151.0" AnchorPane.rightAnchor="150.0">
+                                       <font>
+                                          <Font name="Cambria Bold Italic" size="18.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                 </children>
+                                 <styleClass>
+                                    <String fx:value="bg-white" />
+                                    <String fx:value="box-shadow" />
+                                    <String fx:value="box-border" />
+                                 </styleClass>
+                              </AnchorPane>
+                              <Label fx:id="userName11" contentDisplay="CENTER" layoutX="46.0" layoutY="43.0" prefHeight="36.0" prefWidth="183.0" text="User Profile" textFill="#282a3c" AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="43.0">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="27.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="userName111" contentDisplay="CENTER" layoutX="327.0" layoutY="43.0" prefHeight="36.0" prefWidth="253.0" text="Account Settings" textFill="#282a3c" AnchorPane.topAnchor="43.0">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="27.0" />
+                                 </font>
+                              </Label>
+                              <AnchorPane layoutX="25.0" layoutY="346.0" prefHeight="205.0" prefWidth="254.0" stylesheets="@dashboardlayout.css">
+                                 <styleClass>
+                                    <String fx:value="bg-white" />
+                                    <String fx:value="box-shadow" />
+                                    <String fx:value="box-border" />
+                                 </styleClass>
+                                 <children>
+                                    <PasswordField fx:id="oldPassField" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="223.0" promptText="Old Password" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                       <font>
+                                          <Font name="Cambria" size="18.0" />
+                                       </font>
+                                    </PasswordField>
+                                    <PasswordField fx:id="newPassField" layoutX="14.0" layoutY="60.0" prefHeight="32.0" prefWidth="223.0" promptText="New Password" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                       <font>
+                                          <Font name="Cambria" size="18.0" />
+                                       </font>
+                                    </PasswordField>
+                                    <PasswordField fx:id="confirmPassField" layoutX="14.0" layoutY="104.0" prefHeight="32.0" prefWidth="223.0" promptText="Confirm Password" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                       <font>
+                                          <Font name="Cambria" size="18.0" />
+                                       </font>
+                                    </PasswordField>
+                                    <Button fx:id="updatePassBtn" layoutX="53.0" layoutY="157.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="145.0" styleClass="button-style" stylesheets="@dashboardlayout.css" text="Change" textFill="WHITE" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0">
+                                       <font>
+                                          <Font name="Cambria Bold Italic" size="18.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <Label fx:id="userName112" contentDisplay="CENTER" layoutX="32.0" layoutY="308.0" prefHeight="37.0" prefWidth="238.0" text="Change Password" textFill="#282a3c">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="27.0" />
+                                 </font>
+                              </Label>
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab text="Users">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="usersTable" layoutX="26.0" layoutY="246.0" prefHeight="363.0" prefWidth="752.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                                <columns>
+                                    <TableColumn fx:id="usersIdCol" prefWidth="60.0" text="User ID" />
+                                  <TableColumn fx:id="usersNameCol" prefWidth="99.0" text="Name" />
+                                    <TableColumn fx:id="usersRoleCol" prefWidth="103.0" text="User Role" />
+                                    <TableColumn fx:id="usersBranchCol" minWidth="0.0" prefWidth="128.0" text="Branch" />
+                                  <TableColumn fx:id="usersEmailCol" prefWidth="109.0" text="Email" />
+                                    <TableColumn fx:id="usersContactCol" prefWidth="121.0" text="Contact" />
+                                    <TableColumn fx:id="usersAddressCol" prefWidth="192.0" text="Address" />
+                                </columns>
+                              </TableView>
+                              <AnchorPane layoutY="67.0" prefHeight="135.0" prefWidth="779.0">
+                                 <children>
+                                    <TextField fx:id="usersNameField" layoutX="16.0" layoutY="14.0" prefHeight="23.0" prefWidth="206.0" promptText="Name" AnchorPane.leftAnchor="16.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <ComboBox fx:id="usersBranchComboBox" layoutX="469.0" layoutY="30.0" prefHeight="25.0" prefWidth="150.0" promptText="Branch" AnchorPane.rightAnchor="160.0" />
+                                    <ComboBox fx:id="usersRoleComboBox" layoutX="469.0" layoutY="93.0" prefHeight="25.0" prefWidth="149.0" promptText="User Role" AnchorPane.rightAnchor="161.0" />
+                                    <TextField fx:id="usersEmailField" layoutX="17.0" layoutY="52.0" prefHeight="23.0" prefWidth="206.0" promptText="Email" AnchorPane.leftAnchor="16.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField fx:id="usersContactField" layoutX="241.0" layoutY="14.0" prefHeight="28.0" prefWidth="205.0" promptText="Contact" AnchorPane.leftAnchor="241.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextArea fx:id="usersAddressField" layoutX="241.0" layoutY="48.0" prefHeight="72.0" prefWidth="204.0" promptText="Address" AnchorPane.leftAnchor="241.0" AnchorPane.rightAnchor="334.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextArea>
+                                    <PasswordField fx:id="usersPassField" layoutX="16.0" layoutY="91.0" prefHeight="28.0" prefWidth="206.0" promptText="Password">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </PasswordField>
+                                    <ImageView fx:id="addUserBtn" fitHeight="44.0" fitWidth="50.0" layoutX="664.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="71.0" AnchorPane.topAnchor="8.0">
+                                       <image>
+                                          <Image url="@img/add-user.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="deleteUserBtn" fitHeight="44.0" fitWidth="39.0" layoutX="731.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="11.0">
+                                       <image>
+                                          <Image url="@img/delete.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="updateUserBtn" fitHeight="64.0" fitWidth="71.0" layoutX="686.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="59.0">
+                                       <image>
+                                          <Image url="@img/updated.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="469.0" layoutY="9.0" text="Select User Role" AnchorPane.rightAnchor="199.0" AnchorPane.topAnchor="9.0">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="469.0" layoutY="70.0" text="Select Branch" AnchorPane.rightAnchor="217.0" AnchorPane.topAnchor="70.0">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <ComboBox fx:id="usersSearchByComboBox" layoutX="20.0" layoutY="212.0" prefHeight="25.0" prefWidth="122.0" promptText="Search By" />
+                              <TextField fx:id="usersSearchByField" layoutX="156.0" layoutY="212.0" prefHeight="28.0" prefWidth="155.0" promptText="Search By">
+                                 <font>
+                                    <Font name="Cambria" size="14.0" />
+                                 </font>
+                              </TextField>
+                              <ComboBox fx:id="usersOrderByComboBox" layoutX="666.0" layoutY="214.0" prefHeight="25.0" prefWidth="106.0" promptText="Order By" />
+                              <Label alignment="CENTER" layoutX="282.0" layoutY="9.0" prefHeight="58.0" prefWidth="229.0" text="Users Data">
+                                 <font>
+                                    <Font name="Arial Black" size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="clearUserTableBtn" fitHeight="44.0" fitWidth="50.0" layoutX="615.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/clear-table2.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="refreshUsersTableBtn" fitHeight="38.0" fitWidth="39.0" layoutX="465.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/refresh.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="searchUsersBtn" fitHeight="40.0" fitWidth="42.0" layoutX="317.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/search-employee.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab text="Branches">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="branchTable" layoutX="35.0" layoutY="237.0" prefHeight="369.0" prefWidth="742.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+                                <columns>
+                                  <TableColumn fx:id="branchIdCol" prefWidth="75.0" text="Branch ID" />
+                                  <TableColumn fx:id="branchNameCol" prefWidth="180.0" text="Name" />
+                                    <TableColumn fx:id="branchAddressCol" prefWidth="193.0" text="Address" />
+                                    <TableColumn fx:id="branchContactCol" prefWidth="140.0" text="Contact" />
+                                    <TableColumn fx:id="branchEmailCol" prefWidth="153.0" text="Email" />
+                                </columns>
+                              </TableView>
+                              <AnchorPane layoutX="25.0" layoutY="48.0" prefHeight="135.0" prefWidth="742.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+                                 <children>
+                                    <TextField fx:id="branchNameField" layoutX="84.0" layoutY="16.0" prefHeight="23.0" prefWidth="206.0" promptText="Name" AnchorPane.leftAnchor="84.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField fx:id="branchEmailField" layoutX="84.0" layoutY="54.0" prefHeight="23.0" prefWidth="206.0" promptText="Email" AnchorPane.leftAnchor="84.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField fx:id="branchContactField" layoutX="84.0" layoutY="91.0" prefHeight="23.0" prefWidth="206.0" promptText="Contact" AnchorPane.leftAnchor="84.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextArea fx:id="branchAddressField" layoutX="309.0" layoutY="14.0" prefHeight="108.0" prefWidth="223.0" promptText="Address" AnchorPane.leftAnchor="309.0" AnchorPane.rightAnchor="229.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextArea>
+                                    <ImageView fx:id="deleteBranchBtn" fitHeight="43.0" fitWidth="40.0" layoutX="643.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="12.0">
+                                       <image>
+                                          <Image url="@img/delete.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="updateBranchBtn" fitHeight="66.0" fitWidth="73.0" layoutX="597.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="98.0" AnchorPane.topAnchor="58.0">
+                                       <image>
+                                          <Image url="@img/updated.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="addBranchBtn" fitHeight="42.0" fitWidth="44.0" layoutX="576.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="143.0" AnchorPane.topAnchor="11.0">
+                                       <image>
+                                          <Image url="@img/plus.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <ComboBox fx:id="branchSearchByComboBox" layoutX="31.0" layoutY="193.0" prefHeight="30.0" prefWidth="122.0" promptText="Search By" />
+                              <TextField fx:id="branchSearchByField" layoutX="169.0" layoutY="192.0" prefHeight="34.0" prefWidth="155.0" promptText="Search By">
+                                 <font>
+                                    <Font name="Cambria" size="14.0" />
+                                 </font>
+                              </TextField>
+                              <ComboBox fx:id="branchOrderByComboBox" layoutX="661.0" layoutY="198.0" prefHeight="25.0" prefWidth="106.0" promptText="Order By" />
+                              <Label alignment="CENTER" layoutX="264.0" layoutY="4.0" prefHeight="59.0" prefWidth="266.0" text="Branch Data">
+                                 <font>
+                                    <Font name="Arial Black" size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="clearBranchTableBtn" fitHeight="44.0" fitWidth="50.0" layoutX="606.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/clear-table2.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="refreshBranchTableBtn" fitHeight="38.0" fitWidth="39.0" layoutX="471.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/refresh.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                              <ImageView fx:id="searchBranchBtn" fitHeight="42.0" fitWidth="46.0" layoutX="330.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/search.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab text="User Roles">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="userRoleTable" layoutX="81.0" layoutY="138.0" prefHeight="321.0" prefWidth="656.0" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="55.0">
+                                <columns>
+                                  <TableColumn fx:id="userRoleIdCol" prefWidth="102.0" text="User Role ID" />
+                                  <TableColumn fx:id="userRoleTitleCol" prefWidth="203.0" text="Title" />
+                                    <TableColumn fx:id="userRoleDescCol" prefWidth="350.0" text="Description" />
+                                </columns>
+                              </TableView>
+                              <Label alignment="CENTER" layoutX="300.0" layoutY="67.0" prefHeight="52.0" prefWidth="218.0" text="User Roles">
+                                 <font>
+                                    <Font name="Cambria" size="32.0" />
+                                 </font>
+                              </Label>
+                           </children></AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab text="Products">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ComboBox fx:id="productSearchByComboBox" layoutX="10.0" layoutY="220.0" prefHeight="28.0" prefWidth="99.0" promptText="Search By" />
+                              <TextField fx:id="productSearchByField" layoutX="186.0" layoutY="220.0" prefHeight="28.0" prefWidth="165.0" promptText="Search By">
+                                 <font>
+                                    <Font name="Cambria" size="14.0" />
+                                 </font>
+                              </TextField>
+                              <ComboBox fx:id="productOrderByComboBox" layoutX="672.0" layoutY="220.0" prefHeight="27.0" prefWidth="106.0" promptText="Order By" AnchorPane.rightAnchor="14.0" />
+                              <Label alignment="CENTER" layoutX="254.0" prefHeight="50.0" prefWidth="285.0" text="Products Data">
+                                 <font>
+                                    <Font name="Arial Black" size="35.0" />
+                                 </font>
+                              </Label>
+                              <AnchorPane layoutY="45.0" prefHeight="176.0" prefWidth="792.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                 <children>
+                                    <TextField fx:id="productModelField" layoutX="16.0" layoutY="45.0" prefHeight="23.0" prefWidth="206.0" promptText="Model" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="52.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <ComboBox fx:id="productSubcategoryComboBox" layoutX="332.0" layoutY="132.0" prefHeight="25.0" prefWidth="121.0" promptText="Subcategory" />
+                                    <TextField fx:id="productNameField" layoutX="16.0" layoutY="14.0" prefHeight="23.0" prefWidth="206.0" promptText="Name" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="14.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField fx:id="productPurchaseRateField" layoutX="465.0" layoutY="14.0" prefHeight="28.0" prefWidth="157.0" promptText="Purchase Rate" AnchorPane.rightAnchor="170.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextArea fx:id="productDescriptionField" layoutX="235.0" layoutY="12.0" prefHeight="109.0" prefWidth="218.0" promptText="Description" AnchorPane.leftAnchor="235.0" AnchorPane.rightAnchor="339.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextArea>
+                                    <ImageView fx:id="addProductBtn" fitHeight="53.0" fitWidth="53.0" layoutX="638.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="101.0" AnchorPane.topAnchor="20.0">
+                                       <image>
+                                          <Image url="@img/add-to-cart.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="deleteProductBtn" fitHeight="46.0" fitWidth="48.0" layoutX="722.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="24.0">
+                                       <image>
+                                          <Image url="@img/delete.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="updateProductBtn" fitHeight="64.0" fitWidth="71.0" layoutX="671.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="86.0">
+                                       <image>
+                                          <Image url="@img/updated.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="235.0" layoutY="134.0" prefHeight="21.0" prefWidth="95.0" text="Subcategory :" AnchorPane.leftAnchor="235.0" AnchorPane.topAnchor="134.0">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="productBrandField" layoutX="16.0" layoutY="77.0" prefHeight="23.0" prefWidth="206.0" promptText="Brand" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="90.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField fx:id="productSalesRateField" layoutX="464.0" layoutY="52.0" prefHeight="28.0" prefWidth="160.0" promptText="Sales Rate" AnchorPane.rightAnchor="170.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField fx:id="productQuantityField" layoutX="462.0" layoutY="131.0" prefHeight="28.0" prefWidth="162.0" promptText="Quantity" AnchorPane.rightAnchor="170.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <ComboBox fx:id="productCategoryComboBox" layoutX="98.0" layoutY="132.0" prefHeight="25.0" prefWidth="121.0" promptText="Category" />
+                                    <Label layoutX="19.0" layoutY="134.0" prefHeight="21.0" prefWidth="78.0" text="Category :">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="productDiscountField" layoutX="464.0" layoutY="90.0" prefHeight="28.0" prefWidth="160.0" promptText="Discount" AnchorPane.rightAnchor="170.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </AnchorPane>
+                              <TableView fx:id="productTable" layoutX="176.0" layoutY="255.0" prefHeight="354.0" prefWidth="773.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.0">
+                                <columns>
+                                  <TableColumn fx:id="productIdCol" prefWidth="36.0" text="ID" />
+                                  <TableColumn fx:id="productNameCol" prefWidth="86.0" text="Name" />
+                                    <TableColumn fx:id="productModelCol" prefWidth="99.0" text="Model" />
+                                    <TableColumn fx:id="productBrandCol" prefWidth="76.0" text="Brand" />
+                                    <TableColumn fx:id="productQuantityCol" text="Quantity" />
+                                    <TableColumn fx:id="productPurchaseRateCol" prefWidth="84.0" text="Purchase Rate" />
+                                    <TableColumn fx:id="productSalesRateCol" prefWidth="94.0" text="Sales Rate" />
+                                    <TableColumn fx:id="productDiscountCol" prefWidth="76.0" text="Discount" />
+                                    <TableColumn fx:id="productCategoryCol" minWidth="0.0" prefWidth="159.0" text="Category" />
+                                    <TableColumn fx:id="productSubcategoryCol" minWidth="0.0" prefWidth="99.0" text="Subcategory" />
+                                    <TableColumn fx:id="productDescriptionCol" prefWidth="94.0" text="Description" />
+                                    <TableColumn fx:id="productBranchCol" prefWidth="94.0" text="Branch" />
+                                </columns>
+                              </TableView>
+                              <ImageView fx:id="refreshProductTableBtn" fitHeight="38.0" fitWidth="39.0" layoutX="493.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/refresh.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                              <ImageView fx:id="searchProductBtn" fitHeight="46.0" fitWidth="52.0" layoutX="351.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/search2.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                              <ComboBox fx:id="productCompareComboBox" accessibleText="Compare" layoutX="116.0" layoutY="220.0" prefHeight="29.0" prefWidth="65.0" promptText="=" />
+                              <ImageView fx:id="clearProductTableBtn" fitHeight="44.0" fitWidth="50.0" layoutX="630.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="118.0">
+                                 <image>
+                                    <Image url="@img/clear-table2.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab text="Employees">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="employeeTable" layoutX="25.0" layoutY="237.0" prefHeight="371.0" prefWidth="754.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="13.0">
+                                <columns>
+                                  <TableColumn fx:id="emIdCol" prefWidth="51.0" text="ID" />
+                                  <TableColumn fx:id="emNameCol" prefWidth="118.0" text="Name" />
+                                    <TableColumn fx:id="emPositionCol" prefWidth="115.0" text="Position" />
+                                    <TableColumn fx:id="emBranchCol" prefWidth="87.0" text="Branch" />
+                                    <TableColumn fx:id="emSalaryCol" prefWidth="84.0" text="Salary" />
+                                    <TableColumn fx:id="emContactCol" prefWidth="92.0" text="Contact" />
+                                    <TableColumn fx:id="emEmailCol" prefWidth="99.0" text="Email" />
+                                    <TableColumn fx:id="emAddressCol" prefWidth="95.0" text="Address" />
+                                </columns>
+                              </TableView>
+                              <AnchorPane layoutX="7.0" layoutY="66.0" prefHeight="135.0" prefWidth="779.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="66.0">
+                                 <children>
+                                    <TextField fx:id="emSalaryField" layoutX="246.0" layoutY="14.0" prefHeight="28.0" prefWidth="185.0" promptText="Salary" AnchorPane.leftAnchor="241.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField fx:id="emNameField" layoutX="16.0" layoutY="14.0" prefHeight="23.0" prefWidth="206.0" promptText="Name" AnchorPane.leftAnchor="16.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <ComboBox fx:id="emPositionComboBox" layoutX="446.0" layoutY="36.0" prefHeight="25.0" prefWidth="175.0" promptText="Position" AnchorPane.rightAnchor="158.0" AnchorPane.topAnchor="36.0" />
+                                    <ComboBox fx:id="emBranchComboBox" layoutX="446.0" layoutY="90.0" prefHeight="25.0" prefWidth="175.0" promptText="Branch" AnchorPane.rightAnchor="158.0" AnchorPane.topAnchor="90.0" />
+                                    <TextField fx:id="emEmailField" layoutX="17.0" layoutY="52.0" prefHeight="23.0" prefWidth="206.0" promptText="Email" AnchorPane.leftAnchor="16.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField fx:id="emContactField" layoutX="18.0" layoutY="89.0" prefHeight="23.0" prefWidth="206.0" promptText="Contact" AnchorPane.leftAnchor="16.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextArea fx:id="emAddressField" layoutX="241.0" layoutY="53.0" prefHeight="67.0" prefWidth="184.0" promptText="Address" AnchorPane.leftAnchor="241.0" AnchorPane.rightAnchor="354.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextArea>
+                                    <ImageView fx:id="deleteEmployeeBtn" fitHeight="43.0" fitWidth="40.0" layoutX="718.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="21.0">
+                                       <image>
+                                          <Image url="@img/delete.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="updateEmployeeBtn" fitHeight="66.0" fitWidth="73.0" layoutX="672.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="58.0">
+                                       <image>
+                                          <Image url="@img/updated.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="addEmployeeBtn" fitHeight="38.0" fitWidth="42.0" layoutX="657.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="88.0">
+                                       <image>
+                                          <Image url="@img/add-user2.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="446.0" layoutY="11.0" text="Select Position" AnchorPane.rightAnchor="235.0" AnchorPane.topAnchor="10.0">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="446.0" layoutY="70.0" text="Select Branch" AnchorPane.rightAnchor="238.0" AnchorPane.topAnchor="66.0">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <ComboBox fx:id="employeeSearchByComboBox" accessibleHelp="Search By" accessibleText="Search By" layoutX="25.0" layoutY="196.0" prefHeight="32.0" prefWidth="111.0" promptText="Search By" />
+                              <TextField fx:id="emSearchByTextField" layoutX="224.0" layoutY="194.0" prefHeight="35.0" prefWidth="155.0" promptText="Search By">
+                                 <font>
+                                    <Font name="Cambria" size="14.0" />
+                                 </font>
+                              </TextField>
+                              <ComboBox fx:id="employeeOrderByComboBox" layoutX="663.0" layoutY="201.0" prefHeight="30.0" prefWidth="106.0" promptText="Order By" AnchorPane.rightAnchor="23.0" />
+                              <Label alignment="CENTER" layoutX="245.0" layoutY="8.0" prefHeight="58.0" prefWidth="314.0" text="Employee Data">
+                                 <font>
+                                    <Font name="Arial Black" size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="clearEmployeeTableBtn" fitHeight="49.0" fitWidth="48.0" layoutX="605.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="139.0">
+                                 <image>
+                                    <Image url="@img/clear-table2.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="refreshEmTableBtn" fitHeight="38.0" fitWidth="39.0" layoutX="472.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/refresh.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                              <ImageView fx:id="searchEmployeeBtn" fitHeight="40.0" fitWidth="42.0" layoutX="387.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/search-employee.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                              <ComboBox fx:id="emCompareComboBox" accessibleText="Compare" layoutX="142.0" layoutY="196.0" prefHeight="32.0" prefWidth="73.0" promptText="=" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Customers">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <AnchorPane layoutX="6.0" layoutY="56.0" prefHeight="137.0" prefWidth="774.0">
+                                 <children>
+                                    <TextField layoutX="448.0" layoutY="14.0" promptText="Salary" AnchorPane.rightAnchor="158.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField layoutX="16.0" layoutY="14.0" prefHeight="23.0" prefWidth="206.0" promptText="Name" AnchorPane.leftAnchor="16.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <ComboBox layoutX="446.0" layoutY="51.0" prefHeight="25.0" prefWidth="175.0" promptText="Position" AnchorPane.rightAnchor="158.0" />
+                                    <ComboBox layoutX="446.0" layoutY="90.0" prefHeight="25.0" prefWidth="175.0" promptText="Branch" AnchorPane.rightAnchor="158.0" />
+                                    <TextField layoutX="17.0" layoutY="52.0" prefHeight="23.0" prefWidth="206.0" promptText="Email" AnchorPane.leftAnchor="16.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField layoutX="18.0" layoutY="89.0" prefHeight="23.0" prefWidth="206.0" promptText="Contact" AnchorPane.leftAnchor="16.0">
+                                       <font>
+                                          <Font name="Cambria" size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextArea layoutX="241.0" layoutY="12.0" prefHeight="108.0" prefWidth="184.0" promptText="Address" AnchorPane.leftAnchor="241.0" AnchorPane.rightAnchor="354.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextArea>
+                                    <Button layoutX="655.0" layoutY="16.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="ADD" AnchorPane.rightAnchor="20.0">
+                                       <font>
+                                          <Font name="Cambria Bold" size="14.0" />
+                                       </font>
+                                    </Button>
+                                    <Button layoutX="655.0" layoutY="52.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="UPDATE" AnchorPane.rightAnchor="20.0">
+                                       <font>
+                                          <Font name="Cambria Bold" size="14.0" />
+                                       </font>
+                                    </Button>
+                                    <Button layoutX="655.0" layoutY="89.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="DELETE" AnchorPane.rightAnchor="20.0">
+                                       <font>
+                                          <Font name="Cambria Bold" size="14.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <ComboBox layoutX="21.0" layoutY="212.0" prefHeight="25.0" prefWidth="122.0" promptText="Search By" />
+                              <TextField layoutX="164.0" layoutY="211.0" prefHeight="28.0" prefWidth="155.0" promptText="Name">
+                                 <font>
+                                    <Font name="Cambria" size="14.0" />
+                                 </font>
+                              </TextField>
+                              <ComboBox layoutX="642.0" layoutY="213.0" prefHeight="25.0" prefWidth="106.0" promptText="Order By" />
+                              <Label alignment="CENTER" layoutX="235.0" layoutY="11.0" prefHeight="56.0" prefWidth="331.0" text="Customer Table">
+                                 <font>
+                                    <Font name="Arial Black" size="35.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Sales">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="124.0" layoutY="120.0" prefHeight="44.0" prefWidth="170.0" text="Sales">
+                                 <font>
+                                    <Font name="Cambria" size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               
+              </tabs>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TabPane>
+            <AnchorPane prefHeight="30.0" prefWidth="776.0" styleClass="bg-white" stylesheets="@dashboardlayout.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Label fx:id="copyrightLabel" alignment="CENTER" prefHeight="17.0" prefWidth="605.0" text="Copyright Text" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="SansSerif Regular" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

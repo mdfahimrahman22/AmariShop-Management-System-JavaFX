@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="471.0" prefWidth="621.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AmariShop.Dashboard.AddBranchController">
+    <stylesheets>
+        <URL value="@addbranch.css" />
+    </stylesheets>
+   <children>
+      <TextField fx:id="nameField" layoutX="176.0" layoutY="78.0" prefHeight="45.0" prefWidth="289.0" promptText="Name" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="140.0">
+         <font>
+            <Font name="Cambria" size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="emailField" layoutX="176.0" layoutY="143.0" prefHeight="45.0" prefWidth="289.0" promptText="Email" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="140.0">
+         <font>
+            <Font name="Cambria" size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="contactField" layoutX="176.0" layoutY="204.0" prefHeight="45.0" prefWidth="289.0" promptText="Contact" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="140.0">
+         <font>
+            <Font name="Cambria" size="18.0" />
+         </font>
+      </TextField>
+      <TextArea fx:id="addressField" layoutX="176.0" layoutY="267.0" prefHeight="104.0" prefWidth="289.0" promptText="Address" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="140.0">
+         <font>
+            <Font name="Cambria" size="18.0" />
+         </font>
+      </TextArea>
+      <Label alignment="CENTER" layoutX="177.0" layoutY="21.0" prefHeight="44.0" prefWidth="269.0" text="Branch Details" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="160.0">
+         <font>
+            <Font name="Cambria" size="36.0" />
+         </font>
+      </Label>
+      <Button fx:id="addBranchBtn" layoutX="227.0" layoutY="391.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="168.0" text="Add" AnchorPane.leftAnchor="227.0" AnchorPane.rightAnchor="226.0">
+         <font>
+            <Font name="Cambria Bold" size="18.0" />
+         </font>
+      </Button>
+      <ImageView fx:id="cancelBtn" fitHeight="27.0" fitWidth="25.0" layoutX="578.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="6.0">
+         <image>
+            <Image url="@img/cancel.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="updateBranchBtn" layoutX="227.0" layoutY="391.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="168.0" text="Update" AnchorPane.leftAnchor="227.0" AnchorPane.rightAnchor="226.0">
+         <font>
+            <Font name="Cambria Bold" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
