@@ -823,7 +823,7 @@ public class DashboardLayoutController implements Initializable {
         } else if (col.equals("id")) {
             sql += String.format("where p.ProductID %s %d", compare, Integer.parseInt(search));
         } else if (col.equals("discount")) {
-            sql += String.format("where p.discount %s %d", compare, Integer.parseInt(search));
+            sql += String.format("where p.product_discount %s %d", compare, Integer.parseInt(search));
         } else if (col.equals("purchase rate")) {
             sql += String.format("where p.product_purchase_rate %s '%s'", compare, search);
         } else if (col.equals("sales rate")) {

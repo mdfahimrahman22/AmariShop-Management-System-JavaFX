@@ -39,16 +39,16 @@ public class LoginLayoutController implements Initializable {
         FXMain fxmain=new FXMain();
         connection=ConnectDB.getConnection();
         UserAccount userAccount=new UserAccount(connection);
-        String email="f1@gmail.com";String pass="123456";
+//        String email="f1@gmail.com";String pass="123456";
 //        String email="f2@gmail.com";String pass="123456";
         
-//        String email=emailField.getText();String pass=passField.getText();
+        String email=emailField.getText();String pass=passField.getText();
         User user=userAccount.getUserProfile(email,pass);
         if(user!=null){
             fxmain.openDashboard(event,user,connection);
         }
         else{
-            FXMain.showNotification("Varification Failed", "Can't varify the user.", "warning");
+            FXMain.showNotification("Verification Failed", "Can't verify the user.", "warning");
         }
     }
     
