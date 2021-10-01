@@ -5,6 +5,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
@@ -164,58 +165,6 @@
                         <Insets bottom="10.0" left="20.0" top="10.0" />
                      </padding>
                   </HBox>
-                  <HBox fx:id="salesBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="237.0" styleClass="menuItem" stylesheets="@dashboardlayout.css">
-                     <children>
-                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/business-and-finance.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label text="Sales" textFill="WHITE">
-                           <font>
-                              <Font name="SansSerif Bold Italic" size="23.0" />
-                           </font>
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding>
-                        </Label>
-                     </children>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <padding>
-                        <Insets bottom="10.0" left="20.0" top="10.0" />
-                     </padding>
-                  </HBox>
-                  <HBox fx:id="customersBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="237.0" styleClass="menuItem" stylesheets="@dashboardlayout.css">
-                     <children>
-                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/customers.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label text="Customers" textFill="WHITE">
-                           <font>
-                              <Font name="SansSerif Bold Italic" size="23.0" />
-                           </font>
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding>
-                        </Label>
-                     </children>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <padding>
-                        <Insets bottom="10.0" left="20.0" top="10.0" />
-                     </padding>
-                  </HBox>
                   <HBox fx:id="employeesBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="237.0" styleClass="menuItem" stylesheets="@dashboardlayout.css">
                      <children>
                         <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
@@ -320,6 +269,58 @@
                         <Insets bottom="10.0" left="20.0" top="10.0" />
                      </padding>
                   </HBox>
+                  <HBox fx:id="customersBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="237.0" styleClass="menuItem" stylesheets="@dashboardlayout.css" visible="false">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/customers.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="Customers" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold Italic" size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox fx:id="salesBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="237.0" styleClass="menuItem" stylesheets="@dashboardlayout.css" visible="false">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/business-and-finance.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="Sales" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold Italic" size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
                </children></VBox>
          </children>
          <BorderPane.margin>
@@ -353,17 +354,17 @@
                                                 <Image url="@img/increase.png" />
                                              </image>
                                           </ImageView>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="111.0" layoutY="12.0" prefHeight="46.0" prefWidth="247.0" text="Sales" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="5.0">
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="111.0" layoutY="12.0" prefHeight="46.0" prefWidth="247.0" text="Average Profit" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="5.0">
                                              <font>
-                                                <Font name="SansSerif Regular" size="38.0" />
+                                                <Font name="SansSerif Regular" size="28.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="102.0" layoutY="63.0" prefHeight="39.0" prefWidth="181.0" text="50000৳" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="77.0" AnchorPane.topAnchor="52.0">
+                                          <Label fx:id="avgProfit" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="102.0" layoutY="63.0" prefHeight="39.0" prefWidth="181.0" text="0৳" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="77.0" AnchorPane.topAnchor="52.0">
                                              <font>
                                                 <Font name="SansSerif Regular" size="34.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="291.0" layoutY="77.0" prefHeight="21.0" prefWidth="63.0" text="This month" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="64.0">
+                                          <Label fx:id="timelineText1" alignment="CENTER" contentDisplay="CENTER" layoutX="291.0" layoutY="77.0" prefHeight="21.0" prefWidth="63.0" text="This month" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="64.0">
                                              <font>
                                                 <Font name="SansSerif Regular" size="12.0" />
                                              </font>
@@ -389,17 +390,17 @@
                                                 <Image url="@img/checklist.png" />
                                              </image>
                                           </ImageView>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="12.0" prefHeight="46.0" prefWidth="247.0" text="Purchases" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="5.0">
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="12.0" prefHeight="46.0" prefWidth="247.0" text="Total Purchases" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="5.0">
                                              <font>
-                                                <Font name="SansSerif Regular" size="38.0" />
+                                                <Font name="SansSerif Regular" size="28.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="129.0" layoutY="63.0" prefHeight="39.0" prefWidth="181.0" text="80000৳" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="77.0" AnchorPane.topAnchor="52.0">
+                                          <Label fx:id="totalPurchase" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="129.0" layoutY="63.0" prefHeight="39.0" prefWidth="181.0" text="0৳" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="77.0" AnchorPane.topAnchor="52.0">
                                              <font>
                                                 <Font name="SansSerif Regular" size="34.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="320.0" layoutY="77.0" prefHeight="21.0" prefWidth="63.0" text="This month" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="64.0">
+                                          <Label fx:id="timelineText2" alignment="CENTER" contentDisplay="CENTER" layoutX="320.0" layoutY="77.0" prefHeight="21.0" prefWidth="63.0" text="This month" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="64.0">
                                              <font>
                                                 <Font name="SansSerif Regular" size="12.0" />
                                              </font>
@@ -425,17 +426,17 @@
                                                 <Image url="@img/tax.png" />
                                              </image>
                                           </ImageView>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="12.0" prefHeight="46.0" prefWidth="247.0" text="PayableTax" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="5.0">
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="12.0" prefHeight="46.0" prefWidth="247.0" text="Max Purchase" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="5.0">
                                              <font>
-                                                <Font name="SansSerif Regular" size="38.0" />
+                                                <Font name="SansSerif Regular" size="28.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="129.0" layoutY="63.0" prefHeight="39.0" prefWidth="181.0" text="5000৳" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="77.0" AnchorPane.topAnchor="52.0">
+                                          <Label fx:id="maxPurchase" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="129.0" layoutY="63.0" prefHeight="39.0" prefWidth="181.0" text="0৳" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="77.0" AnchorPane.topAnchor="52.0">
                                              <font>
                                                 <Font name="SansSerif Regular" size="34.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="320.0" layoutY="77.0" prefHeight="21.0" prefWidth="63.0" text="This month" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="64.0">
+                                          <Label fx:id="timelineText3" alignment="CENTER" contentDisplay="CENTER" layoutX="320.0" layoutY="77.0" prefHeight="21.0" prefWidth="63.0" text="This month" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="64.0">
                                              <font>
                                                 <Font name="SansSerif Regular" size="12.0" />
                                              </font>
@@ -461,17 +462,17 @@
                                                 <Image url="@img/financial-profit.png" />
                                              </image>
                                           </ImageView>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="12.0" prefHeight="46.0" prefWidth="247.0" text="Growth" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="5.0">
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="12.0" prefHeight="46.0" prefWidth="247.0" text="Max Profit" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="5.0">
                                              <font>
-                                                <Font name="SansSerif Regular" size="38.0" />
+                                                <Font name="SansSerif Regular" size="28.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="129.0" layoutY="63.0" prefHeight="39.0" prefWidth="181.0" text="10000৳" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="77.0" AnchorPane.topAnchor="52.0">
+                                          <Label fx:id="totalProfit" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="129.0" layoutY="63.0" prefHeight="39.0" prefWidth="181.0" text="0৳" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="77.0" AnchorPane.topAnchor="52.0">
                                              <font>
                                                 <Font name="SansSerif Regular" size="34.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="320.0" layoutY="77.0" prefHeight="21.0" prefWidth="63.0" text="This month" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="64.0">
+                                          <Label fx:id="timelineText4" alignment="CENTER" contentDisplay="CENTER" layoutX="320.0" layoutY="77.0" prefHeight="21.0" prefWidth="63.0" text="This month" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="64.0">
                                              <font>
                                                 <Font name="SansSerif Regular" size="12.0" />
                                              </font>
@@ -491,6 +492,26 @@
                                     </AnchorPane>
                                  </children>
                               </GridPane>
+                              <DatePicker fx:id="startingDate" layoutX="74.0" layoutY="297.0" prefHeight="48.0" prefWidth="202.0" promptText="Starting Date" />
+                              <DatePicker fx:id="endingDate" layoutX="349.0" layoutY="296.0" prefHeight="50.0" prefWidth="174.0" promptText="Ending Date" />
+                              <Label alignment="CENTER" layoutX="290.0" layoutY="292.0" prefHeight="58.0" prefWidth="51.0" text="To">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="filterByDateBtn" layoutX="536.0" layoutY="302.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="143.0" text="Filter by Date">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <ImageView fx:id="refreshDashboardBtn" fitHeight="38.0" fitWidth="39.0" layoutX="697.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/refresh.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
                            </children></AnchorPane>
                   </content>
                 </Tab>

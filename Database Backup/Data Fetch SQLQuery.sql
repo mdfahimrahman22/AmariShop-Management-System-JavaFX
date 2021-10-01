@@ -109,6 +109,21 @@ update Product set product_name='',product_model='',product_brand='',product_des
 product_purchase_rate=1,product_sales_rate=1,product_discount=1, total_quantity=9,SubcategoryID=1
 where ProductID=1
 
+--> Product purchase summary
+select sum((product_sales_rate-product_purchase_rate-product_discount)*total_quantity) as total_profit, 
+avg((product_sales_rate-product_purchase_rate-product_discount)*total_quantity) as avg_profit, 
+max(product_purchase_rate*total_quantity) as max_purchase, 
+sum(product_purchase_rate*total_quantity) as total_purchase from Product
+where month(created_at) = month(getdate()) and year(created_at) = year(getdate())
+
+--> Product purchase summary Filter by Date
+select sum((product_sales_rate-product_purchase_rate-product_discount)*total_quantity) as total_profit, 
+avg((product_sales_rate-product_purchase_rate-product_discount)*total_quantity) as avg_profit, 
+max(product_purchase_rate*total_quantity) as max_purchase, 
+sum(product_purchase_rate*total_quantity) as total_purchase from Product
+where cast(created_at as date) between '2021-09-27' and '2021-10-02'
+
+
 --> Check
 select * from users where userid=1
 select * from UserRole

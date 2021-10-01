@@ -48,6 +48,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -69,7 +70,7 @@ public class DashboardLayoutController implements Initializable {
     private TabPane tabPane;
 
     @FXML
-    private Label copyrightLabel, userName, profileNameLabel, userRoleLabel, branchNameLabel, acIdLabel;
+    private Label avgProfit, totalPurchase, totalProfit, maxPurchase, copyrightLabel, userName, profileNameLabel, userRoleLabel, branchNameLabel, acIdLabel;
 
     @FXML
     private TextField branchSearchByField, usersSearchByField, emSearchByTextField, emNameField, emContactField, emEmailField, emSalaryField, usersNameField, usersEmailField, usersContactField, branchNameField, branchEmailField, branchContactField, emailTextField, contactTextField, nameTextField;
@@ -87,10 +88,10 @@ public class DashboardLayoutController implements Initializable {
     private TextArea productDescriptionField, emAddressField, addressTextField, usersAddressField, branchAddressField;
 
     @FXML
-    private ImageView searchProductBtn, refreshProductTableBtn, clearProductTableBtn, addProductBtn, deleteProductBtn, updateProductBtn, searchBranchBtn, refreshBranchTableBtn, searchUsersBtn, refreshUsersTableBtn, searchEmployeeBtn, refreshEmTableBtn, clearEmployeeTableBtn, addEmployeeBtn, deleteEmployeeBtn, updateEmployeeBtn, clearBranchTableBtn, clearUserTableBtn, editBtn, updateUserBtn, updateBranchBtn, addBranchBtn, deleteBranchBtn, addUserBtn, deleteUserBtn;
+    private ImageView refreshDashboardBtn,searchProductBtn, refreshProductTableBtn, clearProductTableBtn, addProductBtn, deleteProductBtn, updateProductBtn, searchBranchBtn, refreshBranchTableBtn, searchUsersBtn, refreshUsersTableBtn, searchEmployeeBtn, refreshEmTableBtn, clearEmployeeTableBtn, addEmployeeBtn, deleteEmployeeBtn, updateEmployeeBtn, clearBranchTableBtn, clearUserTableBtn, editBtn, updateUserBtn, updateBranchBtn, addBranchBtn, deleteBranchBtn, addUserBtn, deleteUserBtn;
 
     @FXML
-    private Button updatePassBtn, updateProfileBtn;
+    private Button filterByDateBtn, updatePassBtn, updateProfileBtn;
     @FXML
     private TableView<User> usersTable;
     @FXML
@@ -127,6 +128,9 @@ public class DashboardLayoutController implements Initializable {
     @FXML
     private TableColumn<Product, String> productBranchCol, productNameCol, productModelCol, productBrandCol, productDescriptionCol, productCategoryCol, productSubcategoryCol;
 
+    @FXML
+    private DatePicker startingDate, endingDate;
+
     private User user;
     private Connection connection;
     PreparedStatement ps;
@@ -149,13 +153,32 @@ public class DashboardLayoutController implements Initializable {
         setOnClickListeners();
         setProfileSettingsEditable(false);
         setProfileImage();
-
         initializeEmployeeTable();
         initializeBranchTable();
         initializeProductTable();
         initializeUserRoleTable();
         initializeUserTable();
 
+    }
+
+    public void setDashboardSummary() {
+        String sql = "select sum((product_sales_rate-product_purchase_rate-product_discount)*total_quantity) as total_profit, \n"
+                + "avg((product_sales_rate-product_purchase_rate-product_discount)*total_quantity) as avg_profit, \n"
+                + "max(product_purchase_rate*total_quantity) as max_purchase, \n"
+                + "sum(product_purchase_rate*total_quantity) as total_purchase from Product\n"
+                + "where month(created_at) = month(getdate()) and year(created_at) = year(getdate())";
+        try {
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                avgProfit.setText(Integer.toString(rs.getInt("avg_profit")) + "৳");
+                totalProfit.setText(Integer.toString(rs.getInt("total_profit")) + "৳");
+                totalPurchase.setText(Integer.toString(rs.getInt("total_purchase")) + "৳");
+                maxPurchase.setText(Integer.toString(rs.getInt("max_purchase")) + "৳");
+            }
+        } catch (SQLException e) {
+            System.out.println("Can't fetch product purchase and sales rate summary");
+        }
     }
 
     public void setPositionComboBoxItems(ComboBox comboBox) {
@@ -1259,11 +1282,46 @@ public class DashboardLayoutController implements Initializable {
         emPositionCol.setCellValueFactory(new PropertyValueFactory<>("positionTitle"));
     }
 
+    public void setDashboardSummeryFilterByDate() {
+        try {
+            java.sql.Date startingDateValue = java.sql.Date.valueOf(startingDate.getValue());
+            java.sql.Date endingDateValue = java.sql.Date.valueOf(endingDate.getValue());
+            String sql = String.format("select sum((product_sales_rate-product_purchase_rate-product_discount)*total_quantity) as total_profit, \n"
+                    + "avg((product_sales_rate-product_purchase_rate-product_discount)*total_quantity) as avg_profit, \n"
+                    + "max(product_purchase_rate*total_quantity) as max_purchase, \n"
+                    + "sum(product_purchase_rate*total_quantity) as total_purchase from Product\n"
+                    + "where cast(created_at as date) between '%s' and '%s'", startingDateValue, endingDateValue);
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                avgProfit.setText(Integer.toString(rs.getInt("avg_profit")) + "৳");
+                totalProfit.setText(Integer.toString(rs.getInt("total_profit")) + "৳");
+                totalPurchase.setText(Integer.toString(rs.getInt("total_purchase")) + "৳");
+                maxPurchase.setText(Integer.toString(rs.getInt("max_purchase")) + "৳");
+            }
+
+        } catch (NullPointerException e) {
+            FXMain.showNotification("Invalid Input", "Please select date properly", "warning");
+        } catch (SQLException sqle) {
+            FXMain.showNotification("SQL Exception", "Sorry, Can't fetch data", "error");
+        }
+
+    }
+
     public void initializeDashboardLayout(Connection connection, User user) {
         this.user = user;
         this.connection = connection;
         setUserInfo(user);
         setUserRoleTableData(connection);
+        setDashboardSummary();
+        filterByDateBtn.setOnMouseClicked(e -> {
+            setDashboardSummeryFilterByDate();
+        });
+        refreshDashboardBtn.setOnMouseClicked(e -> {
+            startingDate.getEditor().clear();
+            endingDate.getEditor().clear();
+            setDashboardSummary();
+        });
     }
 
     ObservableList<UserRole> userRoleList = FXCollections.observableArrayList();
