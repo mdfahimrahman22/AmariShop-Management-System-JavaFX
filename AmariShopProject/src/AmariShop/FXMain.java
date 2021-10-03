@@ -1,7 +1,5 @@
 package AmariShop;
 
-import AmariShop.Dashboard.AddBranchController;
-import AmariShop.Dashboard.AddUserLayoutController;
 import AmariShop.Dashboard.DashboardLayoutController;
 import AmariShop.Models.Branch;
 import AmariShop.Models.User;
@@ -52,64 +50,6 @@ public class FXMain {
         }
     }
 
-    public void openUpdateUser(Connection conn, TableView<User> usersTable, User user) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard/AddUserLayout.fxml"));
-            Parent root = loader.load();
-            AddUserLayoutController addUserLayoutController = loader.getController();
-            addUserLayoutController.initializeUpdateUserLayout(conn,usersTable,user);
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Update User");
-            stage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void openAddUser(Connection conn, ObservableList<User> userList) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard/AddUserLayout.fxml"));
-            Parent root = loader.load();
-            AddUserLayoutController addUserLayoutController = loader.getController();
-            addUserLayoutController.initializeAddUserLayout(conn,userList);
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Add New User");
-            stage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    public void openUpdateBranch(Connection conn, TableView<Branch> branchTable,Branch branch) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard/AddBranch.fxml"));
-            Parent root = loader.load();
-            AddBranchController addBranchController = loader.getController();
-            addBranchController.initializeUpdateBranch(conn,branchTable,branch);
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Add New Branch");
-            stage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void openAddBranch(Connection conn, ObservableList<Branch> branchList) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard/AddBranch.fxml"));
-            Parent root = loader.load();
-            AddBranchController addBranchController = loader.getController();
-            addBranchController.initializeAddBranch(conn,branchList);
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Add New Branch");
-            stage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     public void openLogin(MouseEvent event, Connection connection) {
         try {

@@ -1826,6 +1826,7 @@ public class DashboardLayoutController implements Initializable {
             MenuClose.setVisible(false);
         });
         dashboardBtn.setOnMouseClicked(event -> {
+            setDashboardSummary();
             tabPane.getSelectionModel().select(0);
         });
         userProfileBtn.setOnMouseClicked(event -> {
@@ -1856,6 +1857,7 @@ public class DashboardLayoutController implements Initializable {
             initProductsTab();
             tabPane.getSelectionModel().select(5);
         });
+        
         salesBtn.setOnMouseClicked(event -> {
             tabPane.getSelectionModel().select(8);
         });
