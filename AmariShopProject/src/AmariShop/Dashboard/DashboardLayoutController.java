@@ -88,7 +88,7 @@ public class DashboardLayoutController implements Initializable {
     private TextArea productDescriptionField, emAddressField, addressTextField, usersAddressField, branchAddressField;
 
     @FXML
-    private ImageView refreshDashboardBtn,searchProductBtn, refreshProductTableBtn, clearProductTableBtn, addProductBtn, deleteProductBtn, updateProductBtn, searchBranchBtn, refreshBranchTableBtn, searchUsersBtn, refreshUsersTableBtn, searchEmployeeBtn, refreshEmTableBtn, clearEmployeeTableBtn, addEmployeeBtn, deleteEmployeeBtn, updateEmployeeBtn, clearBranchTableBtn, clearUserTableBtn, editBtn, updateUserBtn, updateBranchBtn, addBranchBtn, deleteBranchBtn, addUserBtn, deleteUserBtn;
+    private ImageView refreshDashboardBtn, searchProductBtn, refreshProductTableBtn, clearProductTableBtn, addProductBtn, deleteProductBtn, updateProductBtn, searchBranchBtn, refreshBranchTableBtn, searchUsersBtn, refreshUsersTableBtn, searchEmployeeBtn, refreshEmTableBtn, clearEmployeeTableBtn, addEmployeeBtn, deleteEmployeeBtn, updateEmployeeBtn, clearBranchTableBtn, clearUserTableBtn, editBtn, updateUserBtn, updateBranchBtn, addBranchBtn, deleteBranchBtn, addUserBtn, deleteUserBtn;
 
     @FXML
     private Button filterByDateBtn, updatePassBtn, updateProfileBtn;
@@ -1193,7 +1193,15 @@ public class DashboardLayoutController implements Initializable {
         } else if (col.equals("id")) {
             sql += String.format("where em.EmployeeID %s %d", compare, Integer.parseInt(search));
         } else if (col.equals("salary")) {
-            sql += String.format("where em.employee_salary %s %d", compare, Integer.parseInt(search));
+            if (search.toLowerCase().equals("average")) {
+                sql += String.format("where em.employee_salary %s (select AVG(employee_salary) from Employee)", compare);
+            } else if (search.toLowerCase().equals("minimum")) {
+                sql += String.format("where em.employee_salary %s (select MIN(employee_salary) from Employee)", compare);
+            } else if (search.toLowerCase().equals("maximum")) {
+                sql += String.format("where em.employee_salary %s (select MAX(employee_salary) from Employee)", compare);
+            } else {
+                sql += String.format("where em.employee_salary %s %d", compare, Integer.parseInt(search));
+            }
         } else if (col.equals("branch")) {
             sql += String.format("where b.branch_name %s '%s'", compare, search);
         } else if (col.equals("position")) {
@@ -1598,10 +1606,10 @@ public class DashboardLayoutController implements Initializable {
             }
             autoCompletionBindingInt = TextFields.bindAutoCompletion(emSearchByTextField, possibleSet2);
         } else if (searchBy == "Salary") {
-            for (int i = 0; i < n; i++) {
-                possibleSet2.add(employeeList.get(i).getSalary());
-            }
-            autoCompletionBindingInt = TextFields.bindAutoCompletion(emSearchByTextField, possibleSet2);
+            possibleSet.add("Average");
+            possibleSet.add("Maximum");
+            possibleSet.add("Minimum");
+            autoCompletionBindingString = TextFields.bindAutoCompletion(emSearchByTextField, possibleSet);
         }
     }
 
@@ -1857,7 +1865,7 @@ public class DashboardLayoutController implements Initializable {
             initProductsTab();
             tabPane.getSelectionModel().select(5);
         });
-        
+
         salesBtn.setOnMouseClicked(event -> {
             tabPane.getSelectionModel().select(8);
         });

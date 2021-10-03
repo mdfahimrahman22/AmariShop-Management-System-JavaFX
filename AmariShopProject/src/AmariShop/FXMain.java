@@ -1,7 +1,6 @@
 package AmariShop;
 
 import AmariShop.Dashboard.DashboardLayoutController;
-import AmariShop.Models.Branch;
 import AmariShop.Models.User;
 import java.awt.Toolkit;
 import java.io.IOException;
@@ -13,11 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.sql.Connection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
-import javafx.scene.control.TableView;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;

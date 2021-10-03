@@ -752,6 +752,9 @@
                                  <image>
                                     <Image url="@img/clear-table2.png" />
                                  </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </ImageView>
                               <ImageView fx:id="refreshUsersTableBtn" fitHeight="38.0" fitWidth="39.0" layoutX="465.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -835,6 +838,9 @@
                                  <image>
                                     <Image url="@img/clear-table2.png" />
                                  </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </ImageView>
                               <ImageView fx:id="refreshBranchTableBtn" fitHeight="38.0" fitWidth="39.0" layoutX="471.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -999,6 +1005,9 @@
                                  <image>
                                     <Image url="@img/clear-table2.png" />
                                  </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </ImageView>
                            </children>
                         </AnchorPane>
@@ -1092,6 +1101,9 @@
                                  <image>
                                     <Image url="@img/clear-table2.png" />
                                  </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </ImageView>
                               <ImageView fx:id="refreshEmTableBtn" fitHeight="38.0" fitWidth="39.0" layoutX="472.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

@@ -83,6 +83,14 @@ inner join Branch b on em.BranchID= b.BranchID
 inner join EmployeePosition p on em.EmployeePositionID=p.EmployeePositionID 
 where em.employee_salary=12000
 
+--> Employee Search where salary >= avg salary [Using Sub Query]
+select em.EmployeeID,em.branchid,em.employee_name,em.employee_email,em.employee_address,em.employee_contact,
+em.employee_salary,b.branchid,b.branch_name,p.position_title,p.EmployeePositionID from Employee em 
+inner join Branch b on em.BranchID= b.BranchID 
+inner join EmployeePosition p on em.EmployeePositionID=p.EmployeePositionID 
+where em.employee_salary >= (select AVG(employee_salary) from Employee)
+
+
 --> User Search by name/contact/address/email
 select u.userid,u.name,u.email,u.address,u.contact,
 u.created_at,b.branchid,b.branch_name,r.UserRoleID,r.user_role_title from Users u 
